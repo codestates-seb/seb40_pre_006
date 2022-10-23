@@ -62,3 +62,18 @@ StackOverFlow 사이트를 밴치마킹 구현하는 협업 프로젝트 입니�
 - Styled Components
 : 모든 styled 변수는 해당 컴포넌트 파일에 정의해주세요.
 
+
+## 🖌️Commit / branch / PR Convention
+- `feat` : 새로운 기능 추가
+- `fix` : 버그 수정
+- `refactor` : 코드 리팩토링
+- `style` : CSS 추가/수정
+- `test` : 테스트 추가/수정
+- `chore` : 기타
+
+```
+ #이슈번호 feat: 작업내용
+ ex) #1 feat: 로그인 기능 추가
+```
+
+
