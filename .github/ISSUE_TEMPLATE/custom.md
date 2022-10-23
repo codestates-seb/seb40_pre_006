@@ -11,5 +11,5 @@ assignees: ''
 > 여기에 이슈 제목을 입력하세요
 
 ## 작업내용
-[   ] Todo1
-[   ] Todo2
+- [ ] Todo1
+- [ ] Todo2
