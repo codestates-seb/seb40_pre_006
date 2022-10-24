@@ -85,8 +85,8 @@ StackOverFlow 사이트를 밴치마킹 구현하는 협업 프로젝트 입니�
 - `chore` : 기타
 
 ```
- #이슈번호 feat/작업내용
- ex) feat/로그인 기능 추가
+ feat/Issue#[이슈번호]
+ ex) feat/Issue#1
 ```
 
 
