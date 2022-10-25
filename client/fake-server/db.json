@@ -1,29 +1,18 @@
 {
-    "Todos": [
-      {
-        "text": "1 new!",
-        "checked": true,
-        "id": 1
-      },
-      {
-        "text": "2",
-        "checked": true,
-        "id": 2
-      },
-      {
-        "text": "3",
-        "checked": false,
-        "id": 3
-      },
-      {
-        "text": "todo1",
-        "checked": false,
-        "id": 4
-      },
-      {
-        "text": "todo2",
-        "checked": false,
-        "id": 5
+  "Questions": [
+    {
+      "id": 1,
+      "author": "kimcoding",
+      "createdAt": "yyyy년 mm월 dd일 hh시",
+      "title": "hello world",
+      "body" : "이것은 바디입니다",
+      "tags" : ["javascript", "c"],
+      "vote" : 0,
+      "answer" : {
+          "id" : 0,
+          "author" : "park",
+          "body" : "이것은 답변입니다"
       }
-    ]
-  }
+    }
+  ]
+}
