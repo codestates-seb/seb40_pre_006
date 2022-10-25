@@ -62,6 +62,9 @@ StackOverFlow 사이트를 밴치마킹 구현하는 협업 프로젝트 입니�
 - Styled Components
 : 모든 styled 변수는 해당 컴포넌트 파일에 정의해주세요.
 
+- className
+: abc-class (- 사용)
+
 
 ## 🖌️Commit / PR Convention
 - `feat` : 새로운 기능 추가
