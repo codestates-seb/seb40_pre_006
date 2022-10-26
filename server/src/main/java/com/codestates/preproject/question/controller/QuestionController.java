@@ -31,7 +31,7 @@ public class QuestionController {
         map.put("voteCount", 0);
         map.put("answerCount", 0);
         map.put("name", "홍길동");
-        map.put("createdAt", "작성 시간");
+        map.put("createdAt", "2022-10-26T18:17:44.226658200");
 
         return new ResponseEntity<>(map, HttpStatus.CREATED);
     }
@@ -54,7 +54,7 @@ public class QuestionController {
         map.put("voteCount", 0);
         map.put("answerCount", 0);
         map.put("name", "홍길동");
-        map.put("createdAt", "작성 시간");
+        map.put("createdAt", "2022-10-26T18:17:44.226658200");
 
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
@@ -77,7 +77,7 @@ public class QuestionController {
         map.put("voteCount", 1);
         map.put("answerCount", 0);
         map.put("name", "홍길동");
-        map.put("createdAt", "작성 시간");
+        map.put("createdAt", "2022-10-26T18:17:44.226658200");
 
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
@@ -100,7 +100,7 @@ public class QuestionController {
         map.put("voteCount", 0);
         map.put("answerCount", 0);
         map.put("name", "홍길동");
-        map.put("createdAt", "작성 시간");
+        map.put("createdAt", "2022-10-26T18:17:44.226658200");
 
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
@@ -132,7 +132,7 @@ public class QuestionController {
         map1.put("name", "홍길동1");
         map1.put("voteCount", 0);
         map1.put("answerCount", 1);
-        map1.put("createdAt", "작성 시간1");
+        map1.put("createdAt", "2022-10-26T18:17:44.226658200");
         map2.put("tagName", "java");
         map3.put("tagName", "c++");
         list1.add(map2);
@@ -145,7 +145,7 @@ public class QuestionController {
         map4.put("name", "홍길동2");
         map4.put("voteCount", 2);
         map4.put("answerCount", 3);
-        map4.put("createdAt", "작성 시간2");
+        map4.put("createdAt", "2022-10-26T18:17:44.226658200");
         map5.put("tagName", "javascript");
         map6.put("tagName", "python");
         list2.add(map5);
@@ -158,7 +158,7 @@ public class QuestionController {
         map7.put("name", "홍길동3");
         map7.put("voteCount", 4);
         map7.put("answerCount", 5);
-        map7.put("createdAt", "작성 시간3");
+        map7.put("createdAt", "2022-10-26T18:17:44.226658200");
         map8.put("tagName", "c#");
         map9.put("tagName", "android");
         list3.add(map8);
@@ -207,7 +207,7 @@ public class QuestionController {
         map1.put("name", "홍길동1");
         map1.put("voteCount", 0);
         map1.put("answerCount", 1);
-        map1.put("createdAt", "작성 시간1");
+        map1.put("createdAt", "2022-10-26T18:17:44.226658200");
         map2.put("tagName", "java");
         map3.put("tagName", "c++");
         list1.add(map2);
@@ -220,7 +220,7 @@ public class QuestionController {
         map4.put("name", "홍길동2");
         map4.put("voteCount", 2);
         map4.put("answerCount", 3);
-        map4.put("createdAt", "작성 시간2");
+        map4.put("createdAt", "2022-10-26T18:17:44.226658200");
         map5.put("tagName", "javascript");
         map6.put("tagName", "python");
         list2.add(map5);
@@ -233,7 +233,7 @@ public class QuestionController {
         map7.put("name", "홍길동3");
         map7.put("voteCount", 4);
         map7.put("answerCount", 5);
-        map7.put("createdAt", "작성 시간3");
+        map7.put("createdAt", "2022-10-26T18:17:44.226658200");
         map8.put("tagName", "c#");
         map9.put("tagName", "android");
         list3.add(map8);
@@ -282,7 +282,7 @@ public class QuestionController {
         map1.put("name", "홍길동1");
         map1.put("voteCount", 0);
         map1.put("answerCount", 0);
-        map1.put("createdAt", "작성 시간1");
+        map1.put("createdAt", "2022-10-26T18:17:44.226658200");
         map2.put("tagName", "java");
         map3.put("tagName", "c++");
         list1.add(map2);
@@ -295,7 +295,7 @@ public class QuestionController {
         map4.put("name", "홍길동2");
         map4.put("voteCount", 2);
         map4.put("answerCount", 0);
-        map4.put("createdAt", "작성 시간2");
+        map4.put("createdAt", "2022-10-26T18:17:44.226658200");
         map5.put("tagName", "javascript");
         map6.put("tagName", "python");
         list2.add(map5);
@@ -308,7 +308,7 @@ public class QuestionController {
         map7.put("name", "홍길동3");
         map7.put("voteCount", 4);
         map7.put("answerCount", 0);
-        map7.put("createdAt", "작성 시간3");
+        map7.put("createdAt", "2022-10-26T18:17:44.226658200");
         map8.put("tagName", "c#");
         map9.put("tagName", "android");
         list3.add(map8);
