@@ -59,7 +59,7 @@ public class QuestionController {
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
 
-    @PatchMapping("/{question-id}/plus")
+    @PatchMapping("/{question-id}/vote/plus")
     public ResponseEntity patchQuestionPlus() {
         Map<String, Object> map = new HashMap<>();
         Map<String, Object> map1 = new HashMap<>();
@@ -82,7 +82,7 @@ public class QuestionController {
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
 
-    @PatchMapping("/{question-id}/minus")
+    @PatchMapping("/{question-id}/vote/minus")
     public ResponseEntity patchQuestionMinus() {
         Map<String, Object> map = new HashMap<>();
         Map<String, Object> map1 = new HashMap<>();
