@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import { Routes, Route, Link } from "react-router-dom";
-import { useState } from "react";
+// import { useState } from "react";
 import { FaGlobeAmericas } from 'react-icons/fa';
+import { asideFocusState, headerToggleState } from "../atom/atom";
+import { useRecoilState } from "recoil";
 
 const Container = styled.div`
 
@@ -22,7 +24,7 @@ const Container = styled.div`
 
     .side-menu {
         width : 100%;
-        height : 500px;
+        height : 700px;
 
         position : sticky;
         top : 53px;
@@ -92,8 +94,10 @@ const StyledLink = styled(Link)`
 `;
 
 const Aside = () => {
-    const [focus, setFocus] = useState(1);
-
+    // const [focus, setFocus] = useState(1);
+    const [ focus, setFocus ] = useRecoilState(asideFocusState);
+    const [ toggle, setToggle ] = useRecoilState(headerToggleState);
+ 
 
     const handleClick = (menu) => {
         setFocus(menu);
@@ -101,7 +105,7 @@ const Aside = () => {
 
     return (
         <>
-        <Container props={false}>
+        <Container props={toggle}>
             
             <div className="side-menu">
                 <ol className="menu-list">
