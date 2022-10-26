@@ -2,6 +2,10 @@ import styled from "styled-components";
 import { FaSearch } from "react-icons/fa";
 import { FaBars } from "react-icons/fa";
 
+import { headerToggleState } from "../atom/atom";
+import { useRecoilState } from "recoil";
+
+
 function Header() {
   const Header = styled.div`
     position: sticky;
@@ -19,6 +23,10 @@ function Header() {
     border-top: 4px solid #f38237;
     /* border-bottom: 1px solid #e7e7e7; */
     box-shadow: 0.8px 0.8px 0.8px 0.8px #e7e7e7;
+    
+    
+    /* 수정사항 */
+    z-index : 1; 
 
     .logo {
       /* border : 1px solid red; */
@@ -27,6 +35,9 @@ function Header() {
   `;
 
   const MenuIcon = styled(FaBars)`
+    /* 수정사항 */
+    cursor: pointer;
+
     @media screen and (max-width: 640px) {
       margin-left: 1rem;
       color: #2e3134;
@@ -147,9 +158,19 @@ function Header() {
   const handleClickSignup = () => {
     window.location.href = "https://stackoverflow.com/users/signup?ssrc=head";
   };
+
+  // 수정사항
+  const [ menuClick, setMenuClick ] = useRecoilState(headerToggleState);
+
+  // 수정사항
+  const handleClickMenu = () => {
+    setMenuClick(!menuClick)
+  }
+
   return (
     <Header>
-      <MenuIcon />
+      {/* 수정사항 */}
+      <MenuIcon onClick={handleClickMenu}/>
       <div className="logo">
         <LogoImg src="img/logo-stackoverflow.png" alt="logo" />
       </div>
