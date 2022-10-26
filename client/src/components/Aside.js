@@ -8,6 +8,8 @@ const Container = styled.div`
     width : 180px;
     height : flex;
 
+    /* background-color : #5a5a5a; */
+
     
     border-right : 1px solid #e0e0e0;
     
@@ -23,7 +25,7 @@ const Container = styled.div`
         height : 500px;
 
         position : sticky;
-        top : 0;
+        top : 53px;
 
         /* background-color : #ffc2c2; */
         
