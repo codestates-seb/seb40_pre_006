@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 
 const FooterBox = styled.footer`
   display: flex;
-  min-width: 1000px;
   color: #9199a1; // 본문 text 색
   background-color: #232629; // background
 `;
@@ -15,6 +14,10 @@ const FooterContainer = styled.div`
   max-width: 1264px;
   margin: 0 auto;
   padding: 32px 12px 12px 12px;
+
+  @media (max-width: 640px) {
+    flex-direction: column;
+  }
 `;
 
 const FooterLogo = styled.div`
@@ -25,6 +28,10 @@ const FooterLogo = styled.div`
     width: 60px;
     height: 60px;
   }
+
+  @media (max-width: 640px) {
+    margin: -24px 0 12px 0;
+  }
 `;
 
 const FooterNav = styled.nav`
@@ -33,7 +40,7 @@ const FooterNav = styled.nav`
   flex: 2 1 auto;
   flex-wrap: wrap;
 
-  @media (max-width: 960px) {
+  @media (max-width: 1000px) {
     flex-direction: column;
   }
 `;
@@ -56,7 +63,7 @@ const FooterCol = styled.div`
     margin: 0;
     padding: 0;
 
-    @media (max-width: 960px) {
+    @media (max-width: 1000px) {
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
@@ -71,8 +78,12 @@ const FooterCol = styled.div`
     font-weight: 500;
     line-height: 17px;
 
-    @media (max-width: 960px) {
+    @media (max-width: 1000px) {
       line-height: 7px;
+    }
+
+    @media (max-width: 640px) {
+      padding: 2px 0;
     }
   }
 
@@ -91,7 +102,7 @@ const FooterCopyright = styled.div`
   flex-direction: column;
   flex: 1 1 150px;
 
-  @media (max-width: 960px) {
+  @media (max-width: 1000px) {
     flex: 1 1 100px;
   }
 `;
@@ -123,9 +134,13 @@ const FooterSns = styled.ul`
     }
   }
 
-  @media (max-width: 960px) {
+  @media (max-width: 1000px) {
     margin-top: auto;
     justify-content: start;
+
+    ul {
+      justify-content: start;
+    }
   }
 `;
 
@@ -140,7 +155,7 @@ const FooterEtc = styled.p`
     text-decoration: underline;
   }
 
-  @media (max-width: 960px) {
+  @media (max-width: 1000px) {
     margin-top: 12px;
     justify-content: start;
   }
@@ -233,17 +248,17 @@ function Footer() {
               {stackoverflowLinks.map((el, idx) => {
                 if (el.name === "Questions") {
                   return (
-                    // <Link to="/">
-                    <li>
-                      <a key={idx} href={el.site}>
-                        {el.name}
-                      </a>
-                    </li>
-                    // </Link>
+                    <Link to="/">
+                      <li key={idx}>
+                        {/* <a key={idx} href={el.site}> */}
+                          {el.name}
+                        {/* </a> */}
+                      </li>
+                    </Link>
                   );
                 } else {
                   return (
-                    <li>
+                    <li key={idx}>
                       <a key={idx} href={el.site}>
                         {el.name}
                       </a>
@@ -257,7 +272,7 @@ function Footer() {
             <h5>PRODUCTS</h5>
             <ul>
               {productsLinks.map((el, idx) => (
-                <li>
+                <li key={idx}>
                   <a key={idx} href={el.site}>
                     {el.name}
                   </a>
@@ -269,7 +284,7 @@ function Footer() {
             <h5>COMPANY</h5>
             <ul>
               {companyLinks.map((el, idx) => (
-                <li>
+                <li key={idx}>
                   <a key={idx} href={el.site}>
                     {el.name}
                   </a>
@@ -281,7 +296,7 @@ function Footer() {
             <h5>STACK EXCHANGE NETWORK</h5>
             <ul>
               {stackLinks.map((el, idx) => (
-                <li>
+                <li key={idx}>
                   <a key={idx} href={el.site}>
                     {el.name}
                   </a>
@@ -313,3 +328,4 @@ function Footer() {
 };
 
 export default Footer;
+
