@@ -4,7 +4,7 @@ import { FaBars } from "react-icons/fa";
 
 function Header() {
   const Header = styled.div`
-    position: fixed;
+    position: sticky;
     top: 0;
     right: 0;
     left: 0;
@@ -13,10 +13,17 @@ function Header() {
     background-color: #f8f9f9;
     display: flex;
     align-items: center;
+    justify-content : center;
     padding-right: 1rem;
+    /* padding-left : 6%; */
     border-top: 4px solid #f38237;
     /* border-bottom: 1px solid #e7e7e7; */
     box-shadow: 0.8px 0.8px 0.8px 0.8px #e7e7e7;
+
+    .logo {
+      /* border : 1px solid red; */
+      width : 180px;
+    }
   `;
 
   const MenuIcon = styled(FaBars)`
@@ -41,7 +48,8 @@ function Header() {
 
   const Searchbar = styled.div`
     background-color: white;
-    width: 65.8rem;
+    /* width: 65.8rem; */
+    width: 70rem;
     height: 36px;
     margin-left: 1.25rem;
     margin-right: 10px;
@@ -66,7 +74,7 @@ function Header() {
   const Input = styled.input`
     display: flex;
     align-items: center;
-    width: 80%;
+    width: 100%;
     height: 32px;
     margin-left: 0.5rem;
     border: none;
@@ -98,9 +106,13 @@ function Header() {
   const ButtonWrapper = styled.div`
     width: 170px;
     display: flex;
+
+    border : 1px soild red;
     @media screen and (max-width: 640px) {
       position: fixed;
       right: 1.2rem;
+      top : 10px;
+      /* align-items : center;  */
     }
   `;
 
@@ -119,6 +131,15 @@ function Header() {
     }
   `;
 
+  const RightContainer = styled.div`
+    /* border : 1px solid red; */
+    width : 70vw;
+
+    display : flex;
+    flex-direction : row;
+    justify-content : space-between;
+  `
+
   const handleClickLogin = () => {
     window.location.href =
       "https://stackoverflow.com/users/login?ssrc=head&returnurl=https%3a%2f%2fstackoverflow.com%2fquestionshttps://stackoverflow.com/users/login?ssrc=head&returnurl=https%3a%2f%2fstackoverflow.com%2fquestions";
@@ -132,35 +153,37 @@ function Header() {
       <div className="logo">
         <LogoImg src="img/logo-stackoverflow.png" alt="logo" />
       </div>
-      <Searchbar>
-        <InputSearchIcon />
-        <Input placeholder="Search..."></Input>
-      </Searchbar>
-      <SearchIcon />
-      <ButtonWrapper>
-        <Button
-          backgroundcolor="#E1ECF4"
-          color="#2C5877"
-          onClick={handleClickLogin}
-          marginright="7px"
-          width="76px"
-          border="0.5px solid #7aa7c7"
-          hoverbackcolor="#B3D3EA"
-        >
-          Log in
-        </Button>
-        <Button
-          backgroundcolor="#1693FA"
-          color="#FFFFFF"
-          className="sign-up"
-          onClick={handleClickSignup}
-          width="87px"
-          border="0.5px solid #0074CC"
-          hoverbackcolor="#0066cc"
-        >
-          Sign up
-        </Button>
-      </ButtonWrapper>
+      <RightContainer>
+        <Searchbar>
+          <InputSearchIcon />
+          <Input placeholder="Search..."></Input>
+        </Searchbar>
+        <SearchIcon />
+        <ButtonWrapper>
+          <Button
+            backgroundcolor="#E1ECF4"
+            color="#2C5877"
+            onClick={handleClickLogin}
+            marginright="7px"
+            width="76px"
+            border="0.5px solid #7aa7c7"
+            hoverbackcolor="#B3D3EA"
+          >
+            Log in
+          </Button>
+          <Button
+            backgroundcolor="#1693FA"
+            color="#FFFFFF"
+            className="sign-up"
+            onClick={handleClickSignup}
+            width="87px"
+            border="0.5px solid #0074CC"
+            hoverbackcolor="#0066cc"
+          >
+            Sign up
+          </Button>
+        </ButtonWrapper>
+      </RightContainer>
     </Header>
   );
 }
