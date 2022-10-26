@@ -8,7 +8,7 @@ const Container = styled.div`
     /* background-color : #7e7e7e; */
 `
 
-const Questions = () => {
+const Users = () => {
     return (
         <>
         <Container>
@@ -18,4 +18,4 @@ const Questions = () => {
     )
 }
 
-export default Questions;
+export default Users;
