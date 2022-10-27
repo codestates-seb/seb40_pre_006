@@ -1,9 +1,10 @@
 import styled from "styled-components";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, useLocation } from "react-router-dom";
 // import { useState } from "react";
 import { FaGlobeAmericas } from 'react-icons/fa';
-import { asideFocusState, headerToggleState } from "../atom/atom";
+import { asideFocusState, headerToggleState, isAskState } from "../atom/atom";
 import { useRecoilState } from "recoil";
+import { useEffect } from "react";
 
 const Container = styled.div`
 
@@ -18,18 +19,23 @@ const Container = styled.div`
     @media screen and (max-width: 640px){
         display : ${(props) => props.props ? 'block' : 'none'};
         width : 220px;
+        height : 500px;
+
+        position : absolute;
+        left : 0;
+
 
     }
 
 
     .side-menu {
         width : 100%;
-        height : 700px;
+        height : 500px;
 
         position : sticky;
         top : 53px;
 
-        /* background-color : #ffc2c2; */
+        background-color : white;
         
         
         .menu-list {
@@ -97,11 +103,16 @@ const Aside = () => {
     // const [focus, setFocus] = useState(1);
     const [ focus, setFocus ] = useRecoilState(asideFocusState);
     const [ toggle, setToggle ] = useRecoilState(headerToggleState);
+    const [ isAsk, setIsAsk ] = useRecoilState(isAskState);
  
 
-    const handleClick = (menu) => {
-        setFocus(menu);
-    }
+    let params = useLocation();
+    setFocus(params.pathname);
+    setIsAsk(params.pathname);
+
+    // const handleClick = ( ) => {
+    //     setFocus(params.pathname);
+    // }
 
     return (
         <>
@@ -112,7 +123,7 @@ const Aside = () => {
                     <li className="root">PUBLIC</li>
                     <li className="node">
                         <StyledLink to="/">
-                            <Menubox onClick={() => handleClick(1)} props={focus === 1 ? focus : null}>
+                            <Menubox  props={focus === "/" ? focus : null}>
                                 <div className="icons"><FaGlobeAmericas /></div>
                                 <div className="text">Questions</div>
                             </Menubox>
@@ -120,7 +131,7 @@ const Aside = () => {
                     </li>
                     <li className="node">
                         <StyledLink to="/tags">
-                            <Menubox onClick={() => handleClick(2)} props={focus === 2 ? focus : null}>
+                            <Menubox  props={focus === "/tags" ? focus : null}>
                                 <div className="icons"></div>
                                 <div className="text">Tags</div>
                             </Menubox>
@@ -129,7 +140,7 @@ const Aside = () => {
 
                     <li className="node">
                         <StyledLink to="/users">
-                            <Menubox onClick={() => handleClick(3)} props={focus === 3 ? focus : null}>
+                            <Menubox  props={focus === "/users" ? focus : null}>
                             <div className="icons"></div>
                                 <div className="text">Users</div>
                             </Menubox>

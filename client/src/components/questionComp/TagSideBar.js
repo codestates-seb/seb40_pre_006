@@ -9,22 +9,26 @@ const TagWrapper = styled.div``;
 const Wrapper = styled.div`
   /* margin-right: 50px; */
   width: 180px;
-  height: 100vh;
+  /* height: 100vh; */
   display: flex;
   flex-direction: column;
-  position: absolute;
+  /* position: absolute; */
   top: 73px;
-  right: 2.9rem;
+  /* right: 2.9rem; */
 
-  @media screen and (min-width: 642px) and (max-width: 980px) {
+
+  padding-left : 15px;
+  padding-top : 15px;
+  /* @media screen and (min-width: 642px) and (max-width: 980px) {
     position: absolute;
     top: 850px;
     left: 195px;
-  }
+  } */
   @media screen and (max-width: 641px) {
-    top: 750px;
+    /* top: 750px; */
     left: 15px;
     width: 100vw;
+    height : flex;
   }
   /* @media screen and (max-width: 980px) {
     display: none;
@@ -34,6 +38,7 @@ const Wrapper = styled.div`
 const TitleContainer = styled.div`
   width: 180px;
   height: 8%;
+  margin-bottom : 10px;
   /* border: 1px solid black; */
   /* padding-left: 7px; */
   display: flex;
