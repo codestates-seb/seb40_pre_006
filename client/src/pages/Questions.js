@@ -1,7 +1,6 @@
-import styled from 'styled-components';
-import QuestionList from '../components/questionComp/QuestionList';
+import styled from "styled-components";
+import QuestionList from "../components/questionComp/QuestionList";
 import { useRecoilState } from "recoil";
-
 const Container = styled.div`
   width: 70vw;
   min-height: 700px;
