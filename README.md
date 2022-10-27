@@ -49,7 +49,7 @@ StackOverFlow 사이트를 밴치마킹 구현하는 협업 프로젝트 입니�
 </br>
 
 ## 🖌️Code Convention
-
+### 🪄Frontend
 - Camel Casting
 : const camelCase 형식으로 작성해주세요.
 
@@ -64,6 +64,19 @@ StackOverFlow 사이트를 밴치마킹 구현하는 협업 프로젝트 입니�
 
 - className
 : abc-class (- 사용)
+
+### 🪄Backend
+- Class Name
+: 명사이어야 하며, 첫 글자를 대문자로 작성해 주세요.
+
+- Interface Name
+: 첫 글자를 대문자로 작성해 주세요.
+
+- Variable Name
+: CamelCase, 첫 글자를 대문자로 적지만 맨 앞에 오는 글자는 소문자로 작성해 주세요.
+
+- Method Name
+: CamelCase, 동사이어야 하며, 첫 글자를 대문자로 적지만 맨 앞에 오는 글자는 소문자로 작성해 주세요.
 
 
 ## 🖌️Commit / PR Convention
