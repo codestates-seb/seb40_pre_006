@@ -3,8 +3,8 @@ import { FaSearch } from "react-icons/fa";
 import { FaBars } from "react-icons/fa";
 
 import { headerToggleState } from "../atom/atom";
+import { headerClickState } from "../atom/atom";
 import { useRecoilState } from "recoil";
-
 
 function Header() {
   const Header = styled.div`
@@ -17,20 +17,19 @@ function Header() {
     background-color: #f8f9f9;
     display: flex;
     align-items: center;
-    justify-content : center;
+    justify-content: center;
     padding-right: 1rem;
     /* padding-left : 6%; */
     border-top: 4px solid #f38237;
     /* border-bottom: 1px solid #e7e7e7; */
     box-shadow: 0.8px 0.8px 0.8px 0.8px #e7e7e7;
-    
-    
+
     /* 수정사항 */
-    z-index : 1; 
+    z-index: 1;
 
     .logo {
       /* border : 1px solid red; */
-      width : 180px;
+      width: 180px;
     }
   `;
 
@@ -72,7 +71,16 @@ function Header() {
       border: 1px solid #6bbbf7;
     }
     @media screen and (max-width: 640px) {
-      display: none;
+      margin-left: 0px;
+      margin-right: 0px;
+      position: fixed;
+      width: 100vw;
+      top: 60px;
+      left: 0;
+      z-index: 1;
+      display: ${({ searchClick }) => {
+        return searchClick === false ? "none" : "flex";
+      }};
     }
   `;
 
@@ -82,6 +90,7 @@ function Header() {
     width: 20px;
     color: #9ba1a8;
   `;
+
   const Input = styled.input`
     display: flex;
     align-items: center;
@@ -100,6 +109,7 @@ function Header() {
       outline: none;
     }
   `;
+
   const SearchIcon = styled(FaSearch)`
     @media screen and (min-width: 641px) {
       display: none;
@@ -107,10 +117,11 @@ function Header() {
     @media screen and (max-width: 640px) {
       height: 20px;
       width: 20px;
-      color: #9ba1a8;
+      /* color: #9ba1a8; */
       /* background-color: red; */
       margin-left: 8px;
       color: #2e3134;
+      cursor: pointer;
     }
   `;
 
@@ -118,11 +129,11 @@ function Header() {
     width: 170px;
     display: flex;
 
-    border : 1px soild red;
+    border: 1px soild red;
     @media screen and (max-width: 640px) {
       position: fixed;
       right: 1.2rem;
-      top : 10px;
+      top: 10px;
       /* align-items : center;  */
     }
   `;
@@ -144,12 +155,12 @@ function Header() {
 
   const RightContainer = styled.div`
     /* border : 1px solid red; */
-    width : 70vw;
+    width: 70vw;
 
-    display : flex;
-    flex-direction : row;
-    justify-content : space-between;
-  `
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  `;
 
   const handleClickLogin = () => {
     window.location.href =
@@ -160,26 +171,40 @@ function Header() {
   };
 
   // 수정사항
-  const [ menuClick, setMenuClick ] = useRecoilState(headerToggleState);
+  const [menuClick, setMenuClick] = useRecoilState(headerToggleState);
+  const [searchClick, setSearchClick] = useRecoilState(headerClickState);
 
   // 수정사항
   const handleClickMenu = () => {
-    setMenuClick(!menuClick)
-  }
+    setMenuClick(!menuClick);
+    // setSearchClick(false);
+  };
+
+  const handleClickSearch = () => {
+    setSearchClick(!searchClick);
+    // setMenuClick(false);
+  };
+
+  console.log(searchClick, menuClick);
 
   return (
     <Header>
       {/* 수정사항 */}
-      <MenuIcon onClick={handleClickMenu}/>
+      <MenuIcon onClick={handleClickMenu} />
       <div className="logo">
         <LogoImg src="img/logo-stackoverflow.png" alt="logo" />
       </div>
       <RightContainer>
-        <Searchbar>
+        <Searchbar searchClick={searchClick}>
           <InputSearchIcon />
           <Input placeholder="Search..."></Input>
         </Searchbar>
-        <SearchIcon />
+        <SearchIcon
+          onClick={(e) => {
+            handleClickSearch();
+            e.stopPropagation();
+          }}
+        />
         <ButtonWrapper>
           <Button
             backgroundcolor="#E1ECF4"
