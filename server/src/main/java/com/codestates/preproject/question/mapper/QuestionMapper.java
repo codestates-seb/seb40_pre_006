@@ -64,6 +64,7 @@ public interface QuestionMapper {
                 .map(questionTag -> QuestionTagResponseDto
                         .builder()
                         .tagId(questionTag.getTag().getTagId())
+                        .tagName(questionTag.getTag().getTagName())
                         .build())
                 .collect(Collectors.toList());
     }
