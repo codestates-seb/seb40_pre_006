@@ -1,157 +1,197 @@
 import styled from "styled-components";
-import { questionOptionFocusState, questionCountState } from "../../atom/atom";
+import { questionOptionFocusState, questionCountState, getDataState } from "../../atom/atom";
 import { useRecoilState } from "recoil";
 import { useEffect } from "react";
 import axios from "axios";
 
-
 const Container = styled.div`
-    width : 100%;
-    height : 150px;
+  width: 100%;
+  height: 150px;
 
-    /* border : 1px solid red; */
+  /* border : 1px solid red; */
 
-    .up-box {
-        width : 100%;
-        height : 50%;
+  .up-box {
+    width: 100%;
+    height: 50%;
 
-        /* background-color : #ffbbbb; */
+    /* background-color : #ffbbbb; */
 
-        display : flex;
-        flex-direction : row;
-        justify-content : space-between;
-        align-items : center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 
-        .title {
-            font-size : 20px;
-            margin-left : 15px;
-        }
-
-
-        button {
-            height : 40px;
-            width : 100px;
-
-            border : 0.5px solid #0074CC;
-            border-radius : 3px;
-            background-color : #1693FA;
-
-            color : white;
-            font-size : 13px;
-
-            margin-right : 15px;
-
-            cursor: pointer;
-
-            &:hover {
-                background-color : #0066cc;
-            }
-        }
+    .title {
+      font-size: 20px;
+      margin-left: 15px;
     }
 
-    .down-box {
-        width : 100%;
-        height : 50%;
+    button {
+      height: 40px;
+      width: 100px;
 
-        /* background-color : #ff6c6c; */
-        
-        display : flex;
-        flex-direction : row;
-        justify-content : space-between;
-        align-items : center;
+      border: 0.5px solid #0074cc;
+      border-radius: 3px;
+      background-color: #1693fa;
 
-        /* border-bottom : 0.5px solid #dddddd; */
+      color: white;
+      font-size: 13px;
 
-        .question-count {
-            font-size : 17px;
-            margin-left : 15px;
-        }
+      margin-right: 15px;
 
-        .option-container {
-            display : flex;
-            flex-direction : row;
+      cursor: pointer;
 
-            /* border : 1px solid blue; */
-
-            height : 40px;
-
-            .first-btn {
-        
-                border-radius : 3px 0 0 3px;
-                border-right : none;
-            }
-
-            .last-btn {
-                border-radius : 0 3px 3px 0;
-                border-left : none;
-                margin-right : 15px;
-            }
-        }
+      &:hover {
+        background-color: #0066cc;
+      }
     }
-`
+  }
+
+  .down-box {
+    width: 100%;
+    height: 50%;
+
+    /* background-color : #ff6c6c; */
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    /* border-bottom : 0.5px solid #dddddd; */
+
+    .question-count {
+      font-size: 17px;
+      margin-left: 15px;
+    }
+
+    .option-container {
+      display: flex;
+      flex-direction: row;
+
+      /* border : 1px solid blue; */
+
+      height: 40px;
+
+      .first-btn {
+        border-radius: 3px 0 0 3px;
+        border-right: none;
+      }
+
+      .last-btn {
+        border-radius: 0 3px 3px 0;
+        border-left: none;
+        margin-right: 15px;
+      }
+    }
+  }
+`;
 
 const Button = styled.button`
-    padding-left : 10px;
-    padding-right : 10px;
+  padding-left: 10px;
+  padding-right: 10px;
 
-    font-size : 13px;
-    color : #555555;
-    background-color : ${(props) => props.props ? "#e4e3e3" : "white"};
+  font-size: 13px;
+  color: #555555;
+  background-color: ${(props) => (props.props ? "#e4e3e3" : "white")};
 
-    border : 0.5px solid #8a8a8a;
+  border: 0.5px solid #8a8a8a;
 
-    cursor: pointer;
+  cursor: pointer;
 
-    &:hover {
-        /* background-color : #f3f3f3; */
-        background-color : ${(props) => props.props ? "#e4e3e3" : "#f7f5f591"};
-    }
-`
-
+  &:hover {
+    /* background-color : #f3f3f3; */
+    background-color: ${(props) => (props.props ? "#e4e3e3" : "#f7f5f591")};
+  }
+`;
 
 const QuestionHeader = () => {
-    const [ optionBtn, setOptionBtn ] = useRecoilState(questionOptionFocusState);
-    const [ questionCount, setQuestionCount ] = useRecoilState(questionCountState);
+  const [optionBtn, setOptionBtn] = useRecoilState(questionOptionFocusState);
+  const [questionCount, setQuestionCount] = useRecoilState(questionCountState);
+  const [questions, setQuestions] = useRecoilState(getDataState);
 
-    // 실제 API 주소로 수정 필요!
-    const domain = "http://localhost:3001";
+  // 실제 API 주소로 수정 필요!
+  // const domain = "http://localhost:3001";
 
-    useEffect(() => {
-        getQuestionInfo();
-    },[])
+  // useEffect(() => {
+  //     getQuestionInfo();
+  // },[])
 
-    const getQuestionInfo = () => {
-        return axios.get(`${domain}/pageInfo`)
-        .then((res) => setQuestionCount(res.data.totalElements));
+  // const getQuestionInfo = () => {
+  //     return axios.get(`${domain}/pageInfo`)
+  //     .then((res) => setQuestionCount(res.data.totalElements));
+  // }
+
+  const handleOptionBtnClick = (opt) => {
+
+    setOptionBtn(opt);
+
+    if (opt === 1){
+        axios.get("https://310c-221-140-177-247.jp.ngrok.io/question?page=3&size=1")
+        .then((res)=> {
+            // setOptionBtn(opt)
+            console.log(optionBtn);
+            setQuestions(res.data.data);
+        })
+    }else if (opt === 2){
+        axios.get('')
+        .then((res)=> {
+            // setOptionBtn(opt);
+            console.log(optionBtn);
+
+            setQuestions(res.data.data);
+        })
+    }else if (opt === 3){
+        // axios.get('https://310c-221-140-177-247.jp.ngrok.io/question/answered')
+        axios.get('http://localhost:3001/data')
+        .then((res)=> {
+            // setOptionBtn(opt);
+            console.log(optionBtn);
+            setQuestions(res.data);
+        })
     }
 
-    const handleOptionBtnClick = (opt) => {
-        setOptionBtn(opt);
-        console.log(opt);
-    }
+    // setOptionBtn(opt);
+    // console.log(opt);
+  };
 
-
-
-    return (
-        <>
-        <Container>
-            <div className="up-box">
-                <div className="title">All Questions</div>
-                <a href="/ask">
-                    <button>Ask Question</button>
-                </a>
-            </div>
-            <div className="down-box">
-                <div className="question-count">{questionCount} questions</div>
-                <div className="option-container">
-                    <Button className="first-btn" onClick={() => handleOptionBtnClick(1)} props={optionBtn === 1 ? optionBtn : null}>All</Button>
-                    <Button onClick={() => handleOptionBtnClick(2)} props= {optionBtn === 2 ? optionBtn : null}>Unanswered</Button>
-                    <Button className="last-btn" onClick={() => handleOptionBtnClick(3)} props={optionBtn === 3 ? optionBtn : null}>Answered</Button>
-                </div>
-            </div>
-        </Container>
-        </>
-    )
-}
+  return (
+    <>
+      <Container>
+        <div className="up-box">
+          <div className="title">All Questions</div>
+          <a href="/ask">
+            <button>Ask Question</button>
+          </a>
+        </div>
+        <div className="down-box">
+          <div className="question-count">{questionCount} questions</div>
+          <div className="option-container">
+            <Button
+              className="first-btn"
+              onClick={() => handleOptionBtnClick(1)}
+              props={optionBtn === 1 ? optionBtn : null}
+            >
+              All
+            </Button>
+            <Button
+              onClick={() => handleOptionBtnClick(2)}
+              props={optionBtn === 2 ? optionBtn : null}
+            >
+              Unanswered
+            </Button>
+            <Button
+              className="last-btn"
+              onClick={() => handleOptionBtnClick(3)}
+              props={optionBtn === 3 ? optionBtn : null}
+            >
+              Answered
+            </Button>
+          </div>
+        </div>
+      </Container>
+    </>
+  );
+};
 
 export default QuestionHeader;

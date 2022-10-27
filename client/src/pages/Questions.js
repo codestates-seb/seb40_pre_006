@@ -4,8 +4,15 @@ import QuestionHeader from "../components/questionComp/QuestionHeader";
 import TagSideBar from "../components/questionComp/TagSideBar";
 
 
-
+import { getDataState } from "../atom/atom";
+import { questionCountState } from "../atom/atom";
+import { questionOptionFocusState } from "../atom/atom";
+import { tagState } from "../atom/atom";
 import { useRecoilState } from "recoil";
+import { useEffect } from "react";
+import axios from "axios";
+
+
 
 const Container = styled.div`
   width: 70vw;
@@ -40,6 +47,33 @@ const Right = styled.div`
 `;
 
 const Questions = () => {
+
+    const [ data, setData ] = useRecoilState(getDataState);
+    const [ questionCount, setQuestionCount ] = useRecoilState(questionCountState);
+    const [ tags, setTags ] = useRecoilState(tagState);
+    const [ opt, setOpts ] = useRecoilState(questionOptionFocusState);
+
+    // https://310c-221-140-177-247.jp.ngrok.io/question?page=3&size=1
+
+    useEffect(() => {
+
+        if (opt === 1){
+            axios
+                .all(
+                    [axios.get("https://310c-221-140-177-247.jp.ngrok.io/question?page=3&size=1"), axios.get("https://310c-221-140-177-247.jp.ngrok.io/tag")]).then(
+                        axios.spread((res1, res2)=>{
+                            setData(res1.data.data);
+                            setQuestionCount(res1.data.pageInfo.totalElements);
+                            setTags(res2.data.data);
+                            console.log('active');
+    
+                            // console.log(res2.data.data);
+                        })
+                    )
+        }
+    }, []);
+
+
   return (
     <>
       <Container>

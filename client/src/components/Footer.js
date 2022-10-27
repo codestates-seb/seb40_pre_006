@@ -245,24 +245,24 @@ function Footer() {
           <FooterCol>
             <h5>STACK OVERFLOW</h5>
             <ul>
-              {stackoverflowLinks.map((el, idx) => {
-                if (el.name === "Questions") {
+              {stackoverflowLinks.map((el) => {
+                if (el.name !== "Questions") {
                   return (
-                    <Link to="/">
-                      <li key={idx}>
-                        {/* <a key={idx} href={el.site}> */}
+                    <li key={el.name}>
+                      <a key={el.name} href={el.site}>
+                        {el.name}
+                      </a>
+                    </li>
+                  );
+                } else {
+                  return (
+                    <Link to="/" key={el.name}>
+                      <li key={el.name}>
+                        {/* <a key={el.name} href={el.site}> */}
                           {el.name}
                         {/* </a> */}
                       </li>
                     </Link>
-                  );
-                } else {
-                  return (
-                    <li key={idx}>
-                      <a key={idx} href={el.site}>
-                        {el.name}
-                      </a>
-                    </li>
                   );
                 }
               })}
@@ -271,9 +271,9 @@ function Footer() {
           <FooterCol>
             <h5>PRODUCTS</h5>
             <ul>
-              {productsLinks.map((el, idx) => (
-                <li key={idx}>
-                  <a key={idx} href={el.site}>
+              {productsLinks.map((el) => (
+                <li key={el.name}>
+                  <a key={el.name} href={el.site}>
                     {el.name}
                   </a>
                 </li>
@@ -283,9 +283,9 @@ function Footer() {
           <FooterCol>
             <h5>COMPANY</h5>
             <ul>
-              {companyLinks.map((el, idx) => (
-                <li key={idx}>
-                  <a key={idx} href={el.site}>
+              {companyLinks.map((el) => (
+                <li key={el.name}>
+                  <a key={el.name} href={el.site}>
                     {el.name}
                   </a>
                 </li>
@@ -295,9 +295,9 @@ function Footer() {
           <FooterCol>
             <h5>STACK EXCHANGE NETWORK</h5>
             <ul>
-              {stackLinks.map((el, idx) => (
-                <li key={idx}>
-                  <a key={idx} href={el.site}>
+              {stackLinks.map((el) => (
+                <li key={el.name}>
+                  <a key={el.name} href={el.site}>
                     {el.name}
                   </a>
                 </li>
@@ -307,9 +307,9 @@ function Footer() {
 
           <FooterCopyright>
             <FooterSns>
-              {snsLinks.map((el, idx) => (
-                <li key={idx}>
-                  <a key={idx} href={el.site}>
+              {snsLinks.map((el) => (
+                <li key={el.name}>
+                  <a key={el.name} href={el.site}>
                     {el.name}
                   </a>
                 </li>
