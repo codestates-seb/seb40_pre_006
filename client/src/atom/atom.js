@@ -4,10 +4,15 @@ import { recoilPersist } from "recoil-persist";
 const { persistAtom } = recoilPersist();
 
 export const asideFocusState = atom({
-  key: "asideFocusState",
-  default: 1,
-  effects_UNSTABLE: [persistAtom],
+    key : 'asideFocusState',
+    default : '/',
+    effects_UNSTABLE: [persistAtom]
 });
+
+export const isAskState = atom({
+    key : 'isAskState',
+    default : '/'
+})
 
 export const headerToggleState = atom({
   key: "headerToggleState",
@@ -59,3 +64,16 @@ export const getDataState = atom({
   key: "getDataState",
   default: [],
 });
+
+
+export const questionOptionFocusState = atom({
+    key : 'questionOptionFocusState',
+    default : 1,
+    effects_UNSTABLE : [persistAtom]
+})
+
+export const questionCountState = atom({
+    key : 'questionCountState',
+    default : 0,
+    effects_UNSTABLE : [persistAtom]
+})

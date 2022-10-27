@@ -1,21 +1,21 @@
 import styled from "styled-components";
 
-
 const Container = styled.div`
-    width : 70vw;
-    height : 1500px;
+    width : 100%;
+    height : 100vh;
 
-    /* background-color : #7e7e7e; */
+
 `
 
-const Users = () => {
+const AskQuestion = () => {
     return (
         <>
         <Container>
-         
+            Ask a question!
         </Container>
         </>
     )
 }
 
-export default Users;
+
+export default AskQuestion;

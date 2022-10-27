@@ -59,7 +59,7 @@ function Header() {
   const Searchbar = styled.div`
     background-color: white;
     /* width: 65.8rem; */
-    width: 70rem;
+    width: 71rem;
     height: 36px;
     margin-left: 1.25rem;
     margin-right: 10px;
@@ -177,12 +177,12 @@ function Header() {
   // 수정사항
   const handleClickMenu = () => {
     setMenuClick(!menuClick);
-    // setSearchClick(false);
+    setSearchClick(false);
   };
 
   const handleClickSearch = () => {
     setSearchClick(!searchClick);
-    // setMenuClick(false);
+    setMenuClick(false);
   };
 
   console.log(searchClick, menuClick);
