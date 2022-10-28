@@ -53,9 +53,10 @@ const Questions = () => {
             axios
         .all([
           axios.get(
-            "https://6034-221-140-177-247.jp.ngrok.io/question?page=3&size=1"
+            // "https://6034-221-140-177-247.jp.ngrok.io/question?page=3&size=1"
+            `${process.env.REACT_APP_API_URL}/question?page=3&size=1`
           ),
-          axios.get("https://6034-221-140-177-247.jp.ngrok.io/tag"),
+          axios.get(`${process.env.REACT_APP_API_URL}/tag`),
         ])
         .then(
           axios.spread((res1, res2) => {
@@ -66,14 +67,15 @@ const Questions = () => {
         );
     } else if (opt === 2) {
       axios
-        .get("https://6034-221-140-177-247.jp.ngrok.io/question/answered")
+        // .get(`${process.env.REA_APP_API_URL}/question/answered`)
+        .get(`${process.env.REACT_APP_API_URL}/question/answered`)
         .then((res) => {
           setData(res.data.data.slice(2));
           setQuestionCount(res.data.pageInfo.totalElements - 2);
         });
     } else if (opt === 3) {
       axios
-        .get("https://6034-221-140-177-247.jp.ngrok.io/question/answered")
+        .get(`${process.env.REACT_APP_API_URL}/question/answered`)
         .then((res) => {
           setData(res.data.data.slice(1));
           setQuestionCount(res.data.pageInfo.totalElements - 1);
