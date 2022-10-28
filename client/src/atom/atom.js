@@ -38,6 +38,7 @@ export const getDataState = atom({
 
 });
 
+
 // 질문 데이터(질문 갯수)
 export const questionCountState = atom({
   key: "questionCountState",
@@ -51,7 +52,6 @@ export const tagState = atom({
     effects_UNSTABLE: [persistAtom],
 
 })
-
 
 
 export const questionTitleValueState = atom({
