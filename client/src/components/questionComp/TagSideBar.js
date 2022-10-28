@@ -2,45 +2,32 @@ import styled from "styled-components";
 import { useEffect } from "react";
 import axios from "axios";
 import { getDataState } from "../../atom/atom";
+import { tagState } from "../../atom/atom";
 import { useRecoilState } from "recoil";
 
 const TagWrapper = styled.div``;
 
 const Wrapper = styled.div`
-  /* margin-right: 50px; */
   width: 180px;
-  /* height: 100vh; */
   display: flex;
   flex-direction: column;
-  /* position: absolute; */
   top: 73px;
-  /* right: 2.9rem; */
-
 
   padding-left : 15px;
   padding-top : 15px;
-  /* @media screen and (min-width: 642px) and (max-width: 980px) {
-    position: absolute;
-    top: 850px;
-    left: 195px;
-  } */
+
   @media screen and (max-width: 641px) {
-    /* top: 750px; */
     left: 15px;
     width: 100vw;
     height : flex;
+    margin-bottom : 15px;
   }
-  /* @media screen and (max-width: 980px) {
-    display: none;
-  } */
 `;
 
 const TitleContainer = styled.div`
   width: 180px;
   height: 8%;
   margin-bottom : 10px;
-  /* border: 1px solid black; */
-  /* padding-left: 7px; */
   display: flex;
   align-items: center;
   font-size: 1.2rem;
@@ -50,7 +37,6 @@ const TitleContainer = styled.div`
 const TagContainer = styled.div`
   width: min-content;
   height: 25px;
-  /* border: 1px solid pink; */
   display: inline-block;
   border-radius: 3px;
   margin-bottom: 8px;
@@ -63,40 +49,34 @@ const TagContainer = styled.div`
 `;
 
 function TagSideBar() {
-  const [data, setData] = useRecoilState(getDataState);
+  const [tags, setTags] = useRecoilState(tagState);
 
-  useEffect(() => {
-    axios.get("http://localhost:3001/data").then((response) => {
-      setData(response.data);
-    });
-  }, []);
+  // const questionTagList = data.map((row) => row.questionTagList);
+  // const tagList = questionTagList.flat([1]);
+  // const tagArr = [];
 
-  const questionTagList = data.map((row) => row.questionTagList);
-  const tagList = questionTagList.flat([1]);
-  const tagArr = [];
+  // for (let key in tagList) {
+  //   tagArr.push(tagList[key].tagName);
+  // }
 
-  for (let key in tagList) {
-    tagArr.push(tagList[key].tagName);
-  }
+  // const setTag = new Set(tagArr);
+  // const uniqueTag = [...setTag];
+  // const sortedTag = uniqueTag.sort();
+  // let tags = [];
 
-  const setTag = new Set(tagArr);
-  const uniqueTag = [...setTag];
-  const sortedTag = uniqueTag.sort();
-  let tags = [];
-
-  for (let i = 0; i < sortedTag.length; i++) {
-    let obj = {};
-    obj.id = i;
-    obj.name = sortedTag[i];
-    tags.push(obj);
-  }
+  // for (let i = 0; i < sortedTag.length; i++) {
+  //   let obj = {};
+  //   obj.id = i;
+  //   obj.name = sortedTag[i];
+  //   tags.push(obj);
+  // }
 
   return (
     <TagWrapper>
       <Wrapper>
         <TitleContainer>Related Tags</TitleContainer>
         {tags.map((tag) => (
-          <TagContainer key={tag.id}>{tag.name}</TagContainer>
+          <TagContainer key={tag.tagId}>{tag.tagName}</TagContainer>
         ))}
       </Wrapper>
     </TagWrapper>

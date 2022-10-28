@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { isAskState } from "../atom/atom";
+import { useRecoilState } from "recoil";
 
 const FooterBox = styled.footer`
   display: flex;
@@ -163,7 +165,7 @@ const FooterEtc = styled.p`
 
 function Footer() {
   const stackoverflowLinks = [
-    { name: "Questions", site: "https://stackoverflow.com/questions" },
+    { name: "Questions", site: "/" },
     { name: "Help", site: "https://stackoverflow.com/help" },
   ];
 
@@ -230,6 +232,12 @@ function Footer() {
     { name: "Instagram", site: "https://www.instagram.com/thestackoverflow/" },
   ];
 
+  const [isAsk, setIsAsk] = useRecoilState(isAskState);
+
+  let params = useLocation();
+
+  setIsAsk(params.pathname);
+
   return (
     <FooterBox>
       <FooterContainer>
@@ -245,24 +253,24 @@ function Footer() {
           <FooterCol>
             <h5>STACK OVERFLOW</h5>
             <ul>
-              {stackoverflowLinks.map((el, idx) => {
-                if (el.name === "Questions") {
+              {stackoverflowLinks.map((el) => {
+                if (el.name !== "Questions") {
                   return (
-                    <Link to="/">
-                      <li key={idx}>
-                        {/* <a key={idx} href={el.site}> */}
-                          {el.name}
-                        {/* </a> */}
-                      </li>
-                    </Link>
-                  );
-                } else {
-                  return (
-                    <li key={idx}>
-                      <a key={idx} href={el.site}>
+                    <li key={el.name}>
+                      <a key={el.name} href={el.site}>
                         {el.name}
                       </a>
                     </li>
+                  );
+                } else {
+                  return (
+                    // <Link to="/" key={el.name}>
+                      <li key={el.name}>
+                        <a key={el.name} href={el.site}>
+                          {el.name}
+                        </a>
+                      </li>
+                    // </Link>
                   );
                 }
               })}
@@ -271,9 +279,9 @@ function Footer() {
           <FooterCol>
             <h5>PRODUCTS</h5>
             <ul>
-              {productsLinks.map((el, idx) => (
-                <li key={idx}>
-                  <a key={idx} href={el.site}>
+              {productsLinks.map((el) => (
+                <li key={el.name}>
+                  <a key={el.name} href={el.site}>
                     {el.name}
                   </a>
                 </li>
@@ -283,9 +291,9 @@ function Footer() {
           <FooterCol>
             <h5>COMPANY</h5>
             <ul>
-              {companyLinks.map((el, idx) => (
-                <li key={idx}>
-                  <a key={idx} href={el.site}>
+              {companyLinks.map((el) => (
+                <li key={el.name}>
+                  <a key={el.name} href={el.site}>
                     {el.name}
                   </a>
                 </li>
@@ -295,9 +303,9 @@ function Footer() {
           <FooterCol>
             <h5>STACK EXCHANGE NETWORK</h5>
             <ul>
-              {stackLinks.map((el, idx) => (
-                <li key={idx}>
-                  <a key={idx} href={el.site}>
+              {stackLinks.map((el) => (
+                <li key={el.name}>
+                  <a key={el.name} href={el.site}>
                     {el.name}
                   </a>
                 </li>
@@ -307,9 +315,9 @@ function Footer() {
 
           <FooterCopyright>
             <FooterSns>
-              {snsLinks.map((el, idx) => (
-                <li key={idx}>
-                  <a key={idx} href={el.site}>
+              {snsLinks.map((el) => (
+                <li key={el.name}>
+                  <a key={el.name} href={el.site}>
                     {el.name}
                   </a>
                 </li>

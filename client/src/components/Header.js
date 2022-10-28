@@ -185,15 +185,16 @@ function Header() {
     setMenuClick(false);
   };
 
-  console.log(searchClick, menuClick);
 
   return (
     <Header>
       {/* 수정사항 */}
       <MenuIcon onClick={handleClickMenu} />
-      <div className="logo">
-        <LogoImg src="img/logo-stackoverflow.png" alt="logo" />
-      </div>
+      <a href="http://localhost:3000/">
+        <div className="logo">
+          <LogoImg src="img/logo-stackoverflow.png" alt="logo" />
+        </div>
+      </a>
       <RightContainer>
         <Searchbar searchClick={searchClick}>
           <InputSearchIcon />
