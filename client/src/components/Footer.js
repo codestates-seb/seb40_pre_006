@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { isAskState } from "../atom/atom";
+import { useRecoilState } from "recoil";
 
 const FooterBox = styled.footer`
   display: flex;
@@ -163,7 +165,7 @@ const FooterEtc = styled.p`
 
 function Footer() {
   const stackoverflowLinks = [
-    { name: "Questions", site: "https://stackoverflow.com/questions" },
+    { name: "Questions", site: "/" },
     { name: "Help", site: "https://stackoverflow.com/help" },
   ];
 
@@ -230,6 +232,12 @@ function Footer() {
     { name: "Instagram", site: "https://www.instagram.com/thestackoverflow/" },
   ];
 
+  const [isAsk, setIsAsk] = useRecoilState(isAskState);
+
+  let params = useLocation();
+
+  setIsAsk(params.pathname);
+
   return (
     <FooterBox>
       <FooterContainer>
@@ -256,13 +264,13 @@ function Footer() {
                   );
                 } else {
                   return (
-                    <Link to="/" key={el.name}>
+                    // <Link to="/" key={el.name}>
                       <li key={el.name}>
-                        {/* <a key={el.name} href={el.site}> */}
+                        <a key={el.name} href={el.site}>
                           {el.name}
-                        {/* </a> */}
+                        </a>
                       </li>
-                    </Link>
+                    // </Link>
                   );
                 }
               })}

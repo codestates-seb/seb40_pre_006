@@ -47,6 +47,24 @@ export const questionCountState = atom({
 
 export const tagState = atom({
     key : "tagState",
-    default : []
+    default : [],
+    effects_UNSTABLE: [persistAtom],
 
 })
+
+
+
+export const questionTitleValueState = atom({
+  key: "questionTitleValuetState",
+  default: "",
+});
+
+export const questionContentValueState = atom({
+  key: "questionContentValueState",
+  default: "",
+});
+
+// export const questionTagValueState = atom({
+//   key: "questionTagValueState",
+//   default: "",
+// });

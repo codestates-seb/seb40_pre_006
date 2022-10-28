@@ -1,8 +1,16 @@
 import styled from "styled-components";
-import { questionOptionFocusState, questionCountState, getDataState } from "../../atom/atom";
+import {
+  questionOptionFocusState,
+  questionCountState,
+  getDataState,
+  isAskState,
+} from "../../atom/atom";
 import { useRecoilState } from "recoil";
 import { useEffect } from "react";
 import axios from "axios";
+import { Route, Routes, Link } from "react-router-dom";
+
+import QuestionList from "./QuestionList";
 
 const Container = styled.div`
   width: 100%;
@@ -109,50 +117,10 @@ const QuestionHeader = () => {
   const [optionBtn, setOptionBtn] = useRecoilState(questionOptionFocusState);
   const [questionCount, setQuestionCount] = useRecoilState(questionCountState);
   const [questions, setQuestions] = useRecoilState(getDataState);
-
-  // 실제 API 주소로 수정 필요!
-  // const domain = "http://localhost:3001";
-
-  // useEffect(() => {
-  //     getQuestionInfo();
-  // },[])
-
-  // const getQuestionInfo = () => {
-  //     return axios.get(`${domain}/pageInfo`)
-  //     .then((res) => setQuestionCount(res.data.totalElements));
-  // }
+  const [isAsk, setIsAsk] = useRecoilState(isAskState);
 
   const handleOptionBtnClick = (opt) => {
-
     setOptionBtn(opt);
-
-    if (opt === 1){
-        axios.get("https://310c-221-140-177-247.jp.ngrok.io/question?page=3&size=1")
-        .then((res)=> {
-            // setOptionBtn(opt)
-            console.log(optionBtn);
-            setQuestions(res.data.data);
-        })
-    }else if (opt === 2){
-        axios.get('')
-        .then((res)=> {
-            // setOptionBtn(opt);
-            console.log(optionBtn);
-
-            setQuestions(res.data.data);
-        })
-    }else if (opt === 3){
-        // axios.get('https://310c-221-140-177-247.jp.ngrok.io/question/answered')
-        axios.get('http://localhost:3001/data')
-        .then((res)=> {
-            // setOptionBtn(opt);
-            console.log(optionBtn);
-            setQuestions(res.data);
-        })
-    }
-
-    // setOptionBtn(opt);
-    // console.log(opt);
   };
 
   return (
@@ -174,6 +142,7 @@ const QuestionHeader = () => {
             >
               All
             </Button>
+
             <Button
               onClick={() => handleOptionBtnClick(2)}
               props={optionBtn === 2 ? optionBtn : null}
@@ -190,6 +159,7 @@ const QuestionHeader = () => {
           </div>
         </div>
       </Container>
+      <QuestionList />
     </>
   );
 };
