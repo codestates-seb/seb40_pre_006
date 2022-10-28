@@ -61,6 +61,7 @@ const Questions = () => {
           axios.spread((res1, res2) => {
                             setData(res1.data.data);
                             setQuestionCount(res1.data.pageInfo.totalElements);
+                            setTags(res2.data.data);
                         })
         );
     } else if (opt === 2) {
