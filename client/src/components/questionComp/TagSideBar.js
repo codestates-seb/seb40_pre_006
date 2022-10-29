@@ -13,21 +13,22 @@ const Wrapper = styled.div`
   flex-direction: column;
   top: 73px;
 
-  padding-left : 15px;
-  padding-top : 15px;
+  padding-left: 15px;
+  padding-top: 15px;
 
   @media screen and (max-width: 641px) {
     left: 15px;
     width: 100vw;
-    height : flex;
-    margin-bottom : 15px;
+    height: flex;
+    margin-bottom: 15px;
   }
 `;
 
 const TitleContainer = styled.div`
   width: 180px;
   height: 8%;
-  margin-bottom : 10px;
+  margin-top: 12px;
+  margin-bottom: 26px;
   display: flex;
   align-items: center;
   font-size: 1.2rem;
