@@ -13,24 +13,25 @@ const Container = styled.div`
   /* background-color : #5a5a5a; */
 
   border-right: 1px solid #e0e0e0;
+  /* border-bottom : 1px solid #e0e0e0; */
 
   @media screen and (max-width: 640px) {
     display: ${(props) => (props.props ? "block" : "none")};
     width: 220px;
     height: 500px;
-
     position: absolute;
     left: 0;
   }
 
   .side-menu {
     width: 100%;
-    height: 500px;
+    height: 100%;
 
     position: sticky;
     top: 53px;
 
     background-color: white;
+    border-bottom: 1px solid #e0e0e0;
 
     .menu-list {
       list-style: none;
@@ -102,7 +103,6 @@ const Aside = () => {
   setIsAsk(params.pathname);
   // useEffect(()=> {
   // },[])
-  
 
   // const handleClick = ( ) => {
   //     setFocus(params.pathname);

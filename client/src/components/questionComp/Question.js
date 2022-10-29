@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const QuestionBox = styled.div`
   width: 100%;
@@ -137,10 +138,13 @@ function Question({ question }) {
         </div>
       </QuestionSide>
       <QuestionContent>
-        <h3 className="title">
-          {/* <a href=""></a> */}
-          {Q.title}
-        </h3>
+        <Link to="detailQuestion">
+          <h3 className="title">
+            {/* <a href=""></a> */}
+            {Q.title}
+          </h3>
+
+        </Link>
         <div className="body">{Q.questionBody}</div>
         <Etc>
           <Tags className="tags">
