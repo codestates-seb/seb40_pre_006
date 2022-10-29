@@ -1,14 +1,18 @@
 import styled from "styled-components";
 import QuestionHeader from "../components/questionComp/QuestionHeader";
 import TagSideBar from "../components/questionComp/TagSideBar";
+import CustomPagination from "../components/questionComp/CustomPagination";
 
 import { getDataState } from "../atom/atom";
 import { questionCountState } from "../atom/atom";
 import { questionOptionFocusState } from "../atom/atom";
 import { tagState } from "../atom/atom";
+import { pageState } from "../atom/atom";
 import { useRecoilState } from "recoil";
 import { useEffect } from "react";
 import axios from "axios";
+
+import { pageSizeState } from "../atom/atom";
 
 const Container = styled.div`
   width: 70vw;
@@ -47,10 +51,12 @@ const Questions = () => {
   const [questionCount, setQuestionCount] = useRecoilState(questionCountState);
   const [tags, setTags] = useRecoilState(tagState);
   const [opt, setOpts] = useRecoilState(questionOptionFocusState);
+  const [size, setSize] = useRecoilState(pageSizeState);
+  const [page, setPage] = useRecoilState(pageState);
 
-    useEffect(() => {
+  useEffect(() => {
     if (opt === 1) {
-            axios
+      axios
         .all([
           axios.get(
             // "https://6034-221-140-177-247.jp.ngrok.io/question?page=3&size=1"
@@ -60,10 +66,12 @@ const Questions = () => {
         ])
         .then(
           axios.spread((res1, res2) => {
-                            setData(res1.data.data);
-                            setQuestionCount(res1.data.pageInfo.totalElements);
-                            setTags(res2.data.data);
-                        })
+            setData(res1.data.data);
+            setQuestionCount(res1.data.pageInfo.totalElements);
+            setTags(res2.data.data);
+            setSize(res1.data.pageInfo.size); // 사이즈는 변하지 않아서 처음에만 설정하면 될 것 같아요
+            console.log('옵션1로 변해 모든 데이터(Page1)를 불러와 데이터로 설정') //
+          })
         );
     } else if (opt === 2) {
       axios
@@ -72,6 +80,7 @@ const Questions = () => {
         .then((res) => {
           setData(res.data.data.slice(2));
           setQuestionCount(res.data.pageInfo.totalElements - 2);
+          console.log('옵션2로 변해 필터링된 데이터(Page1)를 불러와 데이터로 설정') // 
         });
     } else if (opt === 3) {
       axios
@@ -79,9 +88,12 @@ const Questions = () => {
         .then((res) => {
           setData(res.data.data.slice(1));
           setQuestionCount(res.data.pageInfo.totalElements - 1);
+          console.log('옵션3로 변해 필터링된 데이터(Page1)를 불러와 데이터로 설정') // 
         });
-        }
-
+    }
+    
+    setPage(1); //
+    console.log('페이지 1로 리셋') //
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [opt]);
 
@@ -90,6 +102,7 @@ const Questions = () => {
       <Container>
         <Content>
           <QuestionHeader />
+          <CustomPagination />
         </Content>
         <Right>
           <TagSideBar />

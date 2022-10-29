@@ -298,11 +298,17 @@ export const questionContentValueState = atom({
 
 
 // 세비님
+export const pageSizeState = atom({
+  key: "pageSizeState",
+  default: 1,
+  effects_UNSTABLE: [persistAtom]
+});
 
-
-
-
-
+export const pageState = atom({
+  key: "pageState",
+  default: 1,
+  effects_UNSTABLE: [persistAtom]
+});
 
 
 
