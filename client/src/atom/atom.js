@@ -34,10 +34,8 @@ export const questionOptionFocusState = atom({
 export const getDataState = atom({
   key: "getDataState",
   default: [],
-  effects_UNSTABLE: [persistAtom]
-
+  effects_UNSTABLE: [persistAtom],
 });
-
 
 // 질문 데이터(질문 갯수)
 export const questionCountState = atom({
@@ -47,12 +45,10 @@ export const questionCountState = atom({
 });
 
 export const tagState = atom({
-    key : "tagState",
-    default : [],
-    effects_UNSTABLE: [persistAtom],
-
-})
-
+  key: "tagState",
+  default: [],
+  effects_UNSTABLE: [persistAtom],
+});
 
 export const questionTitleValueState = atom({
   key: "questionTitleValuetState",
@@ -68,6 +64,8 @@ export const questionContentValueState = atom({
 //   key: "questionTagValueState",
 //   default: "",
 // });
+{
+  /**
 
 
 
@@ -97,7 +95,11 @@ export const questionContentValueState = atom({
 
 
 
-// 성훈님
+  */
+}
+{
+  /*// 성훈님
+  
 
 
 
@@ -193,15 +195,31 @@ export const questionContentValueState = atom({
 
 
 
-
-
-
-
+*/
+}
 // 채은님
 
+export const questionTagValueState = atom({
+  key: "questionTagValueState",
+  default: [],
+});
 
+export const questionBtn1ClickState = atom({
+  key: "questionBtn1ClickState",
+  default: true,
+});
 
+export const questionBtn2ClickState = atom({
+  key: "questionBtn2ClickState",
+  default: true,
+});
 
+export const questionBtn3ClickState = atom({
+  key: "questionBtn3ClickState",
+  default: true,
+});
+{
+  /**
 
 
 
@@ -276,28 +294,10 @@ export const questionContentValueState = atom({
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+*/
+}
 // 세비님
+
 export const pageSizeState = atom({
   key: "pageSizeState",
   default: 1,

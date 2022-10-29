@@ -4,7 +4,14 @@
       "questionId": "1",
       "title": "6조 FE 화이팅",
       "questionBody": "내용 1",
-      "questionTagList": [{ "tagName": "java" }, { "tagName": "c++" }],
+      "questionTagList": [
+        {
+          "tagName": "java"
+        },
+        {
+          "tagName": "c++"
+        }
+      ],
       "name": "김코딩",
       "voteCount": 1,
       "answerCount": 2,
@@ -14,7 +21,14 @@
       "questionId": "2",
       "title": "6조 BE 화이팅",
       "questionBody": "내용 2",
-      "questionTagList": [{ "tagName": "javascript" }, { "tagName": "react" }],
+      "questionTagList": [
+        {
+          "tagName": "javascript"
+        },
+        {
+          "tagName": "react"
+        }
+      ],
       "name": "박해커",
       "voteCount": 3,
       "answerCount": 4,
@@ -24,7 +38,14 @@
       "questionId": "3",
       "title": "6조 화이팅",
       "questionBody": "내용 3",
-      "questionTagList": [{ "tagName": "array" }, { "tagName": "object" }],
+      "questionTagList": [
+        {
+          "tagName": "array"
+        },
+        {
+          "tagName": "object"
+        }
+      ],
       "name": "박해커",
       "voteCount": 5,
       "answerCount": 18,
@@ -34,7 +55,14 @@
       "questionId": "4",
       "title": "6조 FE 화이팅",
       "questionBody": "내용 1",
-      "questionTagList": [{ "tagName": "java" }, { "tagName": "c++" }],
+      "questionTagList": [
+        {
+          "tagName": "java"
+        },
+        {
+          "tagName": "c++"
+        }
+      ],
       "name": "김코딩",
       "voteCount": 1,
       "answerCount": 2,
@@ -44,7 +72,14 @@
       "questionId": "5",
       "title": "6조 BE 화이팅",
       "questionBody": "내용 2",
-      "questionTagList": [{ "tagName": "javascript" }, { "tagName": "react" }],
+      "questionTagList": [
+        {
+          "tagName": "javascript"
+        },
+        {
+          "tagName": "react"
+        }
+      ],
       "name": "박해커",
       "voteCount": 3,
       "answerCount": 4,
@@ -54,7 +89,14 @@
       "questionId": "6",
       "title": "6조 화이팅",
       "questionBody": "내용 3",
-      "questionTagList": [{ "tagName": "array" }, { "tagName": "object" }],
+      "questionTagList": [
+        {
+          "tagName": "array"
+        },
+        {
+          "tagName": "object"
+        }
+      ],
       "name": "박해커",
       "voteCount": 5,
       "answerCount": 18,
@@ -66,5 +108,38 @@
     "size": 10,
     "totalElements": 3,
     "totalPages": 1
-  }
+  },
+  "question": [
+    {
+      "id": 1,
+      "title": "titleValue",
+      "questionBody": "contentValue",
+      "questionTagList": "tagValue"
+    },
+    {
+      "title": "안녕하세요 15글자입니다....",
+      "questionBody": "안ㄴ여하세요 20글자입ㄴ디ㅏ......",
+      "questionTagList": [
+        {
+          "tagName": "tag1"
+        },
+        {
+          "tagName": "tagh2"
+        }
+      ],
+      "userId": 1,
+      "id": 2
+    },
+    {
+      "title": "한번만더 테스트해보자.....",
+      "questionBody": "20글자20글자20글자20글자20글자20글자",
+      "questionTagList": [
+        {
+          "tagName": "tag1"
+        }
+      ],
+      "userId": 1,
+      "id": 3
+    }
+  ]
 }
