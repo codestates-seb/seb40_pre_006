@@ -18,6 +18,7 @@ import Tags from "./pages/Tags";
 import Users from "./pages/Users";
 import Header from "./components/Header";
 import AskQuestion from "./pages/AskQuestion";
+import DetailQuestion from "./pages/DetailQuestion";
 
 const Container = styled.div`
   display: flex;
@@ -36,10 +37,12 @@ function App() {
       {isAsk === "/ask" ? null : (
         <Container>
           <Aside />
+          {/* <DetailQuestion /> */}
           <Routes>
             <Route path="/" element={<Questions />} />
             <Route path="/tags" element={<Tags />} />
             <Route path="/users" element={<Users />} />
+            <Route path="/detailQuestion" element={<DetailQuestion />} />
           </Routes>
         </Container>
       )}
