@@ -3,6 +3,7 @@ package com.codestates.preproject.answer.entity;
 
 import com.codestates.preproject.question.entity.Question;
 import com.codestates.preproject.user.entity.User;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,6 +14,7 @@ import java.time.LocalDateTime;
 @Entity
 @Getter @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class Answer {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
