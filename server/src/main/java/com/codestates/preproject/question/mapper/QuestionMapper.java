@@ -4,6 +4,8 @@ import com.codestates.preproject.question.dto.*;
 import com.codestates.preproject.question.entity.Question;
 import com.codestates.preproject.question.entity.QuestionTag;
 import com.codestates.preproject.tag.entity.Tag;
+import com.codestates.preproject.user.entity.User;
+import com.codestates.preproject.user.service.UserService;
 import org.mapstruct.Mapper;
 
 import java.time.LocalDateTime;
@@ -27,11 +29,16 @@ public interface QuestionMapper {
         }
 
         Question question = new Question();
-        question.setUser( questionPostDto.getUser() );
-        question.getUser().setUserId(questionPostDto.getUserId());
+        User user = new User();
+        user.setUserId(questionPostDto.getUserId());
+//        question.setUser( questionPostDto.getUser() );
+        question.setUser(user);
+//        question.setName();
+//        question.getUser().setUserId( user.getUserId() );
+//        question.getUser().setUserId(questionPostDto.getUserId());
         question.setTitle( questionPostDto.getTitle() );
         question.setQuestionBody( questionPostDto.getQuestionBody() );
-        question.setName(questionPostDto.getUser().getName());
+//        question.setName(questionPostDto.getUser().getName());
         List<QuestionTag> list = questionPostDto.getQuestionTagList().stream()
                 .map(questionTagDto -> {
                     QuestionTag questionTag = new QuestionTag();
@@ -61,7 +68,7 @@ public interface QuestionMapper {
         questionResponseDto.setName( question.getName() );
         questionResponseDto.setVoteCount( question.getVoteCount() );
         questionResponseDto.setAnswerCount( question.getAnswerCount() );
-        questionResponseDto.setCreateAt(LocalDateTime.now());
+        questionResponseDto.setCreatedAt(LocalDateTime.now());
 
         return questionResponseDto;
     }
