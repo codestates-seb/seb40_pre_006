@@ -310,3 +310,15 @@ export const pageState = atom({
   default: 1,
   effects_UNSTABLE: [persistAtom],
 });
+
+export const getAnswerState = atom({
+  key: "getAnswerState",
+  default: [],
+  // effects_UNSTABLE: [persistAtom],
+});
+
+export const questionIdState = atom({
+  key: "getAnswerState",
+  default: 1,
+  effects_UNSTABLE: [persistAtom],
+});
