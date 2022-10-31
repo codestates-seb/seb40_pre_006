@@ -30,7 +30,7 @@ public class TagController {
 
 
     @GetMapping("/{right}")
-    public ResponseEntity getTags(){
+    public ResponseEntity getTagsRight(){
         List<Tag> tags = tagService.findTags();
         List<TagDto.Response> response =
                 tags.stream()
