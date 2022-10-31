@@ -10,4 +10,8 @@ public class QuestionPatchDto {
     public void setQuestionId(Long questionId) {
         this.questionId = questionId;
     }
+
+    public void setVoteCount(int voteCount) {
+        this.voteCount = voteCount;
+    }
 }
