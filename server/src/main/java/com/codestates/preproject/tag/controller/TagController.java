@@ -1,6 +1,7 @@
 package com.codestates.preproject.tag.controller;
 
 import com.codestates.preproject.dto.MultiResponseDto;
+import com.codestates.preproject.dto.SingleResponseDto;
 import com.codestates.preproject.tag.entity.Tag;
 import com.codestates.preproject.tag.mapper.TagMapper;
 import com.codestates.preproject.tag.service.TagService;
@@ -33,7 +34,7 @@ public class TagController {
         Page<Tag> pageTags = tagService.findTags(1-1, 5);
         List<Tag> tags = pageTags.getContent();
         return new ResponseEntity<>(
-                new MultiResponseDto<>(mapper.tagToTagResponseDto(tags), pageTags),
+                new SingleResponseDto<>(mapper.tagToTagResponseDto(tags)),
                 HttpStatus.OK);
     }
 
