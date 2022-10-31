@@ -218,12 +218,13 @@ export const questionBtn3ClickState = atom({
   key: "questionBtn3ClickState",
   default: true,
 });
+
+export const answerContentValueState = atom({
+  key: "answerContentValueState",
+  default: "",
+});
 {
   /**
-
-
-
-
 
 
 

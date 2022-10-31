@@ -7,6 +7,7 @@ import { getAnswerState, questionIdState } from "../atom/atom";
 import { useRecoilState } from "recoil";
 import axios from "axios";
 import { useEffect } from "react";
+import YourAnswer from "../components/DetailQuestionComp/YourAnswer";
 
 const Container = styled.div`
   width: 70vw;
@@ -38,6 +39,7 @@ const DetailQuestion = () => {
         <QuestionTitle />
         <QuestionContent />
         <AnswerList />
+        <YourAnswer />
       </Container>
     </>
   );
