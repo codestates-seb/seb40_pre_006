@@ -17,6 +17,6 @@ public class QuestionResponseDto {
     private String name;
     private int voteCount;
     private int answerCount;
-    private LocalDateTime createAt;
+    private LocalDateTime createdAt;
 
 }
