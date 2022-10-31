@@ -85,7 +85,7 @@ const YourAnswer = () => {
     };
     // await axios.post(`${process.env.REACT_APP_API_URL}/answer`, answer);
     axios
-      .post("http://localhost:3001/question", answer)
+      .post(`${process.env.REACT_APP_API_URL}/question/answer`, answer)
       .then((response) => this.setState({ answerId: response.data.id }));
 
     window.location.reload();

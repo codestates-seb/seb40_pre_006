@@ -14,6 +14,8 @@ const Container = styled.div`
 function AnswerList() {
   const Alist = useRecoilValue(getAnswerState);
 
+  console.log(Alist);
+
   return (
     <Container>
       {Alist.length === 1 ? (

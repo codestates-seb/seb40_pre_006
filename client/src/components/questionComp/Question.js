@@ -174,7 +174,7 @@ function Question({ question }) {
           </Tags>
           <Created className="author-time">
             <span className="author">{Q.name}</span>
-            <span className="createdAt"> {handleDate(Q.createdAt)}</span>
+            <span className="createdAt"> {handleDate(Q.createAt)}</span>
           </Created>
         </Etc>
       </QuestionContent>

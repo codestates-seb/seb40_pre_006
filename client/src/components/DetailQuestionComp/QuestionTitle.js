@@ -76,7 +76,7 @@ const QuestionTitle = () => {
           </a>
         </div>
         <div className="detail-info">
-          <div className="date">{questionInfo.createdAt}</div>
+          <div className="date">{questionInfo.createAt}</div>
         </div>
       </Container>
     </>

@@ -190,7 +190,7 @@ function Header() {
     <Header>
       {/* 수정사항 */}
       <MenuIcon onClick={handleClickMenu} />
-      <a href="http://localhost:3000/">
+      <a href="/">
         <div className="logo">
           <LogoImg src="img/logo-stackoverflow.png" alt="logo" />
         </div>

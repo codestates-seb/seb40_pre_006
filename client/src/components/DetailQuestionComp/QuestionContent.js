@@ -241,6 +241,16 @@ const QuestionContent = () => {
   const handleVoteClick = async () => {
     let isGo = false;
 
+    let minusBody = {
+      // voteCount : questionInfo.voteCount - 1
+      questionId : 1
+    }
+
+    let plusBody = {
+      // voteCount : questionInfo.voteCount + 1
+      questionId : 1
+    }
+
     if (!isLogin) {
       isGo = window.confirm(
         "로그인이 필요합니다! \n로그인 창으로 이동하시겠습니까?"
@@ -250,17 +260,17 @@ const QuestionContent = () => {
       if (vote) {
         setVote(false);
         await axios
-          .patch(`${process.env.REACT_APP_API_URL}/question/1/vote/minus`)
+          .patch(`${process.env.REACT_APP_API_URL}/question/1/vote/minus`, minusBody)
           .then((res) => {
-            setQuestionInfo(res.data);
+            setQuestionInfo(res.data.data);
             // console.log(res);
           });
       } else {
         setVote(true);
         await axios
-          .patch(`${process.env.REACT_APP_API_URL}/question/1/vote/plus`)
+          .patch(`${process.env.REACT_APP_API_URL}/question/1/vote/plus`, plusBody)
           .then((res) => {
-            setQuestionInfo(res.data);
+            setQuestionInfo(res.data.data);
             // console.log(res);
           });
       }

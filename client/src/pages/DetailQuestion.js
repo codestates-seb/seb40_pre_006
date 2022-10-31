@@ -54,11 +54,12 @@ const DetailQuestion = () => {
       ])
       .then(
         axios.spread((res1, res2) => {
-          setQuestionInfo(res1.data);
+          setQuestionInfo(res1.data.data);
           setAnswerData(res2.data.data);
+
         })
       );
-  }, [id]);
+  }, []);
 
   return (
     <>
