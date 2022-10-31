@@ -8,4 +8,5 @@ import javax.validation.constraints.Positive;
 public class QuestionTagDto {
     @Positive
     private Long tagId;
+    private String tagName;
 }

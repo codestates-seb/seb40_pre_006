@@ -2,6 +2,7 @@ package com.codestates.preproject.question.entity;
 
 import com.codestates.preproject.answer.entity.Answer;
 import com.codestates.preproject.user.entity.User;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,6 +15,7 @@ import java.util.List;
 @Entity
 @Getter @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class Question {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,11 +25,25 @@ public class Question {
 
     private String questionBody;
 
+    private String name;
+
     private int voteCount;
 
     private int answerCount;
 
     private LocalDateTime createdAt;
+
+    public Question(Long questionId, String title, String questionBody, String name, int voteCount, int answerCount,
+                    LocalDateTime createdAt, List<QuestionTag> questionTagList) {
+        this.questionId = questionId;
+        this.title = title;
+        this.questionBody = questionBody;
+        this.name = name;
+        this.voteCount = voteCount;
+        this.answerCount = answerCount;
+        this.createdAt = createdAt;
+        this.questionTagList = questionTagList;
+    }
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
     private List<Answer> answerList = new ArrayList<>();
