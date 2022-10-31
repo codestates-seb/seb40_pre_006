@@ -28,7 +28,8 @@ public class AnswerController {
     public ResponseEntity postAnswer(@Valid @RequestBody AnswerDto.Post requestBody) {
         Answer answer = answerService.createAnswer(mapper.answerPostDtoToAnswer(requestBody));
 
-        return new ResponseEntity<>(mapper.answerToAnswerResponseDto(answer), HttpStatus.CREATED);
+        return new ResponseEntity<>(
+                new SingleResponseDto<>(mapper.answerToAnswerResponseDto(answer)), HttpStatus.CREATED);
     }
 
     @GetMapping("/{question-id}")
