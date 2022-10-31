@@ -97,14 +97,25 @@ export const questionContentValueState = atom({
 
   */
 }
-{
-  /*// 성훈님
-  
 
+// 성훈님
 
+  export const DetailQuestionInfoState = atom({
+    key: "DetailQuestionInfoState",
+    default: "",
+    // effects_UNSTABLE: [persistAtom],
+  });
 
 
+  export const LoginState = atom({
+    key : "LoginState",
+    default : true,
+  })
 
+  export const QuestionIdState = atom({
+    key : "QuestionIdState",
+    default : "",
+  })
 
 
 
@@ -195,8 +206,12 @@ export const questionContentValueState = atom({
 
 
 
-*/
-}
+
+
+
+
+
+
 // 채은님
 
 export const questionTagValueState = atom({
@@ -218,12 +233,13 @@ export const questionBtn3ClickState = atom({
   key: "questionBtn3ClickState",
   default: true,
 });
+
+export const answerContentValueState = atom({
+  key: "answerContentValueState",
+  default: "",
+});
 {
   /**
-
-
-
-
 
 
 
@@ -301,16 +317,23 @@ export const questionBtn3ClickState = atom({
 export const pageSizeState = atom({
   key: "pageSizeState",
   default: 1,
-  effects_UNSTABLE: [persistAtom]
+  effects_UNSTABLE: [persistAtom],
 });
 
 export const pageState = atom({
   key: "pageState",
   default: 1,
-  effects_UNSTABLE: [persistAtom]
+  effects_UNSTABLE: [persistAtom],
 });
 
+export const getAnswerState = atom({
+  key: "getAnswerState",
+  default: [],
+  // effects_UNSTABLE: [persistAtom],
+});
 
-
-
-
+export const questionIdState = atom({
+  key: "getAnswerState",
+  default: 1,
+  effects_UNSTABLE: [persistAtom],
+});

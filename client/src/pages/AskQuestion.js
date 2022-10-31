@@ -343,7 +343,7 @@ const AskQuestion = () => {
     setTagValue(filtered);
   };
 
-  async function handleSubmit() {
+  function handleSubmit() {
     const question = {
       title: titleValue,
       questionBody: contentValue,
@@ -351,9 +351,12 @@ const AskQuestion = () => {
       userId: 1,
     };
     // await axios.post(`${process.env.REACT_APP_API_URL}/question`, question);
-    await axios
+    axios
       .post("http://localhost:3001/question", question)
       .then((response) => this.setState({ questionId: response.data.id }));
+
+    alert("질문이 등록되었습니다");
+    document.location.href = "http://localhost:3000/";
   }
   // useEffect(() => {
   //   handleSubmit();
@@ -392,7 +395,7 @@ const AskQuestion = () => {
               </div>
             </div>
             <div className={isBtn1Click ? "input-body-disabled" : "input-body"}>
-              <SectionTitle>Title</SectionTitle>
+              <SectionTitle>Body</SectionTitle>
               <SectionDescription>
                 Introduce the problem and expand on what you put in the title.
                 Minimum 20 characters.
@@ -415,7 +418,7 @@ const AskQuestion = () => {
               </div>
             </div>
             <div className={isBtn2Click ? "input-tag-disabled" : "input-tag"}>
-              <SectionTitle>Title</SectionTitle>
+              <SectionTitle>Tags</SectionTitle>
               <SectionDescription>
                 Add up to 5 tags to describe what your question is about.
               </SectionDescription>

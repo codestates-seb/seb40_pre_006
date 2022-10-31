@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { questionIdState } from "../../atom/atom";
 
 const QuestionBox = styled.div`
   width: 100%;
@@ -126,6 +128,23 @@ const Created = styled.div`
 
 function Question({ question }) {
   const [Q, setQ] = useState(question);
+  const [id, setId] = useRecoilState(questionIdState); // id 설정
+
+  const handleTitleClick = () => { // id 설정
+    setId(Q.questionId);
+    console.log(id);
+  };
+
+  const handleDate = (createdAt) => {
+    let date = new Date(createdAt).toString()
+    let splitDate = date.split(' ');
+    let month = splitDate[1];
+    let day =  splitDate[2];
+    let year = splitDate[3];
+    let time = splitDate[4].slice(0,5);
+
+    return `asked ${month} ${day}, ${year} at ${time}`
+  }
 
   return (
     <QuestionBox>
@@ -138,8 +157,9 @@ function Question({ question }) {
         </div>
       </QuestionSide>
       <QuestionContent>
-        <Link to="detailQuestion">
-          <h3 className="title">
+        <Link to="detailQuestion"> 
+        {/* onClick={()=>handleTitleClick()} */}
+          <h3 className="title" >
             {/* <a href=""></a> */}
             {Q.title}
           </h3>
@@ -152,9 +172,9 @@ function Question({ question }) {
               <span key={idx}>{tag.tagName}</span>
             ))}
           </Tags>
-          <Created className='author-time'>
+          <Created className="author-time">
             <span className="author">{Q.name}</span>
-            <span className="createdAt"> {Q.createdAt}</span>
+            <span className="createdAt"> {handleDate(Q.createdAt)}</span>
           </Created>
         </Etc>
       </QuestionContent>
