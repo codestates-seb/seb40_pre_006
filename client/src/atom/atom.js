@@ -218,12 +218,13 @@ export const questionBtn3ClickState = atom({
   key: "questionBtn3ClickState",
   default: true,
 });
+
+export const answerContentValueState = atom({
+  key: "answerContentValueState",
+  default: "",
+});
 {
   /**
-
-
-
-
 
 
 
@@ -301,16 +302,11 @@ export const questionBtn3ClickState = atom({
 export const pageSizeState = atom({
   key: "pageSizeState",
   default: 1,
-  effects_UNSTABLE: [persistAtom]
+  effects_UNSTABLE: [persistAtom],
 });
 
 export const pageState = atom({
   key: "pageState",
   default: 1,
-  effects_UNSTABLE: [persistAtom]
+  effects_UNSTABLE: [persistAtom],
 });
-
-
-
-
-
