@@ -97,14 +97,25 @@ export const questionContentValueState = atom({
 
   */
 }
-{
-  /*// 성훈님
-  
 
+// 성훈님
 
+  export const DetailQuestionInfoState = atom({
+    key: "DetailQuestionInfoState",
+    default: "",
+    // effects_UNSTABLE: [persistAtom],
+  });
 
 
+  export const LoginState = atom({
+    key : "LoginState",
+    default : true,
+  })
 
+  export const QuestionIdState = atom({
+    key : "QuestionIdState",
+    default : "",
+  })
 
 
 
@@ -195,8 +206,12 @@ export const questionContentValueState = atom({
 
 
 
-*/
-}
+
+
+
+
+
+
 // 채은님
 
 export const questionTagValueState = atom({

@@ -60,9 +60,9 @@ const Questions = () => {
         .all([
           axios.get(
             // "https://6034-221-140-177-247.jp.ngrok.io/question?page=3&size=1"
-            `${process.env.REACT_APP_API_URL}/question?page=3&size=1`
+            `${process.env.REACT_APP_API_URL}/question?page=1&size=10`
           ),
-          axios.get(`${process.env.REACT_APP_API_URL}/tag`),
+          axios.get(`${process.env.REACT_APP_API_URL}/tag/right`),
         ])
         .then(
           axios.spread((res1, res2) => {
@@ -76,18 +76,18 @@ const Questions = () => {
     } else if (opt === 2) {
       axios
         // .get(`${process.env.REA_APP_API_URL}/question/answered`)
-        .get(`${process.env.REACT_APP_API_URL}/question/answered`)
+        .get(`${process.env.REACT_APP_API_URL}/question/unanswered?page=1&size=10`)
         .then((res) => {
-          setData(res.data.data.slice(2));
-          setQuestionCount(res.data.pageInfo.totalElements - 2);
+          setData(res.data.data);
+          setQuestionCount(res.data.pageInfo.totalElements);
           console.log('옵션2로 변해 필터링된 데이터(Page1)를 불러와 데이터로 설정') // 
         });
     } else if (opt === 3) {
       axios
-        .get(`${process.env.REACT_APP_API_URL}/question/answered`)
+        .get(`${process.env.REACT_APP_API_URL}/question/answered?page=1&size=10`)
         .then((res) => {
-          setData(res.data.data.slice(1));
-          setQuestionCount(res.data.pageInfo.totalElements - 1);
+          setData(res.data.data);
+          setQuestionCount(res.data.pageInfo.totalElements);
           console.log('옵션3로 변해 필터링된 데이터(Page1)를 불러와 데이터로 설정') // 
         });
     }

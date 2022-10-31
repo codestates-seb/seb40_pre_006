@@ -2,12 +2,14 @@ import styled from "styled-components";
 
 import QuestionTitle from "../components/DetailQuestionComp/QuestionTitle";
 import QuestionContent from "../components/DetailQuestionComp/QuestionContent";
-import AnswerList from "../components/DetailQuestionComp/AnswerList";
-import { getAnswerState, questionIdState } from "../atom/atom";
-import { useRecoilState } from "recoil";
+import { DetailQuestionInfoState } from "../atom/atom";
+
 import axios from "axios";
+import { useRecoilState } from "recoil";
 import { useEffect } from "react";
 import YourAnswer from "../components/DetailQuestionComp/YourAnswer";
+import AnswerList from "../components/DetailQuestionComp/AnswerList";
+import { getAnswerState, questionIdState } from "../atom/atom";
 
 const Container = styled.div`
   width: 70vw;
@@ -24,14 +26,40 @@ const Container = styled.div`
 `;
 
 const DetailQuestion = () => {
+  const [questionInfo, setQuestionInfo] = useRecoilState(
+    DetailQuestionInfoState
+  );
   const [answerData, setAnswerData] = useRecoilState(getAnswerState);
   const [id, setId] = useRecoilState(questionIdState);
 
+  // useEffect(() => {
+  //   axios.get(`${process.env.REACT_APP_API_URL}/question/1`)
+  //   .then((res) => {
+  //     // console.log(res.data);
+  //     setQuestionInfo(res.data);
+  //   })
+  // },[])
+
+  // useEffect(() => {
+  //   axios.get(`${process.env.REACT_APP_API_URL}/answer/1`).then((res) => {
+  //     setAnswerData(res.data.data);
+  //   });
+  // }, [id]);
+
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_API_URL}/answer/1`).then((res) => {
-      setAnswerData(res.data.data);
-    });
-  }, [id]);
+    axios
+      .all([
+        axios.get(`${process.env.REACT_APP_API_URL}/question/1`),
+        axios.get(`${process.env.REACT_APP_API_URL}/answer/1`),
+      ])
+      .then(
+        axios.spread((res1, res2) => {
+          setQuestionInfo(res1.data.data);
+          setAnswerData(res2.data.data);
+
+        })
+      );
+  }, []);
 
   return (
     <>

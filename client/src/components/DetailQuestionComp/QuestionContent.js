@@ -1,5 +1,11 @@
 import styled from "styled-components";
 import { FaCaretUp } from "react-icons/fa";
+import { DetailQuestionInfoState } from "../../atom/atom";
+import { LoginState } from "../../atom/atom";
+import { constSelector, useRecoilState } from "recoil";
+import { useEffect } from "react";
+import axios from "axios";
+import { useState } from "react";
 
 const Container = styled.div`
   width: 100%;
@@ -43,6 +49,14 @@ const Container = styled.div`
         padding-top: 10px;
         color: #b4b4b4;
         /* color : #ff4949; */
+
+        cursor: pointer;
+      }
+
+      .icons-active {
+        font-size: 40px;
+        padding-top: 10px;
+        color: #ff4949;
 
         cursor: pointer;
       }
@@ -210,53 +224,77 @@ const Container = styled.div`
 `;
 
 const QuestionContent = () => {
+  const [questionInfo, setQuestionInfo] = useRecoilState(
+    DetailQuestionInfoState
+  );
+
+  const [isLogin, setIsLogin] = useRecoilState(LoginState);
+
+  const [vote, setVote] = useState(false);
+
+  // console.log(questionInfo);
+
+  // const getId = (id) => {
+  //   return id++;
+  // }
+
+  const handleVoteClick = async () => {
+    let isGo = false;
+
+    let minusBody = {
+      // voteCount : questionInfo.voteCount - 1
+      questionId : 1
+    }
+
+    let plusBody = {
+      // voteCount : questionInfo.voteCount + 1
+      questionId : 1
+    }
+
+    if (!isLogin) {
+      isGo = window.confirm(
+        "로그인이 필요합니다! \n로그인 창으로 이동하시겠습니까?"
+      );
+      isGo ? (window.location = "/ask") : console.log("stay");
+    } else {
+      if (vote) {
+        setVote(false);
+        await axios
+          .patch(`${process.env.REACT_APP_API_URL}/question/1/vote/minus`, minusBody)
+          .then((res) => {
+            setQuestionInfo(res.data.data);
+            // console.log(res);
+          });
+      } else {
+        setVote(true);
+        await axios
+          .patch(`${process.env.REACT_APP_API_URL}/question/1/vote/plus`, plusBody)
+          .then((res) => {
+            setQuestionInfo(res.data.data);
+            // console.log(res);
+          });
+      }
+    }
+  };
+
   return (
     <>
       <Container>
         <div className="vote">
           <div className="count-container">
-            <div className="icons">
+            <div
+              className={vote ? "icons-active" : "icons"}
+              onClick={handleVoteClick}
+            >
               <FaCaretUp />
             </div>
-            <div className="count">0</div>
+            <div className="count">{questionInfo.voteCount}</div>
           </div>
           {/* <div className="message">로그인이 필요합니다</div> */}
         </div>
         <div className="main">
           <div className="content-container">
-            <div className="content">
-              seraphic aurora laptop fascinating aurora fabulous masquerade
-              kitten illusion seraphic twilight serendipity lucid serendipity
-              flora blush serendipity masquerade flora twilight hello ice world
-              cresent seraphic seraphic ice way twinkle marshmallow shine
-              carnival shine baby florence flutter laptop kitten destiny
-              illusion you computer adorable cresent adorable hello girlish ice
-              iris cresent. heimish droplet droplet stella flutter twinkle like
-              lucid girlish apple carnival flutter you requiem cream purity
-              world heimish adolescence kitten kitten carnival laptop flutter
-              way aurora purity baby lovable ice adolescence stella destiny
-              aurora miracle carnival milky droplet baby lucid milky cream
-              blossom destiny charming milky lovable way ideale sunrise.
-              twilight masquerade milky lovable fascinating aurora serendipity
-              masquerade blossom like adolescence sunrise miracle destiny flora
-              twinkle hello aurora lucid way adorable haze adorable twinkle
-              cherish computer grapes laptop purity adolescence blossom lucid
-              shine cherish cresent way carnival marshmallow requiem way honey
-              way world blossom destiny serendipity heimish carnival girlish
-              milky. moonlight serendipity twilight carnival blossom fascinating
-              laptop iris fascinating florence girlish apple fascinating
-              twilight lucid world adolescence world twinkle purity illusion
-              masquerade eunoia blossom adorable eunoia bijou marshmallow
-              droplet haze fabulous iris destiny haze twinkle adolescence flora
-              haze world hello serendipity masquerade requiem fabulous
-              adolescence fascinating like way marshmallow fascinating. pure
-              lucid seraphic aurora purity banana stella flutter requiem
-              moonlight vanilla flutter lucy iris girlish computer pure fabulous
-              honey banana kitten apple serendipity requiem kitten stella shine
-              hello marshmallow requiem destiny like twinkle vanilla iris way
-              iris destiny bijou apple twinkle like shine banana adolescence
-              aurora requiem melody you miracle.
-            </div>
+            <div className="content">{questionInfo.questionBody}</div>
             <div className="delete">
               <button>delete</button>
             </div>
@@ -264,10 +302,20 @@ const QuestionContent = () => {
           <div className="extra-info">
             <div className="detail-info">
               <div className="tags-container">
-                <div className="tags">javascript</div>
-                <div className="tags">C++</div>
+                {questionInfo
+                  ? questionInfo.questionTagList.map((el, idx) => {
+                      // let id = 1;
+                      return (
+                        <div className="tags" key={idx}>
+                          {el.tagName}
+                        </div>
+                      );
+                    })
+                  : null}
+                {/* <div className="tags">javascript</div>
+                <div className="tags">C++</div> */}
               </div>
-              <div className="author">author : Kim coding</div>
+              <div className="author">author : {questionInfo.name}</div>
             </div>
             <div className="edit-container">
               <div className="edit-btn">edit</div>

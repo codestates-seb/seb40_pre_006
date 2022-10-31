@@ -352,11 +352,11 @@ const AskQuestion = () => {
     };
     // await axios.post(`${process.env.REACT_APP_API_URL}/question`, question);
     axios
-      .post("http://localhost:3001/question", question)
+      .post(`${process.env.REACT_APP_API_URL}/question`, question)
       .then((response) => this.setState({ questionId: response.data.id }));
 
     alert("질문이 등록되었습니다");
-    document.location.href = "http://localhost:3000/";
+    document.location.href = "/";
   }
   // useEffect(() => {
   //   handleSubmit();
