@@ -14,10 +14,21 @@ public class UserDto {
     @Getter
     @Setter
     public static class Response {
-        private long userId;
+        private Long userId;
+        //        private long userId;
         private String email;
         private String name;
         private String password;
         private int questionCount;
     }
+
+    @Getter
+    @Setter
+    public static class ResponseGet {
+        private Long userId;
+        //        private long userId;
+        private String name;
+        private int questionCount;
+    }
+
 }

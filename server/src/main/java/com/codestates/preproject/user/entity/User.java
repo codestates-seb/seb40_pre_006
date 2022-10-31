@@ -36,6 +36,20 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Answer> answerList = new ArrayList<>();
 
+    public User(Long userId, String name, int questionCount) {
+        this.userId = userId;
+        this.name = name;
+        this.questionCount = questionCount;
+    }
+
+    public User(Long userId, String email, String name, String password, int questionCount) {
+        this.userId = userId;
+        this.email = email;
+        this.name = name;
+        this.password = password;
+        this.questionCount = questionCount;
+    }
+
     // 연관 관계 메서드
     public void addQuestion(Question question) {
         questionList.add(question);
