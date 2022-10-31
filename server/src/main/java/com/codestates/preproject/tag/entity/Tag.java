@@ -20,11 +20,6 @@ public class Tag {
 
     private String tagName;
 
-    public Tag(Long tagId, String tagName){
-        this.tagId = tagId;
-        this.tagName = tagName;
-    }
-
     @OneToMany(mappedBy = "tag")
     private List<QuestionTag> questionTagList = new ArrayList<>();
 
