@@ -1,9 +1,12 @@
 package com.codestates.preproject.user.mapper;
 
+import com.codestates.preproject.tag.dto.TagDto;
+import com.codestates.preproject.tag.entity.Tag;
 import com.codestates.preproject.user.dto.UserDto;
 import com.codestates.preproject.user.entity.User;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -34,12 +37,43 @@ public class UserMapperManualImpl implements UserMapper {
         return response;
     }
 
-    public UserDto.ResponseGet userToUserResponseDtoGet(User user) {
+//    public UserDto.ResponseGet userToUserResponseDtoGet(User user) {
+//        UserDto.ResponseGet response = new UserDto.ResponseGet();
+//        response.setUserId(user.getUserId());
+//        response.setName(user.getName());
+//        response.setQuestionCount(user.getQuestionList().size());
+//
+//        return response;
+//    }
+
+    public List<UserDto.ResponseGet> userToUserResponseDtoGet(List<User> users) {
+        if ( users == null ) {
+            return null;
+        }
+
+        List<UserDto.ResponseGet> list = new ArrayList<>( users.size() );
+        for ( User user : users ) {
+            list.add( userToResponse( user ) );
+        }
+
+        return list;
+    }
+
+    protected UserDto.ResponseGet userToResponse(User user) {
+        if ( user == null ) {
+            return null;
+        }
+
         UserDto.ResponseGet response = new UserDto.ResponseGet();
-        response.setUserId(user.getUserId());
-        response.setName(user.getName());
-        response.setQuestionCount(user.getQuestionList().size());
+
+        if ( user.getUserId() != null ) {
+            response.setUserId( user.getUserId() );
+        }
+        response.setName( user.getName() );
+        response.setQuestionCount( user.getQuestionCount() );
 
         return response;
     }
+
+
 }
