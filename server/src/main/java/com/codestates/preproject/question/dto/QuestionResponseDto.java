@@ -1,5 +1,7 @@
 package com.codestates.preproject.question.dto;
 
+import com.codestates.preproject.user.dto.UserDto;
+import com.codestates.preproject.user.entity.User;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,4 +21,7 @@ public class QuestionResponseDto {
     private int answerCount;
     private LocalDateTime createdAt;
 
+    public void setUser(UserDto.Response userToUserResponseDto) {
+        this.name = userToUserResponseDto.getName();
+    }
 }

@@ -1,131 +1,124 @@
 package com.codestates.preproject.question.service;
 
+import com.codestates.preproject.answer.service.AnswerService;
+import com.codestates.preproject.exception.BusinessLogicException;
+import com.codestates.preproject.exception.ExceptionCode;
 import com.codestates.preproject.question.entity.Question;
 import com.codestates.preproject.question.entity.QuestionTag;
 import com.codestates.preproject.question.repository.QuestionRepository;
+import com.codestates.preproject.question.repository.QuestionTagRepository;
 import com.codestates.preproject.tag.entity.Tag;
+import com.codestates.preproject.tag.repository.TagRepository;
+import com.codestates.preproject.tag.service.TagService;
+import com.codestates.preproject.user.entity.User;
+import com.codestates.preproject.user.repository.UserRepository;
+import com.codestates.preproject.user.service.UserService;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
-@Transactional(readOnly = true)
 public class QuestionService {
+    private final QuestionRepository questionRepository;
+    private final QuestionTagRepository questionTagRepository;
+    private final UserService userService;
+    private final UserRepository userRepository;
+    private final TagService tagService;
+    private final TagRepository tagRepository;
 
-    public QuestionService(QuestionRepository questionRepository) {
+    public QuestionService(QuestionRepository questionRepository, QuestionTagRepository questionTagRepository,
+                           UserService userService, UserRepository userRepository,
+                           TagService tagService, TagRepository tagRepository) {
         this.questionRepository = questionRepository;
+        this.questionTagRepository = questionTagRepository;
+        this.userService = userService;
+        this.userRepository = userRepository;
+        this.tagService = tagService;
+        this.tagRepository = tagRepository;
     }
 
-    private final QuestionRepository questionRepository;
 
     public Question createQuestion(Question question) {
-        Question question2 = new Question(1L, question.getTitle(), question.getQuestionBody(), "이게왜되지?",
-                0, 1, LocalDateTime.now(), question.getQuestionTagList());
-        return question2;
+        User user = userRepository.findByUserId(question.getUser().getUserId());
+        question.setUser(user);
 
-//        return questionRepository.save(question);
-    }
-
-    public Question upVoteQuestion(Question question) {
-        Tag tag1 = new Tag();
-        Tag tag2 = new Tag();
-        tag1.setTagName("java");
-        tag2.setTagName("C++");
-        QuestionTag questionTag1 = new QuestionTag();
-        QuestionTag questionTag2 = new QuestionTag();
-        questionTag1.setTag(tag1);
-        questionTag2.setTag(tag2);
+        Question question1 = questionRepository.save(question);
         List<QuestionTag> questionTagList = new ArrayList<>();
-        questionTagList.add(questionTag1);
-        questionTagList.add(questionTag2);
-        int voteCount = 0;
-        Question question1 = new Question(1L, "질문 등록 title 입니다.", "질문 내용입니다. 최소 20자입니다.", "이게왜되지?",
-                voteCount+1, 1, LocalDateTime.now(), questionTagList);
-        return question1;
-    }
+        for (int i = 0; i < question.getQuestionTagList().size(); i++) {
 
-    public Question downVoteQuestion(Question question) {
-        Tag tag1 = new Tag();
-        Tag tag2 = new Tag();
-        tag1.setTagName("java");
-        tag2.setTagName("C++");
-        QuestionTag questionTag1 = new QuestionTag();
-        QuestionTag questionTag2 = new QuestionTag();
-        questionTag1.setTag(tag1);
-        questionTag2.setTag(tag2);
-        List<QuestionTag> questionTagList = new ArrayList<>();
-        questionTagList.add(questionTag1);
-        questionTagList.add(questionTag2);
-        int voteCount = 0;
-        Question question1 = new Question(1L, "질문 등록 title 입니다.", "질문 내용입니다. 최소 20자입니다.", "이게왜되지?",
-                voteCount-1, 1, LocalDateTime.now(), questionTagList);
+            Tag tag = new Tag();
+            tag.setTagName(question.getQuestionTagList().get(i).getTag().getTagName());
+            tagRepository.save(tag);
+
+            question.getQuestionTagList().get(i).setQuestion(question1);
+            question.getQuestionTagList().get(i).setTag(tag);
+
+            QuestionTag questionTag = questionTagRepository.save(question.getQuestionTagList().get(i));
+            questionTagList.add(questionTag);
+        }
+        question1.setQuestionTagList(questionTagList);
+        updateQuestionCount(question1);
+        return questionRepository.save(question);
+    }
+    public Question voteQuestion(Question question, Boolean vote) {
+        Question findQuestion = questionRepository.findByQuestionId(question.getQuestionId());
+//        findQuestion.setQuestionId(question.getQuestionId());
+        if (vote.equals(true)) {
+            findQuestion.setVoteCount(findQuestion.getVoteCount() + 1);
+        } else {
+            findQuestion.setVoteCount(findQuestion.getVoteCount() - 1);
+        }
+        Question question1 = questionRepository.save(findQuestion);
         return question1;
     }
 
     public Question findQuestion(long questionId) {
-        Tag tag1 = new Tag();
-        Tag tag2 = new Tag();
-        tag1.setTagName("java");
-        tag2.setTagName("C++");
-        QuestionTag questionTag1 = new QuestionTag();
-        QuestionTag questionTag2 = new QuestionTag();
-        questionTag1.setTag(tag1);
-        questionTag2.setTag(tag2);
-        List<QuestionTag> questionTagList = new ArrayList<>();
-        questionTagList.add(questionTag1);
-        questionTagList.add(questionTag2);
-
-        Question question = new Question(1L, "질문 등록 title 입니다.", "질문 내용입니다. 최소 20자입니다.", "이게왜되지?",
-                0, 1, LocalDateTime.now(), questionTagList);
-        return question;
+        return findVerifyQuestion(questionId);
     }
 
     public Page<Question> findQuestions(int page, int size) {
-        Tag tag1 = new Tag();
-        Tag tag2 = new Tag();
-        tag1.setTagName("java");
-        tag2.setTagName("C++");
-        QuestionTag questionTag1 = new QuestionTag();
-        QuestionTag questionTag2 = new QuestionTag();
-        questionTag1.addTag(tag1);
-        questionTag2.addTag(tag2);
-        List<QuestionTag> questionTagList = new ArrayList<>();
-        questionTagList.add(questionTag1);
-        questionTagList.add(questionTag2);
-
-        List<Question> question = List.of(
-                new Question(1L, "질문 등록1 title 입니다.", "질문 내용1입니다. 최소 20자입니다.", "이게왜되지?",
-                        0, 1, LocalDateTime.now(), questionTagList),
-                new Question(2L, "질문 등록2 title 입니다.", "질문 내용2입니다. 최소 20자입니다.", "이게왜되지?",
-                        0, 0, LocalDateTime.now(), questionTagList),
-                new Question(3L, "질문 등록3 title 입니다.", "질문 내용3입니다. 최소 20자입니다.", "이게왜되지?",
-                        0, 3, LocalDateTime.now(), questionTagList),
-                new Question(4L, "질문 등록4 title 입니다.", "질문 내용4입니다. 최소 20자입니다.", "이게왜되지?",
-                        0, 0, LocalDateTime.now(), questionTagList),
-                new Question(5L, "질문 등록5 title 입니다.", "질문 내용5입니다. 최소 20자입니다.", "이게왜되지?",
-                        0, 2, LocalDateTime.now(), questionTagList),
-                new Question(6L, "질문 등록6 title 입니다.", "질문 내용6입니다. 최소 20자입니다.", "이게왜되지?",
-                        0, 0,LocalDateTime.now(), questionTagList),
-                new Question(7L, "질문 등록7 title 입니다.", "질문 내용7입니다. 최소 20자입니다.", "이게왜되지?",
-                        0, 1,LocalDateTime.now(), questionTagList),
-                new Question(8L, "질문 등록8 title 입니다.", "질문 내용8입니다. 최소 20자입니다.", "이게왜되지?",
-                        0, 0,LocalDateTime.now(), questionTagList),
-                new Question(9L, "질문 등록9 title 입니다.", "질문 내용9입니다. 최소 20자입니다.", "이게왜되지?",
-                        0, 2,LocalDateTime.now(), questionTagList),
-                new Question(10L, "질문 등록10 title 입니다.", "질문 내용10입니다. 최소 20자입니다.", "이게왜되지?",
-                        0, 0,LocalDateTime.now(), questionTagList),
-                new Question(11L, "질문 등록11 title 입니다.", "질문 내용11입니다. 최소 20자입니다.", "이게왜되지?",
-                        0, 3,LocalDateTime.now(), questionTagList),
-                new Question(12L, "질문 등록12 title 입니다.", "질문 내용12입니다. 최소 20자입니다.", "이게왜되지?",
-                        0, 0,LocalDateTime.now(), questionTagList));
-
-//        Page<Question> questions = new PageImpl<>(question.subList(page, size), pageable, question.size()); // 수정 필요
-        Page<Question> questions = new PageImpl<>(question); // 수정 필요
-        return questions;
+        return questionRepository.findAll(PageRequest.of(page, size, Sort.by("questionId").descending()));
     }
+
+    @Transactional(readOnly = true)
+    private Question findVerifyQuestion(Long questionId) {
+        Optional<Question> optionalQuestion = questionRepository.findById(questionId);
+        Question question = optionalQuestion.orElseThrow(() ->
+                new BusinessLogicException(ExceptionCode.QUESTION_NOT_FOUND));
+        return question;
+    }
+
+    private void VerifiedNoQuestion(Page<Question> findAllQuestion){
+        if(findAllQuestion.getTotalElements() == 0){
+            throw new BusinessLogicException(ExceptionCode.QUESTION_NOT_FOUND);
+        }
+    }
+
+    private void updateQuestionCount(Question question) {
+        User user = userService.findUser(question.getUser().getUserId());
+        user.setQuestionCount(user.getQuestionCount() + 1);
+
+        userService.updateUser(user);
+    }
+
+    private void updateTagCount(Tag tag) {
+        Tag tag1 = tagService.findTag(tag.getTagId());
+        tag1.setTagCount(tag1.getTagCount() + 1);
+
+        tagService.updateTag(tag1);
+    }
+
+//    private void verifyQuestion(Question question) {
+//        // 유저가 존재하는 지 확인
+//        UserService.findVerifiedUSer(question.getUser().getUserId());
+//
+//        // 태그가 존재하는 지 확인
+//        question.getQuestionTagList().stream()
+//                .forEach(questionTag -> tagService.findVerifiedTag(questionTag.getTag().getTagId()));
+//    }
 
 }

@@ -3,8 +3,11 @@ package com.codestates.preproject.question.mapper;
 import com.codestates.preproject.question.dto.*;
 import com.codestates.preproject.question.entity.Question;
 import com.codestates.preproject.question.entity.QuestionTag;
+import com.codestates.preproject.question.service.QuestionService;
 import com.codestates.preproject.tag.entity.Tag;
+import com.codestates.preproject.user.dto.UserDto;
 import com.codestates.preproject.user.entity.User;
+import com.codestates.preproject.user.mapper.UserMapper;
 import com.codestates.preproject.user.service.UserService;
 import org.mapstruct.Mapper;
 
@@ -18,12 +21,12 @@ public interface QuestionMapper {
 
 //    Question questionPostToQuestion(QuestionPostDto questionPostDto);
 
-    Question questionPatchToQuestion(QuestionPatchDto questionPatchDto);
+//    Question questionPatchToQuestion(QuestionPatchDto questionPatchDto);
 
     //    QuestionResponseDto questionToQuestionResponse(Question question);
     List<QuestionResponseDto> questionsToQuestionResponses(List<Question> questions);
 
-    default Question questionPostToQuestion(QuestionPostDto questionPostDto) {
+    default Question questionPostToQuestion(UserService userService, QuestionPostDto questionPostDto) {
         if ( questionPostDto == null ) {
             return null;
         }
@@ -31,14 +34,7 @@ public interface QuestionMapper {
         Question question = new Question();
         User user = new User();
         user.setUserId(questionPostDto.getUserId());
-//        question.setUser( questionPostDto.getUser() );
-        question.setUser(user);
-//        question.setName();
-//        question.getUser().setUserId( user.getUserId() );
-//        question.getUser().setUserId(questionPostDto.getUserId());
-        question.setTitle( questionPostDto.getTitle() );
-        question.setQuestionBody( questionPostDto.getQuestionBody() );
-//        question.setName(questionPostDto.getUser().getName());
+
         List<QuestionTag> list = questionPostDto.getQuestionTagList().stream()
                 .map(questionTagDto -> {
                     QuestionTag questionTag = new QuestionTag();
@@ -51,24 +47,58 @@ public interface QuestionMapper {
         if ( list != null ) {
             question.setQuestionTagList( new ArrayList<QuestionTag>( list ) );
         }
+        question.setTitle( questionPostDto.getTitle() );
+        question.setQuestionBody( questionPostDto.getQuestionBody() );
+        question.setUser(userService.findUser(user));
+        question.setQuestionTagList(list);
+        question.setCreatedAt(LocalDateTime.now());
 
         return question;
     }
 
-    default QuestionResponseDto questionToQuestionResponse(Question question) {
+    default List<QuestionTag> questionTagsDtosToQuestionTags(List<QuestionTagDto> questionTagDtos, Question question) {
+        return questionTagDtos.stream().map(questionTagDto -> {
+            QuestionTag questionTag = new QuestionTag();
+            questionTag.addQuestion(question);
+            questionTag.getTag().setTagName(questionTagDto.getTagName());
+            return questionTag;
+        }).collect(Collectors.toList());
+    }
+
+    default Question questionPatchToQuestion(QuestionPatchDto questionPatchDto) {
+        if ( questionPatchDto == null ) {
+            return null;
+        }
+
+        Question question = new Question();
+        question.setQuestionId( questionPatchDto.getQuestionId() );
+//        question.setVoteCount( questionPatchDto.getVoteCount() );
+
+        return question;
+    }
+
+    default QuestionResponseDto questionToQuestionResponse(UserMapper userMapper, Question question) {
         if ( question == null ) {
             return null;
         }
+
+        List<QuestionTag> questionTagList = question.getQuestionTagList();
+
         QuestionResponseDto questionResponseDto = new QuestionResponseDto();
 
         questionResponseDto.setQuestionId( question.getQuestionId() );
         questionResponseDto.setTitle( question.getTitle() );
         questionResponseDto.setQuestionBody( question.getQuestionBody() );
         questionResponseDto.setQuestionTagList(questionTagListToQuestionTagResponseDtoList(question.getQuestionTagList()));
-        questionResponseDto.setName( question.getName() );
         questionResponseDto.setVoteCount( question.getVoteCount() );
         questionResponseDto.setAnswerCount( question.getAnswerCount() );
-        questionResponseDto.setCreatedAt(LocalDateTime.now());
+        questionResponseDto.setCreatedAt(question.getCreatedAt());
+
+        User user = question.getUser();
+        questionResponseDto.setUser(userMapper.userToUserResponseDto(user));
+        questionResponseDto.setQuestionTagList(questionTagListToQuestionTagResponseDtoList(
+                question.getQuestionTagList()
+        ));
 
         return questionResponseDto;
     }
@@ -103,5 +133,40 @@ public interface QuestionMapper {
                         .builder();
 
         return questionTagResponseDto.build();
+    }
+
+    default UserDto.Response userToResponse(User user) {
+        if ( user == null ) {
+            return null;
+        }
+
+        UserDto.Response response = new UserDto.Response();
+
+        response.setUserId( user.getUserId() );
+        response.setEmail( user.getEmail() );
+        response.setName( user.getName() );
+        response.setPassword( user.getPassword() );
+        response.setQuestionCount( user.getQuestionCount() );
+
+        return response;
+    }
+
+    default QuestionResponseDto questionToQuestionResponseDto(Question question) {
+        if ( question == null ) {
+            return null;
+        }
+
+        QuestionResponseDto questionResponseDto = new QuestionResponseDto();
+
+        questionResponseDto.setUser( userToResponse( question.getUser() ) );
+        questionResponseDto.setQuestionId( question.getQuestionId() );
+        questionResponseDto.setTitle( question.getTitle() );
+        questionResponseDto.setQuestionBody( question.getQuestionBody() );
+        questionResponseDto.setQuestionTagList( questionTagListToQuestionTagResponseDtoList( question.getQuestionTagList() ) );
+        questionResponseDto.setVoteCount( question.getVoteCount() );
+        questionResponseDto.setAnswerCount( question.getAnswerCount() );
+        questionResponseDto.setCreatedAt( question.getCreatedAt() );
+
+        return questionResponseDto;
     }
 }

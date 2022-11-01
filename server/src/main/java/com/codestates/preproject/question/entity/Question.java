@@ -21,11 +21,11 @@ public class Question {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long questionId;
 
+    @Column(nullable = false)
     private String title;
 
+    @Column(nullable = false)
     private String questionBody;
-
-    private String name;
 
     private int voteCount;
 
@@ -33,12 +33,11 @@ public class Question {
 
     private LocalDateTime createdAt;
 
-    public Question(Long questionId, String title, String questionBody, String name, int voteCount, int answerCount,
+    public Question(Long questionId, String title, String questionBody, int voteCount, int answerCount,
                     LocalDateTime createdAt, List<QuestionTag> questionTagList) {
         this.questionId = questionId;
         this.title = title;
         this.questionBody = questionBody;
-        this.name = name;
         this.voteCount = voteCount;
         this.answerCount = answerCount;
         this.createdAt = createdAt;
@@ -73,4 +72,6 @@ public class Question {
             answer.setQuestion(this);
         }
     }
+
+
 }
