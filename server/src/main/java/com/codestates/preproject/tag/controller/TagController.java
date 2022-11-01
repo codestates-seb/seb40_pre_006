@@ -1,10 +1,11 @@
 package com.codestates.preproject.tag.controller;
 
+import com.codestates.preproject.dto.MultiResponseDto;
 import com.codestates.preproject.dto.SingleResponseDto;
-import com.codestates.preproject.tag.dto.TagDto;
 import com.codestates.preproject.tag.entity.Tag;
 import com.codestates.preproject.tag.mapper.TagMapper;
 import com.codestates.preproject.tag.service.TagService;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @CrossOrigin
 @RestController
@@ -28,15 +28,14 @@ public class TagController {
         this.mapper = mapper;
     }
 
-
     @GetMapping("/{right}")
     public ResponseEntity getTagsRight(){
-        List<Tag> tags = tagService.findTags();
-        List<TagDto.Response> response =
-                tags.stream()
-                        .map(tag -> mapper.tagToTagResponseDto(tag))
-                        .collect(Collectors.toList());
-        return new ResponseEntity<>(new SingleResponseDto<>(response), HttpStatus.OK);
+
+        Page<Tag> pageTags = tagService.findTags(1-1, 5);
+        List<Tag> tags = pageTags.getContent();
+        return new ResponseEntity<>(
+                new SingleResponseDto<>(mapper.tagToTagResponseDto(tags)),
+                HttpStatus.OK);
     }
 
 }
