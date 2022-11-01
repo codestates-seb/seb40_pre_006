@@ -207,7 +207,6 @@ function Header() {
           }}
         />
         <ButtonWrapper>
-          <a href="/login">
             <Button
               backgroundcolor="#E1ECF4"
               color="#2C5877"
@@ -219,7 +218,6 @@ function Header() {
             >
               Log in
             </Button>
-          </a>
           <Button
             backgroundcolor="#1693FA"
             color="#FFFFFF"

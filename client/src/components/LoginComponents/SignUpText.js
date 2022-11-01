@@ -11,7 +11,7 @@ const Container = styled.div`
   height: 280px; */
   width: fit-content;
   height: fit-content;
-  border: 1px solid blue;
+  /* border: 1px solid blue; */
 
   .title {
     font-size: 1.7rem;

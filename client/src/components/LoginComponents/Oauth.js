@@ -4,7 +4,7 @@ import { FcGoogle } from "react-icons/fc";
 import { AiFillFacebook, AiFillGithub } from "react-icons/ai";
 
 const Container = styled.div`
-  border: 5px solid red;
+  /* border: 1px solid red; */
   display: flex;
   flex-direction: column;
   align-items: center;

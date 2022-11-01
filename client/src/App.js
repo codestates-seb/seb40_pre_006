@@ -19,7 +19,6 @@ import Users from "./pages/Users";
 import Header from "./components/Header";
 import AskQuestion from "./pages/AskQuestion";
 import DetailQuestion from "./pages/DetailQuestion";
-import Login from "./pages/Login";
 
 const Container = styled.div`
   display: flex;
@@ -35,7 +34,7 @@ function App() {
   return (
     <>
       <Header />
-      {(isAsk === "/ask" || isAsk === "/login") ? null : (
+      {isAsk === "/ask" ? null : (
         <Container>
           <Aside />
           {/* <DetailQuestion /> */}
@@ -49,7 +48,6 @@ function App() {
       )}
       <Routes>
         <Route path="/ask" element={<AskQuestion />} />
-        <Route path="/login" element={<Login />} />
       </Routes>
       <Footer />
     </>
