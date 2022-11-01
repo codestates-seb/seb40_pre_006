@@ -54,7 +54,5 @@ public class AnswerService {
     private void updateAnswerCount(Answer answer) {
         Question question = questionService.findQuestion(answer.getQuestion().getQuestionId());
         question.setAnswerCount(question.getAnswerCount() + 1);
-
-        questionService.updateQuestion1(question);
     }
 }

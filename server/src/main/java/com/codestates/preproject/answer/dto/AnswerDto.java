@@ -19,7 +19,6 @@ public class AnswerDto {
         private Long answerId;
         private String answerBody;
         private LocalDateTime createdAt;
-        //        private long userId;
         private String name;
         private Long questionId;
     }

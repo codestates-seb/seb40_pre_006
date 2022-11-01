@@ -70,7 +70,6 @@ public class QuestionService {
     }
     public Question voteQuestion(Question question, Boolean vote) {
         Question findQuestion = questionRepository.findByQuestionId(question.getQuestionId());
-//        findQuestion.setQuestionId(question.getQuestionId());
         if (vote.equals(true)) {
             findQuestion.setVoteCount(findQuestion.getVoteCount() + 1);
         } else {
@@ -115,25 +114,4 @@ public class QuestionService {
 
         userService.updateUser(user);
     }
-
-    public Question updateQuestion1(Question question) {
-        return questionRepository.save(question);
-    }
-
-//    private void updateTagCount(Tag tag) {
-//        Tag tag1 = tagService.findTag(tag.getTagId());
-//        tag1.setTagCount(tag1.getTagCount() + 1);
-//
-//        tagService.updateTag(tag1);
-//    }
-
-//    private void verifyQuestion(Question question) {
-//        // 유저가 존재하는 지 확인
-//        UserService.findVerifiedUSer(question.getUser().getUserId());
-//
-//        // 태그가 존재하는 지 확인
-//        question.getQuestionTagList().stream()
-//                .forEach(questionTag -> tagService.findVerifiedTag(questionTag.getTag().getTagId()));
-//    }
-
 }

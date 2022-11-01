@@ -11,7 +11,6 @@ import java.util.List;
 @Getter @Setter
 public class QuestionResponseDto {
     private Long questionId;
-    //    private Long userId;
     private String title;
     private String questionBody;
     private List<QuestionTagResponseDto> questionTagList;

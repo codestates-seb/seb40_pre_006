@@ -5,13 +5,8 @@ import lombok.Getter;
 @Getter
 public class QuestionPatchDto {
     private Long questionId;
-//    private int voteCount;
 
     public void setQuestionId(Long questionId) {
         this.questionId = questionId;
     }
-
-//    public void setVoteCount(int voteCount) {
-//        this.voteCount = voteCount;
-//    }
 }
