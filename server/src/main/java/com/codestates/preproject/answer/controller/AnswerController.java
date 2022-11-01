@@ -35,7 +35,7 @@ public class AnswerController {
     }
 
     @GetMapping("/{question-id}")
-    public ResponseEntity getAnswers(@PathVariable("question-id") long questionId){
+    public ResponseEntity getAnswers(@PathVariable("question-id") Long questionId){
         List<Answer> answers = answerService.findAnswers(questionId);
 
         return new ResponseEntity<>(

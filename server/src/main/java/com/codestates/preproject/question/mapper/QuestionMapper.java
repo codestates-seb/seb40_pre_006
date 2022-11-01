@@ -3,7 +3,6 @@ package com.codestates.preproject.question.mapper;
 import com.codestates.preproject.question.dto.*;
 import com.codestates.preproject.question.entity.Question;
 import com.codestates.preproject.question.entity.QuestionTag;
-import com.codestates.preproject.question.service.QuestionService;
 import com.codestates.preproject.tag.entity.Tag;
 import com.codestates.preproject.user.dto.UserDto;
 import com.codestates.preproject.user.entity.User;
@@ -18,12 +17,6 @@ import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring")
 public interface QuestionMapper {
-
-//    Question questionPostToQuestion(QuestionPostDto questionPostDto);
-
-//    Question questionPatchToQuestion(QuestionPatchDto questionPatchDto);
-
-    //    QuestionResponseDto questionToQuestionResponse(Question question);
     List<QuestionResponseDto> questionsToQuestionResponses(List<Question> questions);
 
     default Question questionPostToQuestion(UserService userService, QuestionPostDto questionPostDto) {
@@ -49,7 +42,7 @@ public interface QuestionMapper {
         }
         question.setTitle( questionPostDto.getTitle() );
         question.setQuestionBody( questionPostDto.getQuestionBody() );
-        question.setUser(userService.findUser(user));
+        question.setUser(userService.findUser(user.getUserId()));
         question.setQuestionTagList(list);
         question.setCreatedAt(LocalDateTime.now());
 
@@ -72,7 +65,6 @@ public interface QuestionMapper {
 
         Question question = new Question();
         question.setQuestionId( questionPatchDto.getQuestionId() );
-//        question.setVoteCount( questionPatchDto.getVoteCount() );
 
         return question;
     }
@@ -107,14 +99,6 @@ public interface QuestionMapper {
         if ( list == null ) {
             return null;
         }
-
-//        List<QuestionTagResponseDto> list1 = new ArrayList<QuestionTagResponseDto>( list.size() );
-//        for ( QuestionTag questionTag : list ) {
-//            list1.add( questionTagToQuestionTagResponseDto( questionTag ) );
-//        }
-//
-//        return list1;
-
         return list.stream()
                 .map(questionTag -> QuestionTagResponseDto
                         .builder()
