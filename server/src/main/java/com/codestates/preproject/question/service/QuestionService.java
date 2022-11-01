@@ -1,6 +1,5 @@
 package com.codestates.preproject.question.service;
 
-import com.codestates.preproject.answer.service.AnswerService;
 import com.codestates.preproject.exception.BusinessLogicException;
 import com.codestates.preproject.exception.ExceptionCode;
 import com.codestates.preproject.question.entity.Question;
@@ -48,15 +47,20 @@ public class QuestionService {
 
         Question question1 = questionRepository.save(question);
         List<QuestionTag> questionTagList = new ArrayList<>();
-        for (int i = 0; i < question.getQuestionTagList().size(); i++) {
-
+        for (int i = 0; i < question.getQuestionTagList().size(); i++){
             Tag tag = new Tag();
             tag.setTagName(question.getQuestionTagList().get(i).getTag().getTagName());
-            tagRepository.save(tag);
+            if (!tagRepository.findByTagName(tag.getTagName()).isPresent()) {
+                tagRepository.save(tag);
+                question.getQuestionTagList().get(i).setTag(tag);
+            } else {
+                List<Tag> list = tagRepository.findAll();
+                list.stream().filter(a -> a.getTagName().equals(tag.getTagName()));
+                Tag tag1 = list.get(0);
+                question.getQuestionTagList().get(i).setTag(tag1);
+            }
 
             question.getQuestionTagList().get(i).setQuestion(question1);
-            question.getQuestionTagList().get(i).setTag(tag);
-
             QuestionTag questionTag = questionTagRepository.save(question.getQuestionTagList().get(i));
             questionTagList.add(questionTag);
         }
@@ -76,7 +80,7 @@ public class QuestionService {
         return question1;
     }
 
-    public Question findQuestion(long questionId) {
+    public Question findQuestion(Long questionId) {
         return findVerifyQuestion(questionId);
     }
 
@@ -98,6 +102,13 @@ public class QuestionService {
         }
     }
 
+    public Question VerifyQuestionId(Long questionId) {
+        Optional<Question> optionalQuestion = questionRepository.findById(questionId);
+        Question findQuestion = optionalQuestion.orElseThrow(()->
+                new BusinessLogicException(ExceptionCode.QUESTION_NOT_FOUND));
+        return findQuestion;
+    }
+
     private void updateQuestionCount(Question question) {
         User user = userService.findUser(question.getUser().getUserId());
         user.setQuestionCount(user.getQuestionCount() + 1);
@@ -105,12 +116,16 @@ public class QuestionService {
         userService.updateUser(user);
     }
 
-    private void updateTagCount(Tag tag) {
-        Tag tag1 = tagService.findTag(tag.getTagId());
-        tag1.setTagCount(tag1.getTagCount() + 1);
-
-        tagService.updateTag(tag1);
+    public Question updateQuestion1(Question question) {
+        return questionRepository.save(question);
     }
+
+//    private void updateTagCount(Tag tag) {
+//        Tag tag1 = tagService.findTag(tag.getTagId());
+//        tag1.setTagCount(tag1.getTagCount() + 1);
+//
+//        tagService.updateTag(tag1);
+//    }
 
 //    private void verifyQuestion(Question question) {
 //        // 유저가 존재하는 지 확인

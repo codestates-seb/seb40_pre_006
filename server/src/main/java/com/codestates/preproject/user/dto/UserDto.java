@@ -15,7 +15,6 @@ public class UserDto {
     @Setter
     public static class Response {
         private Long userId;
-        //        private long userId;
         private String email;
         private String name;
         private String password;
@@ -26,7 +25,6 @@ public class UserDto {
     @Setter
     public static class ResponseGet {
         private Long userId;
-        //        private long userId;
         private String name;
         private int questionCount;
     }

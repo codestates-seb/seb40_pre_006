@@ -37,15 +37,6 @@ public class UserMapperManualImpl implements UserMapper {
         return response;
     }
 
-//    public UserDto.ResponseGet userToUserResponseDtoGet(User user) {
-//        UserDto.ResponseGet response = new UserDto.ResponseGet();
-//        response.setUserId(user.getUserId());
-//        response.setName(user.getName());
-//        response.setQuestionCount(user.getQuestionList().size());
-//
-//        return response;
-//    }
-
     public List<UserDto.ResponseGet> userToUserResponseDtoGet(List<User> users) {
         if ( users == null ) {
             return null;

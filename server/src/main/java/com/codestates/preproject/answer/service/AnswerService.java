@@ -6,6 +6,7 @@ import com.codestates.preproject.question.entity.Question;
 import com.codestates.preproject.question.repository.QuestionRepository;
 import com.codestates.preproject.question.service.QuestionService;
 import com.codestates.preproject.user.entity.User;
+import com.codestates.preproject.user.repository.UserRepository;
 import com.codestates.preproject.user.service.UserService;
 import org.springframework.stereotype.Service;
 
@@ -45,7 +46,7 @@ public class AnswerService {
         userService.VerifyUserId(answer.getUser().getUserId());
     }
 
-    public List<Answer> findAnswers(long questionId) {
+    public List<Answer> findAnswers(Long questionId) {
         Question question = questionRepository.findByQuestionId(questionId);
         return answerRepository.findAllByQuestion(question);
     }

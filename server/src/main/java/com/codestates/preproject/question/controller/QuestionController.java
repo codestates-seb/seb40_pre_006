@@ -2,19 +2,15 @@ package com.codestates.preproject.question.controller;
 
 import com.codestates.preproject.dto.MultiResponseDto;
 import com.codestates.preproject.dto.SingleResponseDto;
-import com.codestates.preproject.exception.BusinessLogicException;
-import com.codestates.preproject.exception.ExceptionCode;
 import com.codestates.preproject.question.dto.QuestionPatchDto;
 import com.codestates.preproject.question.dto.QuestionPostDto;
 import com.codestates.preproject.question.dto.QuestionResponseDto;
 import com.codestates.preproject.question.entity.Question;
-import com.codestates.preproject.question.entity.QuestionTag;
 import com.codestates.preproject.question.mapper.QuestionMapper;
 import com.codestates.preproject.question.service.QuestionService;
 import com.codestates.preproject.question.service.QuestionTagService;
 import com.codestates.preproject.user.mapper.UserMapper;
 import com.codestates.preproject.user.service.UserService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -66,17 +62,7 @@ public class QuestionController {
                 HttpStatus.OK);
     }
 
-    // 투표하기
-//    @PatchMapping("/{question-id}/vote/plus")
-//    public ResponseEntity patchQuestionPlus(@PathVariable("question-id") @Positive Long questionId,
-//                                            @Valid @RequestBody QuestionPatchDto questionPatchDto) {
-//        questionPatchDto.setQuestionId(questionId);
-//        Question question = questionService.upVoteQuestion(mapper.questionPatchToQuestion(questionPatchDto));
-//        return new ResponseEntity<>(
-//                new SingleResponseDto<>(mapper.questionToQuestionResponse(userMapper, question))
-//                , HttpStatus.OK);
-//    }
-
+    // 투표하기 Vote=true +1, 투표 취소하기 Vote=false -1
     @PatchMapping("/{question-id}/vote")
     public ResponseEntity patchVote(@PathVariable("question-id") @Positive Long questionId,
                                     @RequestParam Boolean vote,
@@ -88,34 +74,7 @@ public class QuestionController {
         return new ResponseEntity<>(
                     new SingleResponseDto<>(mapper.questionToQuestionResponse(userMapper, question))
                     , HttpStatus.OK);
-
-//        if(vote.equals(true)){
-//            Question question1 = questionService.upVoteQuestion(mapper.questionPatchToQuestion(questionPatchDto));
-//            question1.setQuestionId(questionPatchDto.getQuestionId());
-//            return new ResponseEntity<>(
-//                    new SingleResponseDto<>(mapper.questionToQuestionResponse(userMapper, question1))
-//                    , HttpStatus.OK);
-//        } else {
-//            Question question2 = questionService.downVoteQuestion(mapper.questionPatchToQuestion(questionPatchDto));
-//            question2.setQuestionId(questionPatchDto.getQuestionId());
-//            return new ResponseEntity<>(
-//                    new SingleResponseDto<>(mapper.questionToQuestionResponse(userMapper, question2))
-//                    , HttpStatus.OK);
-//        }
-
     }
-
-    // 투표 취소하기
-//    @PatchMapping("/{question-id}/vote/minus")
-//    public ResponseEntity patchQuestionMinus(@PathVariable("question-id") @Positive Long questionId,
-//                                             @Valid @RequestBody QuestionPatchDto questionPatchDto) {
-//
-//        questionPatchDto.setQuestionId(questionId);
-//        Question question = questionService.downVoteQuestion(mapper.questionPatchToQuestion(questionPatchDto));
-//        return new ResponseEntity<>(
-//                new SingleResponseDto<>(mapper.questionToQuestionResponse(userMapper, question))
-//                , HttpStatus.OK);
-//    }
 
     // 전체 게시글 조회
     @GetMapping  // page = 1, size = 10으로 설정해 주세요!

@@ -30,7 +30,7 @@ public class UserService {
         return user;
     }
 
-    public User findUser(long userId) {
+    public User findUser(Long userId) {
         User user = userRepository.findByUserId(userId);
         List<Question> questionList = questionRepository.findAllByUser(user);
         user.setQuestionList(questionList);
@@ -38,14 +38,17 @@ public class UserService {
         return user;
     }
 
-    public Page<User> findUsers(int page, int size) {
-//        User user1 = new User();
-//        user1.setName("홍길동01");
-//        user1.setQuestionCount(1);
-//        user1.setEmail("hgd1@gmail.com");
-//        user1.setPassword("123abc!@");
-//        userRepository.save(user1);
+    public void VerifyUserId(Long userId) {
+        Optional<User> user = userRepository.findById(userId);
+        if (user.isPresent())
+            throw new BusinessLogicException(ExceptionCode.USER_EXISTS);
+    }
 
+    public User updateUser(User user) {
+        return userRepository.save(user);
+    }
+
+    public Page<User> findUsers(int page, int size) {
         return userRepository.findAll(PageRequest.of(page, size,
                 Sort.by("name")));
     }

@@ -7,7 +7,7 @@ public class TagDto {
     @Getter
     @Setter
     public static class Response {
-        private long tagId;
+        private Long tagId;
         private String tagName;
     }
 }
