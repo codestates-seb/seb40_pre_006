@@ -6,6 +6,8 @@ import { headerToggleState } from "../atom/atom";
 import { headerClickState } from "../atom/atom";
 import { useRecoilState } from "recoil";
 
+import { Link } from "react-router-dom";
+
 function Header() {
   const Header = styled.div`
     position: sticky;
@@ -162,10 +164,10 @@ function Header() {
     justify-content: space-between;
   `;
 
-  const handleClickLogin = () => {
-    window.location.href =
-      "https://stackoverflow.com/users/login?ssrc=head&returnurl=https%3a%2f%2fstackoverflow.com%2fquestionshttps://stackoverflow.com/users/login?ssrc=head&returnurl=https%3a%2f%2fstackoverflow.com%2fquestions";
-  };
+  // const handleClickLogin = () => {
+  //   window.location.href =
+  //     "https://stackoverflow.com/users/login?ssrc=head&returnurl=https%3a%2f%2fstackoverflow.com%2fquestionshttps://stackoverflow.com/users/login?ssrc=head&returnurl=https%3a%2f%2fstackoverflow.com%2fquestions";
+  // };
   const handleClickSignup = () => {
     window.location.href = "https://stackoverflow.com/users/signup?ssrc=head";
   };
@@ -207,10 +209,11 @@ function Header() {
           }}
         />
         <ButtonWrapper>
+          <Link to = "/login">
             <Button
               backgroundcolor="#E1ECF4"
               color="#2C5877"
-              onClick={handleClickLogin}
+              // onClick={handleClickLogin}
               marginright="7px"
               width="76px"
               border="0.5px solid #7aa7c7"
@@ -218,6 +221,7 @@ function Header() {
             >
               Log in
             </Button>
+          </Link>
           <Button
             backgroundcolor="#1693FA"
             color="#FFFFFF"

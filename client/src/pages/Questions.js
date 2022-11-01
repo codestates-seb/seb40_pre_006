@@ -60,7 +60,7 @@ const Questions = () => {
         .all([
           axios.get(
             // "https://6034-221-140-177-247.jp.ngrok.io/question?page=3&size=1"
-            `${process.env.REACT_APP_API_URL}/question?page=1&size=10`
+            `${process.env.REACT_APP_API_URL}/question?page=1&size=5`
           ),
           axios.get(`${process.env.REACT_APP_API_URL}/tag/right`),
         ])
@@ -76,7 +76,7 @@ const Questions = () => {
     } else if (opt === 2) {
       axios
         // .get(`${process.env.REA_APP_API_URL}/question/answered`)
-        .get(`${process.env.REACT_APP_API_URL}/question/unanswered?page=1&size=10`)
+        .get(`${process.env.REACT_APP_API_URL}/question/unanswered?page=1&size=5`)
         .then((res) => {
           setData(res.data.data);
           setQuestionCount(res.data.pageInfo.totalElements);
@@ -84,7 +84,7 @@ const Questions = () => {
         });
     } else if (opt === 3) {
       axios
-        .get(`${process.env.REACT_APP_API_URL}/question/answered?page=1&size=10`)
+        .get(`${process.env.REACT_APP_API_URL}/question/answered?page=1&size=5`)
         .then((res) => {
           setData(res.data.data);
           setQuestionCount(res.data.pageInfo.totalElements);
