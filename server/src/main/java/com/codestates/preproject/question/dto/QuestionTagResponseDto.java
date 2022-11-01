@@ -2,9 +2,9 @@ package com.codestates.preproject.question.dto;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
-@Getter @Builder
+@Getter @Builder @Setter
 public class QuestionTagResponseDto {
-    //    private Long tagId;
     private String tagName;
 }

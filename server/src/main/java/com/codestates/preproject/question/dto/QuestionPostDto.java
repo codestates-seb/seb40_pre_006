@@ -20,7 +20,7 @@ public class QuestionPostDto {
     @NotBlank(message = "질문을 작성해 주세요.")
     @Size(min = 20, message = "최소 20자이상 작성해야 합니다.")
     private String questionBody;
-    @Valid @NotNull
+    @Valid @NotNull(message = "태그를 작성해 주세요")
     private List<QuestionTagDto> questionTagList;
 
     public Long getUserId() {
