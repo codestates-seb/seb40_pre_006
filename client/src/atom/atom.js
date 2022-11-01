@@ -109,7 +109,7 @@ export const questionContentValueState = atom({
 
   export const LoginState = atom({
     key : "LoginState",
-    default : true,
+    default : false,
   })
 
   export const QuestionIdState = atom({

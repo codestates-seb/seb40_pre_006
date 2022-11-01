@@ -66,6 +66,21 @@ const QuestionTitle = () => {
 
   // console.log(questionInfo);
 
+  const handleDate = (createdAt) => {
+    if(createdAt !== undefined){
+      let date = new Date(createdAt).toString()
+      let splitDate = date.split(' ');
+      let month = splitDate[1];
+      let day =  splitDate[2];
+      let year = splitDate[3];
+      let time = splitDate[4].slice(0,5);
+  
+      return `asked ${month} ${day}, ${year} at ${time}`
+    }
+    // console.log(createdAt)
+
+  }
+
   return (
     <>
       <Container>
@@ -76,7 +91,7 @@ const QuestionTitle = () => {
           </a>
         </div>
         <div className="detail-info">
-          <div className="date">{questionInfo.createAt}</div>
+          <div className="date">{handleDate(questionInfo.createdAt)}</div>
         </div>
       </Container>
     </>

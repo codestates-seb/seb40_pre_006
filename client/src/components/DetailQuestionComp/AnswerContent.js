@@ -158,14 +158,17 @@ const AnswerContent = ({ answer }) => {
   const [A, setA] = useState(answer);
 
   const handleDate = (createdAt) => {
-    let date = new Date(createdAt).toString()
-    let splitDate = date.split(' ');
-    let month = splitDate[1];
-    let day =  splitDate[2];
-    let year = splitDate[3];
-    let time = splitDate[4].slice(0,5);
+    if(createdAt !== undefined){
+      let date = new Date(createdAt).toString()
+      let splitDate = date.split(' ');
+      let month = splitDate[1];
+      let day =  splitDate[2];
+      let year = splitDate[3];
+      let time = splitDate[4].slice(0,5);
+  
+      return `asked ${month} ${day}, ${year} at ${time}`
 
-    return `asked ${month} ${day}, ${year} at ${time}`
+    }
   }
 
   return (
