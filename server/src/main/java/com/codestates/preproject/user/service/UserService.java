@@ -2,6 +2,8 @@ package com.codestates.preproject.user.service;
 
 import com.codestates.preproject.exception.BusinessLogicException;
 import com.codestates.preproject.exception.ExceptionCode;
+import com.codestates.preproject.question.entity.Question;
+import com.codestates.preproject.question.repository.QuestionRepository;
 import com.codestates.preproject.user.entity.User;
 import com.codestates.preproject.user.repository.UserRepository;
 import org.springframework.data.domain.Page;
@@ -15,13 +17,24 @@ import java.util.Optional;
 @Service
 public class UserService {
     private final UserRepository userRepository;
-    public UserService(UserRepository userRepository) {
+    private final QuestionRepository questionRepository;
+
+    public UserService(UserRepository userRepository, QuestionRepository questionRepository) {
         this.userRepository = userRepository;
+        this.questionRepository = questionRepository;
     }
 
     public User createUser(User user){
         verifyExistsEmailAndName(user.getEmail(), user.getName());
         userRepository.save(user);
+        return user;
+    }
+
+    public User findUser(long userId) {
+        User user = userRepository.findByUserId(userId);
+        List<Question> questionList = questionRepository.findAllByUser(user);
+        user.setQuestionList(questionList);
+
         return user;
     }
 
