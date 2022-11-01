@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class QuestionService {
@@ -54,8 +55,9 @@ public class QuestionService {
                 tagRepository.save(tag);
                 question.getQuestionTagList().get(i).setTag(tag);
             } else {
-                List<Tag> list = tagRepository.findAll();
-                list.stream().filter(a -> a.getTagName().equals(tag.getTagName()));
+                List<Tag> list = tagRepository.findAll().stream()
+                        .filter(a -> a.getTagName().equals(tag.getTagName()))
+                        .collect(Collectors.toList());
                 Tag tag1 = list.get(0);
                 question.getQuestionTagList().get(i).setTag(tag1);
             }
