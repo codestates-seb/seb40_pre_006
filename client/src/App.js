@@ -19,6 +19,7 @@ import Users from "./pages/Users";
 import Header from "./components/Header";
 import AskQuestion from "./pages/AskQuestion";
 import DetailQuestion from "./pages/DetailQuestion";
+import SignUp from "./components/SignUpComponents/SignUpComp";
 import Login from "./pages/Login";
 
 const Container = styled.div`
@@ -35,7 +36,7 @@ function App() {
   return (
     <>
       <Header />
-      {isAsk === "/ask" || isAsk === "/login" ? null : (
+      {isAsk === "/ask" || isAsk === "/signUp" || isAsk === "/login" ? null : (
         <Container>
           <Aside />
           {/* <DetailQuestion /> */}
@@ -49,10 +50,11 @@ function App() {
       )}
       <Routes>
         <Route path="/ask" element={<AskQuestion />} />
+        <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
       </Routes>
 
-      {isAsk === '/login' || isAsk === '/signup' ? null : <Footer />}
+      {isAsk === "/login" || isAsk === "/signUp" ? null : <Footer />}
     </>
   );
 }

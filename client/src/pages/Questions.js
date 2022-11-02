@@ -79,7 +79,8 @@ const Questions = () => {
         .get(`${process.env.REACT_APP_API_URL}/question/unanswered?page=1&size=5`)
         .then((res) => {
           setData(res.data.data);
-          setQuestionCount(res.data.pageInfo.totalElements);
+          // setQuestionCount(res.data.pageInfo.totalElements);
+          setQuestionCount(res.data.data.length);
           console.log('옵션2로 변해 필터링된 데이터(Page1)를 불러와 데이터로 설정') // 
         });
     } else if (opt === 3) {
@@ -87,7 +88,9 @@ const Questions = () => {
         .get(`${process.env.REACT_APP_API_URL}/question/answered?page=1&size=5`)
         .then((res) => {
           setData(res.data.data);
-          setQuestionCount(res.data.pageInfo.totalElements);
+          // setQuestionCount(res.data.pageInfo.totalElements);
+          setQuestionCount(res.data.data.length);
+
           console.log('옵션3로 변해 필터링된 데이터(Page1)를 불러와 데이터로 설정') // 
         });
     }
