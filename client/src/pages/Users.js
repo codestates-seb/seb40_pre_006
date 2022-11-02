@@ -83,7 +83,7 @@ const Container = styled.div`
 
       .user-name {
         /* background-color: hsl(210, 8%, 95%); //2 */
-        background-color: hsl(205,46%,92%);
+        background-color: hsl(205, 46%, 92%);
         padding: 3px; //2
         color: hsl(210, 8%, 25%);
         color: hsl(206, 100%, 40%); //1
@@ -132,7 +132,7 @@ const Users = () => {
             <div key={user.userId} className="user-box">
               <div className="user-name">{user.name}</div>
               <div className="user-question-count">
-                질문 개수 : 
+                질문 개수 :
                 <span className="user-question-count-span">
                   {` ${user.questionCount}`}
                 </span>
