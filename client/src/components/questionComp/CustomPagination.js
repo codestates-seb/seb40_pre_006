@@ -74,46 +74,51 @@ function CustomPagination() {
   const [page, setPage] = useRecoilState(pageState);
   const size = useRecoilValue(pageSizeState);
   const questionCount = useRecoilValue(questionCountState);
-  const setData = useSetRecoilState(getDataState);
+  const [data, setData] = useRecoilState(getDataState);
   const opt = useRecoilValue(questionOptionFocusState);
 
-  useEffect(() => {
-    if (opt === 1) {
-      axios
-        .get(
-          `${process.env.REACT_APP_API_URL}/question?page=${page}&size=${size}`
-        )
-        .then((res) => {
-          setData(res.data.data);
-          console.log(page);
-          console.log("opt1일 때, 페이지가 변해 all에 변한 페이지로 다시 요청");
-        });
-    } else if (opt === 2) {
-      axios
-        .get(
-          `${process.env.REACT_APP_API_URL}/question/answered?page=${page}&size=${size}`
-        )
-        .then((res) => {
-          setData(res.data.data);
-          console.log(page);
-          console.log(
-            "opt2일 때, 페이지가 변해 필터링데이터에 변한 페이지로 다시 요청"
-          );
-        });
-    } else if (opt === 3) {
-      axios
-        .get(
-          `${process.env.REACT_APP_API_URL}/question/answered?page=${page}&size=${size}`
-        )
-        .then((res) => {
-          setData(res.data.data);
-          console.log(page);
-          console.log(
-            "opt3일 때, 페이지가 변해 필터링데이터에 변한 페이지로 다시 요청"
-          );
-        });
-    }
-  }, [page]);
+  // useEffect(() => {
+  //   console.log(`옵션: ${opt}`);
+  //   if (opt === 1) {
+  //     axios
+  //       .get(
+  //         `${process.env.REACT_APP_API_URL}/question?page=${page}&size=${size}`
+  //       )
+  //       .then((res) => {
+  //         setData(res.data.data);
+  //         console.log(`페이지: ${page}`);
+  //         console.log("opt1일 때, 페이지가 변해 all에 변한 페이지로 다시 요청");
+  //       });
+  //   } else if (opt === 2) {
+  //     axios
+  //       .get(
+  //         `${process.env.REACT_APP_API_URL}/question/answered?page=${page}&size=${size}`
+  //       )
+  //       .then((res) => {
+  //         setData(res.data.data);
+  //         console.log(`페이지: ${page}`);
+  //         console.log(
+  //           "opt2일 때, 페이지가 변해 필터링데이터에 변한 페이지로 다시 요청"
+  //         );
+  //       });
+  //   } else if (opt === 3) {
+  //     axios
+  //       .get(
+  //         `${process.env.REACT_APP_API_URL}/question/answered?page=${page}&size=${size}`
+  //       )
+  //       .then((res) => {
+  //         setData(res.data.data);
+  //         console.log(page);
+  //         console.log(
+  //           "opt3일 때, 페이지가 변해 필터링데이터에 변한 페이지로 다시 요청"
+  //         );
+  //       });
+  //   }
+  // }, [page]);
+
+  // useEffect(() => {
+  //   setPage(1);
+  // },[opt])
 
   const handlePageChange = (page) => {
     setPage(page);
