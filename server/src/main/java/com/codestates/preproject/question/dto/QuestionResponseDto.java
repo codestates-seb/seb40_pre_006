@@ -15,6 +15,7 @@ public class QuestionResponseDto {
     private String questionBody;
     private List<QuestionTagResponseDto> questionTagList;
 
+    private Long userId;
     private String name;
     private int voteCount;
     private int answerCount;
@@ -22,5 +23,6 @@ public class QuestionResponseDto {
 
     public void setUser(UserDto.Response userToUserResponseDto) {
         this.name = userToUserResponseDto.getName();
+        this.userId = userToUserResponseDto.getUserId();
     }
 }
