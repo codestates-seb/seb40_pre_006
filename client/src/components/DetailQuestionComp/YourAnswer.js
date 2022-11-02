@@ -1,6 +1,7 @@
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { answerContentValueState } from "../../atom/atom";
+import { questionIdState } from "../../atom/atom";
 import axios from "axios";
 
 const Container = styled.div`
@@ -73,19 +74,21 @@ const YourAnswer = () => {
     answerContentValueState
   );
 
+  const [qId, SetQId] = useRecoilState(questionIdState);
+
   const handleAsnwerContentValue = (e) => {
     setAnswerContent(e.target.value);
   };
 
   async function handleAnswerSubmit() {
     const answer = {
-      questionId: "1",
+      questionId: qId,
       answerBody: answerContent,
       userId: 1,
     };
     // await axios.post(`${process.env.REACT_APP_API_URL}/answer`, answer);
     axios
-      .post(`${process.env.REACT_APP_API_URL}/question/answer`, answer)
+      .post(`${process.env.REACT_APP_API_URL}/answer`, answer)
       .then((response) => this.setState({ answerId: response.data.id }));
 
     window.location.reload();

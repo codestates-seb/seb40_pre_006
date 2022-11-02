@@ -23,9 +23,9 @@ function AnswerList() {
       ) : (
         <div className="answer-number">{Alist.length} Answers</div>
       )}
-      {Alist.map((answer) => (
+      {Alist !== '[]'? Alist.map((answer) => (
         <AnswerContent key={answer.answerId} answer={answer} />
-      ))}
+      )) : null}
     </Container>
   );
 }

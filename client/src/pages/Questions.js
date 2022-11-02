@@ -55,6 +55,7 @@ const Questions = () => {
   const [page, setPage] = useRecoilState(pageState);
 
   useEffect(() => {
+    console.log('go');
     if (opt === 1) {
       axios
         .all([

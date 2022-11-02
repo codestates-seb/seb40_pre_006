@@ -49,14 +49,13 @@ const DetailQuestion = () => {
   useEffect(() => {
     axios
       .all([
-        axios.get(`${process.env.REACT_APP_API_URL}/question/1`),
-        axios.get(`${process.env.REACT_APP_API_URL}/answer/1`),
+        axios.get(`${process.env.REACT_APP_API_URL}/question/${id}`),
+        axios.get(`${process.env.REACT_APP_API_URL}/answer/${id}`),
       ])
       .then(
         axios.spread((res1, res2) => {
           setQuestionInfo(res1.data.data);
           setAnswerData(res2.data.data);
-
         })
       );
   }, []);

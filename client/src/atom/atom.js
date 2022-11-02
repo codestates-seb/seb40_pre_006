@@ -107,21 +107,8 @@ export const DetailQuestionInfoState = atom({
 
   export const LoginState = atom({
     key : "LoginState",
-    default : false,
+    default : true,
   })
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -274,6 +261,8 @@ export const signUpNameValueState = atom({
 
 
 
+{
+  /**
 
 
 
@@ -291,11 +280,7 @@ export const signUpNameValueState = atom({
 
 
 
-
-
-
-
-
+**/}
 
 
 
