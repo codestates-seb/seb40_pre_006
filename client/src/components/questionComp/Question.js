@@ -153,8 +153,6 @@ function Question({ questionId, question }) {
 
       date = new Date(kr_curr).toString();
 
-      console.log(date);
-
       let splitDate = date.split(' ');
       let month = splitDate[1];
       let day =  splitDate[2];
