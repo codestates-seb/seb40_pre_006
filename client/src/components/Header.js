@@ -32,6 +32,7 @@ function Header() {
     .logo {
       /* border : 1px solid red; */
       width: 180px;
+      cursor: pointer;
     }
   `;
 
@@ -187,15 +188,18 @@ function Header() {
     setMenuClick(false);
   };
 
+  const handleLogoClick = () => {
+    document.location.href = "/";
+    // window.location.reload();
+  }
+
   return (
     <Header>
       {/* 수정사항 */}
       <MenuIcon onClick={handleClickMenu} />
-      <a href="/">
-        <div className="logo">
+        <div className="logo" onClick={handleLogoClick}>
           <LogoImg src="img/logo-stackoverflow.png" alt="logo" />
         </div>
-      </a>
       <RightContainer>
         <Searchbar searchClick={searchClick}>
           <InputSearchIcon />

@@ -6,7 +6,6 @@ import { useRecoilState } from 'recoil';
 
 function QuestionList() {
   const [Qlist, setQlist] = useRecoilState(getDataState);
-
   return (
     <div>
       {Qlist.map((question) => (

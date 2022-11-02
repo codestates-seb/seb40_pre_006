@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
 import { isAskState } from "../atom/atom";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { useState } from "react";
 import Oauth from "../components/LoginComponents/Oauth";
 
@@ -178,8 +178,9 @@ const Login = () => {
             <input type="password" name="password" autoComplete="off" onChange={handlePwChange} value={pw}></input>
             <div className="btn-container">
               {pass && pw ? <button type="submit" className="login-btn" >Log in</button> : <button type="submit" className="login-btn-inactive" >Log in</button>}
-              
-              <button className="signup-btn">Sign up</button>
+              <Link to="/signUp">
+                <button className="signup-btn">Sign up</button>
+              </Link>
             </div>
           </form>
         </div>

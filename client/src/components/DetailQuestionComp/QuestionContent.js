@@ -255,13 +255,13 @@ const QuestionContent = () => {
 
     let minusBody = {
       // voteCount : questionInfo.voteCount - 1
-      questionId: 1,
-    };
+      questionId : qId
+    }
 
     let plusBody = {
       // voteCount : questionInfo.voteCount + 1
-      questionId: 1,
-    };
+      questionId : qId
+    }
 
     if (!isLogin) {
       isGo = window.confirm(
@@ -272,10 +272,7 @@ const QuestionContent = () => {
       if (vote) {
         setVote(false);
         await axios
-          .patch(
-            `${process.env.REACT_APP_API_URL}/question/${qId}/vote?vote=false`,
-            minusBody
-          )
+          .patch(`${process.env.REACT_APP_API_URL}/question/${qId}/vote?vote=false`, minusBody)
           .then((res) => {
             setQuestionInfo(res.data.data);
             // console.log(res);
@@ -283,10 +280,7 @@ const QuestionContent = () => {
       } else {
         setVote(true);
         await axios
-          .patch(
-            `${process.env.REACT_APP_API_URL}/question/${qId}/vote?vote=true`,
-            plusBody
-          )
+          .patch(`${process.env.REACT_APP_API_URL}/question/${qId}/vote?vote=true`, plusBody)
           .then((res) => {
             setQuestionInfo(res.data.data);
             // console.log(res);
