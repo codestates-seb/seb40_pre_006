@@ -17,11 +17,14 @@ const Container = styled.div`
   width: 350px;
   min-height: 460px;
   /* background-color: pink; */
-  /* margin-left: 500px; */
+  margin-top: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid black;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 3px 3px 30px #d6d6d6;
+  /* border: 1px solid black; */
 
   .wrapper {
     width: 300px;

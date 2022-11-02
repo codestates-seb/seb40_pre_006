@@ -19,8 +19,9 @@ import Users from "./pages/Users";
 import Header from "./components/Header";
 import AskQuestion from "./pages/AskQuestion";
 import DetailQuestion from "./pages/DetailQuestion";
-import SignUp from "./components/SignUpComponents/SignUpComp";
+import SignUpForm from "./components/SignUpComponents/SignUpComp";
 import Login from "./pages/Login";
+import SignUp from "./pages/SignUp";
 
 const Container = styled.div`
   display: flex;
@@ -50,7 +51,7 @@ function App() {
       )}
       <Routes>
         <Route path="/ask" element={<AskQuestion />} />
-        <Route path="/signup" element={<SignUp />} />
+        <Route path="/signUp" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
       </Routes>
 

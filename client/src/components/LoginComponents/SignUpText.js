@@ -12,6 +12,7 @@ const Container = styled.div`
   width: fit-content;
   height: fit-content;
   /* border: 1px solid blue; */
+  float: right;
 
   .title {
     font-size: 1.7rem;
@@ -48,7 +49,7 @@ const Container = styled.div`
       .vote {
         width: 24px;
         height: 24px;
-        margin: -4.5px 10px -4.5px 0 ;
+        margin: -4.5px 10px -4.5px 0;
       }
     }
   }
