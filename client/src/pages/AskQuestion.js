@@ -320,19 +320,22 @@ const AskQuestion = () => {
 
   const inputHandler = (e) => {
     const copy = [...tagValue];
-    const filterTarget = tagValue.filter((el) => el === e.target.value);
+    const filterTarget = copy.filter((el) => el.tagName === e.target.value);
     if (
       e.key === "Enter" &&
       filterTarget.length === 0 &&
       e.target.value.length > 0 &&
-      tagValue.length < 5
+      copy.length < 5
     ) {
       let tagObj = {};
       tagObj.tagName = e.target.value;
       copy.push(tagObj);
       setTagValue(copy);
       e.target.value = "";
-    } else if (tagValue.length >= 5 && e.key === "Enter") {
+    } else if (
+      (filterTarget.length !== 0 && e.key === "Enter") ||
+      (tagValue.length >= 5 && e.key === "Enter")
+    ) {
       e.target.value = "";
     }
   };

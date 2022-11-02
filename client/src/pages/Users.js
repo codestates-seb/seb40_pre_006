@@ -83,7 +83,7 @@ const Container = styled.div`
 
       .user-name {
         /* background-color: hsl(210, 8%, 95%); //2 */
-        background-color: hsl(205,46%,92%);
+        background-color: hsl(205, 46%, 92%);
         padding: 3px; //2
         color: hsl(210, 8%, 25%);
         color: hsl(206, 100%, 40%); //1
@@ -106,7 +106,7 @@ const Users = () => {
 
   useEffect(() => {
     axios
-      .get(`http://ec2-3-35-19-24.ap-northeast-2.compute.amazonaws.com:8080/user?page=1&size=10`)
+      .get(`${process.env.REACT_APP_API_URL}/user?page=1&size=10`)
       .then((res) => {
         setUsers(res.data.data);
         // console.log(res.data.data)
@@ -132,7 +132,7 @@ const Users = () => {
             <div key={user.userId} className="user-box">
               <div className="user-name">{user.name}</div>
               <div className="user-question-count">
-                질문 개수 : 
+                질문 개수 :
                 <span className="user-question-count-span">
                   {` ${user.questionCount}`}
                 </span>
