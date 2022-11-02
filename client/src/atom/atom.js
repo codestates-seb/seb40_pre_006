@@ -97,25 +97,26 @@ export const questionContentValueState = atom({
 
   */
 }
-
 // 성훈님
+export const DetailQuestionInfoState = atom({
+  key: "DetailQuestionInfoState",
+  default: "",
+  // effects_UNSTABLE: [persistAtom],
+});
 
-  export const DetailQuestionInfoState = atom({
-    key: "DetailQuestionInfoState",
-    default: "",
-    // effects_UNSTABLE: [persistAtom],
-  });
+export const LoginState = atom({
+  key: "LoginState",
+  default: true,
+});
 
+export const QuestionIdState = atom({
+  key: "QuestionIdState",
+  default: "",
+});
+{
+  /*
 
-  export const LoginState = atom({
-    key : "LoginState",
-    default : false,
-  })
 
-  export const QuestionIdState = atom({
-    key : "QuestionIdState",
-    default : "",
-  })
 
 
 
@@ -194,24 +195,8 @@ export const questionContentValueState = atom({
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+*/
+}
 // 채은님
 
 export const questionTagValueState = atom({
@@ -238,49 +223,49 @@ export const answerContentValueState = atom({
   key: "answerContentValueState",
   default: "",
 });
+
+export const signUpEmailValueState = atom({
+  key: "signUpEmailValueState",
+  default: "",
+});
+
+export const signUpEmailMessageState = atom({
+  key: "signUpEmailMessageState",
+  default: "",
+});
+
+export const signUpEmailDuplicationState = atom({
+  key: "signUpEmailDuplicationState",
+  default: "",
+});
+
+export const signUpPasswordValueState = atom({
+  key: "signUpPasswordValueState",
+  default: "",
+});
+
+export const signUpPasswordMessageState = atom({
+  key: "signUpPasswordMessageState",
+  default: "",
+});
+
+export const signUpNameValueState = atom({
+  key: "signUpNameValueState",
+  default: "",
+});
+
+export const signUpNameMessageState = atom({
+  key: "signUpNameMessageState",
+  default: "",
+});
+
+export const signUpResponseState = atom({
+  key: "signUpResponseState",
+  default: "",
+});
+
 {
   /**
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
