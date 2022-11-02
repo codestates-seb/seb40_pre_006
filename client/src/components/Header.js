@@ -187,7 +187,6 @@ function Header() {
     setMenuClick(false);
   };
 
-
   return (
     <Header>
       {/* 수정사항 */}
@@ -209,7 +208,7 @@ function Header() {
           }}
         />
         <ButtonWrapper>
-          <Link to = "/login">
+          <Link to="/login">
             <Button
               backgroundcolor="#E1ECF4"
               color="#2C5877"
@@ -222,17 +221,19 @@ function Header() {
               Log in
             </Button>
           </Link>
-          <Button
-            backgroundcolor="#1693FA"
-            color="#FFFFFF"
-            className="sign-up"
-            onClick={handleClickSignup}
-            width="87px"
-            border="0.5px solid #0074CC"
-            hoverbackcolor="#0066cc"
-          >
-            Sign up
-          </Button>
+          <Link to="/signUp">
+            <Button
+              backgroundcolor="#1693FA"
+              color="#FFFFFF"
+              className="sign-up"
+              // onClick={handleClickSignup}
+              width="87px"
+              border="0.5px solid #0074CC"
+              hoverbackcolor="#0066cc"
+            >
+              Sign up
+            </Button>
+          </Link>
         </ButtonWrapper>
       </RightContainer>
     </Header>
