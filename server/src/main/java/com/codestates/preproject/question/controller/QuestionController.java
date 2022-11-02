@@ -96,39 +96,23 @@ public class QuestionController {
     @GetMapping("/answered")
     public ResponseEntity getQuestionsAnswered(@Positive @RequestParam int page,
                                                @Positive @RequestParam int size) {
-        Page<Question> pageQuestions = questionService.findQuestions(page-1, size);
-        List<Question> questions = pageQuestions.getContent()
-                .stream()
-                .filter(i -> i.getAnswerCount() >= 1)
-                .collect(Collectors.toList());
-        List<QuestionResponseDto> response =
-                questions.stream()
-                        .map(question -> mapper.questionToQuestionResponse(userMapper, question))
-                        .filter(i -> i.getAnswerCount() >= 1)
-                        .collect(Collectors.toList());
+        Page<Question> pageQuestions = questionService.findAnsweredQuestions(page - 1, size);
+        List<Question> questions = pageQuestions.getContent();
 
         return new ResponseEntity<>(
-                new MultiResponseDto<>(mapper.questionsToQuestionResponses(questions),pageQuestions),
-                HttpStatus.OK);
+                new MultiResponseDto<>(mapper.questionsToQuestionResponseDtos(questions),
+                        pageQuestions), HttpStatus.OK);
     }
 
     // 필터링 된 게시글 - 답변 미완료
     @GetMapping("/unanswered")
     public ResponseEntity getQuestionsUnanswered(@Positive @RequestParam int page,
                                                  @Positive @RequestParam int size) {
-        Page<Question> pageQuestions = questionService.findQuestions(page-1, size);
-        List<Question> questions = pageQuestions.getContent()
-                .stream()
-                .filter(i -> i.getAnswerCount() == 0)
-                .collect(Collectors.toList());
-        List<QuestionResponseDto> response =
-                questions.stream()
-                        .map(question -> mapper.questionToQuestionResponse(userMapper, question))
-                        .filter(i -> i.getAnswerCount() == 0)
-                        .collect(Collectors.toList());
+        Page<Question> pageQuestions = questionService.findUnansweredQuestions(page - 1, size);
+        List<Question> questions = pageQuestions.getContent();
 
         return new ResponseEntity<>(
-                new MultiResponseDto<>(mapper.questionsToQuestionResponses(questions),pageQuestions),
-                HttpStatus.OK);
+                new MultiResponseDto<>(mapper.questionsToQuestionResponseDtos(questions),
+                        pageQuestions), HttpStatus.OK);
     }
 }
