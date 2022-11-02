@@ -55,7 +55,6 @@ const Questions = () => {
   const [page, setPage] = useRecoilState(pageState);
 
   useEffect(() => {
-    console.log('go');
     if (opt === 1) {
       axios
         .all([
@@ -68,12 +67,15 @@ const Questions = () => {
         .then(
           axios.spread((res1, res2) => {
             setData(res1.data.data);
+            // console.log(res1.data.data);
             setQuestionCount(res1.data.pageInfo.totalElements);
             setTags(res2.data.data);
             setSize(res1.data.pageInfo.size); // 사이즈는 변하지 않아서 처음에만 설정하면 될 것 같아요
-            console.log('옵션1로 변해 모든 데이터(Page1)를 불러와 데이터로 설정') //
+            // console.log('옵션1로 변해 모든 데이터(Page1)를 불러와 데이터로 설정') //
           })
         );
+        console.log('go1');
+
     } else if (opt === 2) {
       axios
         // .get(`${process.env.REA_APP_API_URL}/question/answered`)
@@ -84,6 +86,8 @@ const Questions = () => {
           setQuestionCount(res.data.data.length);
           console.log('옵션2로 변해 필터링된 데이터(Page1)를 불러와 데이터로 설정') // 
         });
+        console.log('go2');
+
     } else if (opt === 3) {
       axios
         .get(`${process.env.REACT_APP_API_URL}/question/answered?page=1&size=5`)
@@ -94,6 +98,8 @@ const Questions = () => {
 
           console.log('옵션3로 변해 필터링된 데이터(Page1)를 불러와 데이터로 설정') // 
         });
+        console.log('go3');
+
     }
     
     setPage(1); //
