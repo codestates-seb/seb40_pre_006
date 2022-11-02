@@ -9,15 +9,24 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   background-color: #f1f2f3;
+  @media screen and (max-width: 850px) {
+    justify-content: center;
+  }
 
   .text-container {
     width: 50%;
+    min-width: 420px;
     /* border: 1px solid black; */
+    @media screen and (max-width: 850px) {
+      display: none;
+    }
   }
 
   .signup-container {
     width: 50%;
     margin-left: 50px;
+    min-width: 400px;
+
     /* border: 1px solid red; */
   }
 `;
