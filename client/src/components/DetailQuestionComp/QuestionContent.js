@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { FaCaretUp } from "react-icons/fa";
 import { DetailQuestionInfoState } from "../../atom/atom";
 import { LoginState } from "../../atom/atom";
+import { questionIdState } from "../../atom/atom";
 import { constSelector, useRecoilState } from "recoil";
 import { useEffect } from "react";
 import axios from "axios";
@@ -230,6 +231,8 @@ const QuestionContent = () => {
 
   const [isLogin, setIsLogin] = useRecoilState(LoginState);
 
+  const [qId, setQId] = useRecoilState(questionIdState);
+
   const [vote, setVote] = useState(false);
 
   // console.log(questionInfo);
@@ -260,7 +263,7 @@ const QuestionContent = () => {
       if (vote) {
         setVote(false);
         await axios
-          .patch(`${process.env.REACT_APP_API_URL}/question/1/vote/minus`, minusBody)
+          .patch(`${process.env.REACT_APP_API_URL}/question/${qId}/vote?vote=false`, minusBody)
           .then((res) => {
             setQuestionInfo(res.data.data);
             // console.log(res);
@@ -268,7 +271,7 @@ const QuestionContent = () => {
       } else {
         setVote(true);
         await axios
-          .patch(`${process.env.REACT_APP_API_URL}/question/1/vote/plus`, plusBody)
+          .patch(`${process.env.REACT_APP_API_URL}/question/${qId}/vote?vote=true`, plusBody)
           .then((res) => {
             setQuestionInfo(res.data.data);
             // console.log(res);

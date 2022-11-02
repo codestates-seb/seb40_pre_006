@@ -126,13 +126,14 @@ const Created = styled.div`
   }
 `;
 
-function Question({ question }) {
+function Question({ questionId, question }) {
   const [Q, setQ] = useState(question);
   const [id, setId] = useRecoilState(questionIdState); // id 설정
 
   const handleTitleClick = () => { // id 설정
     setId(Q.questionId);
-    console.log(id);
+    // console.log(id);
+    // console.log('active')
   };
 
   const handleDate = (createdAt) => {
@@ -160,9 +161,9 @@ function Question({ question }) {
         </div>
       </QuestionSide>
       <QuestionContent>
-        <Link to="detailQuestion"> 
+        <Link to="detailQuestion" onClick={handleTitleClick}> 
         {/* onClick={()=>handleTitleClick()} */}
-          <h3 className="title" >
+          <h3 className="title">
             {/* <a href=""></a> */}
             {Q.title}
           </h3>

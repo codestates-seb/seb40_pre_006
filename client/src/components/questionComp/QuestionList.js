@@ -12,6 +12,7 @@ function QuestionList() {
       {Qlist.map((question) => (
         <Question
           key={question.questionId}
+          questionId = {question.questionId}
           question={question}
         />
       ))}
