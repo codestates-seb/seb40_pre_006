@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { questionIdState } from "../../atom/atom";
+import {  questionIdState } from "../../atom/atom";
+import { compareUserNameState } from "../../atom/atom";
 
 const QuestionBox = styled.div`
   width: 100%;
@@ -129,10 +130,14 @@ const Created = styled.div`
 function Question({ questionId, question }) {
   const [Q, setQ] = useState(question);
   const [id, setId] = useRecoilState(questionIdState); // id 설정
+  const [compareUserName, setCompareUserName] = useRecoilState(compareUserNameState)
+  // const [userName, setUserName] = useRecoilState(userNameState);
+
 
   const handleTitleClick = () => { // id 설정
     setId(Q.questionId);
-    // console.log(id);
+    setCompareUserName(Q.name);
+    // console.log(Q.name);
     // console.log('active')
   };
 
