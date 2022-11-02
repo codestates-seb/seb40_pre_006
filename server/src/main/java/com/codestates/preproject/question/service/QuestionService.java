@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -115,5 +116,27 @@ public class QuestionService {
         user.setQuestionCount(user.getQuestionCount() + 1);
 
         userService.updateUser(user);
+    }
+
+    public Page<Question> findAnsweredQuestions(int page, int size) {
+        List<Question> list = questionRepository.findByAnswerCountGreaterThan(0)
+                .stream().sorted(Comparator.comparing(Question::getQuestionId).reversed())
+                .collect(Collectors.toList());
+        PageRequest pageRequest = PageRequest.of(page, size);
+        int start = (int) pageRequest.getOffset();
+        int end = Math.min((start + pageRequest.getPageSize()), list.size());
+        Page<Question> questionPage = new PageImpl<>(list.subList(start, end), pageRequest, list.size());
+        return questionPage;
+    }
+
+    public Page<Question> findUnansweredQuestions(int page, int size) {
+        List<Question> list = questionRepository.findByAnswerCountLessThanEqual(0)
+                .stream().sorted(Comparator.comparing(Question::getQuestionId).reversed())
+                .collect(Collectors.toList());
+        PageRequest pageRequest = PageRequest.of(page, size);
+        int start = (int) pageRequest.getOffset();
+        int end = Math.min((start + pageRequest.getPageSize()), list.size());
+        Page<Question> questionPage = new PageImpl<>(list.subList(start, end), pageRequest, list.size());
+        return questionPage;
     }
 }

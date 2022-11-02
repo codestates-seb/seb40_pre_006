@@ -10,4 +10,6 @@ import java.util.List;
 public interface QuestionRepository extends JpaRepository<Question, Long> {
     Question findByQuestionId(Long questionId);
     List<Question> findAllByUser(User user);
+    List<Question> findByAnswerCountGreaterThan(int answerCount);
+    List<Question> findByAnswerCountLessThanEqual(int answerCount);
 }
