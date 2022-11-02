@@ -16,35 +16,40 @@ const CustomPaginationBox = styled.div`
     justify-content: center;
     margin: 50px 0px;
 
-    & > li:first-child { // << 버튼 안보이게
+    & > li:first-child {
+      // << 버튼 안보이게
       display: none;
     }
 
-    & > li:last-child { // >> 버튼 안보이게
+    & > li:last-child {
+      // >> 버튼 안보이게
       display: none;
     }
 
-    & > li:nth-child(2) { // prev 길이 맞춰 width 설정
+    & > li:nth-child(2) {
+      // prev 길이 맞춰 width 설정
       width: 50px;
     }
 
-    & > li:nth-last-child(2) {  // next 길이 맞춰 width 설정
+    & > li:nth-last-child(2) {
+      // next 길이 맞춰 width 설정
       width: 50px;
     }
 
-    & > li.active { // 클릭->활성화 되었을 때, 
+    & > li.active {
+      // 클릭->활성화 되었을 때,
       a {
         color: white; // 글자색 흰색
       }
-      border-color: #f48225;  // 테두리 진한 주황
-      background-color: #f48225;  // 배경색 주황
+      border-color: #f48225; // 테두리 진한 주황
+      background-color: #f48225; // 배경색 주황
     }
   }
 
   li {
     width: 30px;
     height: 30px;
-    border: 1px solid hsl(210,8%,85%);  // 기본 테두리 색(회색)
+    border: 1px solid hsl(210, 8%, 85%); // 기본 테두리 색(회색)
     border-radius: 3px;
     display: flex;
     justify-content: center;
@@ -55,12 +60,12 @@ const CustomPaginationBox = styled.div`
 
     &:hover {
       border: 1px solid #bec1c4;
-      background-color: #D6D9DC; // 회색
+      background-color: #d6d9dc; // 회색
     }
 
     > a {
       text-decoration: none;
-      color: hsl(210,8%,25%);
+      color: hsl(210, 8%, 25%);
     }
   }
 `;
@@ -73,7 +78,7 @@ function CustomPagination() {
   const opt = useRecoilValue(questionOptionFocusState);
 
   useEffect(() => {
-    if(opt === 1) {
+    if (opt === 1) {
       axios
         .get(
           `${process.env.REACT_APP_API_URL}/question?page=${page}&size=${size}`
@@ -91,7 +96,9 @@ function CustomPagination() {
         .then((res) => {
           setData(res.data.data);
           console.log(page);
-          console.log("opt2일 때, 페이지가 변해 필터링데이터에 변한 페이지로 다시 요청");
+          console.log(
+            "opt2일 때, 페이지가 변해 필터링데이터에 변한 페이지로 다시 요청"
+          );
         });
     } else if (opt === 3) {
       axios
@@ -101,7 +108,9 @@ function CustomPagination() {
         .then((res) => {
           setData(res.data.data);
           console.log(page);
-          console.log("opt3일 때, 페이지가 변해 필터링데이터에 변한 페이지로 다시 요청");
+          console.log(
+            "opt3일 때, 페이지가 변해 필터링데이터에 변한 페이지로 다시 요청"
+          );
         });
     }
   }, [page]);
@@ -112,15 +121,19 @@ function CustomPagination() {
 
   return (
     <CustomPaginationBox>
-      <Pagination
-        activePage={page} //현재페이지
-        itemsCountPerPage={size} //한페이지당 보여줄 질문 개수 -> size -> 받아와야함
-        totalItemsCount={questionCount} //총 질문 개수 -> totalElements -> atom에 질문총개수 상태 존재
-        pageRangeDisplayed={5} //페이지네이션에서 보여줄 페이지버튼 개수(범위)
-        prevPageText={"prev"} // 이전 버튼
-        nextPageText={"next"} // 이후 버튼
-        onChange={handlePageChange} //페이지 바뀔 때 페이지상태값 변경함수
-      />
+      {questionCount === 0 ? (
+        <br></br>
+      ) : (
+        <Pagination
+          activePage={page} //현재페이지
+          itemsCountPerPage={size} //한페이지당 보여줄 질문 개수 -> size -> 받아와야함
+          totalItemsCount={questionCount} //총 질문 개수 -> totalElements -> atom에 질문총개수 상태 존재
+          pageRangeDisplayed={5} //페이지네이션에서 보여줄 페이지버튼 개수(범위)
+          prevPageText={"prev"} // 이전 버튼
+          nextPageText={"next"} // 이후 버튼
+          onChange={handlePageChange} //페이지 바뀔 때 페이지상태값 변경함수
+        />
+      )}
     </CustomPaginationBox>
   );
 }

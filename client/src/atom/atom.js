@@ -108,11 +108,6 @@ export const LoginState = atom({
   key: "LoginState",
   default: true,
 });
-
-export const QuestionIdState = atom({
-  key: "QuestionIdState",
-  default: "",
-});
 {
   /*
 
@@ -318,7 +313,7 @@ export const getAnswerState = atom({
 });
 
 export const questionIdState = atom({
-  key: "getAnswerState",
+  key: "questionIdState",
   default: 1,
   effects_UNSTABLE: [persistAtom],
 });
