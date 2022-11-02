@@ -104,13 +104,11 @@ export const DetailQuestionInfoState = atom({
   // effects_UNSTABLE: [persistAtom],
 });
 
-export const LoginState = atom({
-  key: "LoginState",
-  default: true,
-});
-{
-  /*
 
+  export const LoginState = atom({
+    key : "LoginState",
+    default : false,
+  })
 
 
 
@@ -190,8 +188,7 @@ export const LoginState = atom({
 
 
 
-*/
-}
+
 // 채은님
 
 export const questionTagValueState = atom({
@@ -244,10 +241,6 @@ export const signUpPasswordMessageState = atom({
   default: "",
 });
 
-export const signUpNameValueState = atom({
-  key: "signUpNameValueState",
-  default: "",
-});
 
 export const signUpNameMessageState = atom({
   key: "signUpNameMessageState",
@@ -259,8 +252,11 @@ export const signUpResponseState = atom({
   default: "",
 });
 
-{
-  /**
+
+export const signUpNameValueState = atom({
+  key: "signUpNameValueState",
+  default: "",
+});
 
 
 
@@ -290,8 +286,27 @@ export const signUpResponseState = atom({
 
 
 
-*/
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // 세비님
 
 export const pageSizeState = atom({
