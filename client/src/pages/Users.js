@@ -106,7 +106,7 @@ const Users = () => {
 
   useEffect(() => {
     axios
-      .get(`http://ec2-3-35-19-24.ap-northeast-2.compute.amazonaws.com:8080/user?page=1&size=10`)
+      .get(`${process.env.REACT_APP_API_URL}/user?page=1&size=10`)
       .then((res) => {
         setUsers(res.data.data);
         // console.log(res.data.data)

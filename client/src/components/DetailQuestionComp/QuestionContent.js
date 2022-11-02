@@ -3,10 +3,13 @@ import { FaCaretUp } from "react-icons/fa";
 import { DetailQuestionInfoState } from "../../atom/atom";
 import { LoginState } from "../../atom/atom";
 import { questionIdState } from "../../atom/atom";
+import { userNameState } from "../../atom/atom";
 import { constSelector, useRecoilState } from "recoil";
 import { useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
+
+import { compareUserNameState } from "../../atom/atom";
 
 const Container = styled.div`
   width: 100%;
@@ -235,6 +238,12 @@ const QuestionContent = () => {
 
   const [vote, setVote] = useState(false);
 
+  const [userName, setUserName] = useRecoilState(userNameState);
+  const [compareUserName, setCompareUserName] =
+    useRecoilState(compareUserNameState);
+
+  const [editContent, setEditContent] = useState("");
+
   // console.log(questionInfo);
 
   // const getId = (id) => {
@@ -246,13 +255,13 @@ const QuestionContent = () => {
 
     let minusBody = {
       // voteCount : questionInfo.voteCount - 1
-      questionId : 1
-    }
+      questionId: 1,
+    };
 
     let plusBody = {
       // voteCount : questionInfo.voteCount + 1
-      questionId : 1
-    }
+      questionId: 1,
+    };
 
     if (!isLogin) {
       isGo = window.confirm(
@@ -263,7 +272,10 @@ const QuestionContent = () => {
       if (vote) {
         setVote(false);
         await axios
-          .patch(`${process.env.REACT_APP_API_URL}/question/${qId}/vote?vote=false`, minusBody)
+          .patch(
+            `${process.env.REACT_APP_API_URL}/question/${qId}/vote?vote=false`,
+            minusBody
+          )
           .then((res) => {
             setQuestionInfo(res.data.data);
             // console.log(res);
@@ -271,7 +283,10 @@ const QuestionContent = () => {
       } else {
         setVote(true);
         await axios
-          .patch(`${process.env.REACT_APP_API_URL}/question/${qId}/vote?vote=true`, plusBody)
+          .patch(
+            `${process.env.REACT_APP_API_URL}/question/${qId}/vote?vote=true`,
+            plusBody
+          )
           .then((res) => {
             setQuestionInfo(res.data.data);
             // console.log(res);
@@ -298,9 +313,12 @@ const QuestionContent = () => {
         <div className="main">
           <div className="content-container">
             <div className="content">{questionInfo.questionBody}</div>
-            <div className="delete">
-              <button>delete</button>
-            </div>
+            {userName === compareUserName ? (
+              <div className="delete">
+                <button>delete</button>{" "}
+                {/* onClick={()=>handleQuestionDelete()} */}
+              </div>
+            ) : null}
           </div>
           <div className="extra-info">
             <div className="detail-info">
@@ -320,9 +338,13 @@ const QuestionContent = () => {
               </div>
               <div className="author">author : {questionInfo.name}</div>
             </div>
-            <div className="edit-container">
-              <div className="edit-btn">edit</div>
-            </div>
+            {userName === compareUserName ? (
+              <div className="edit-container">
+                <div className="edit-btn">edit</div>{" "}
+                {/* onClick={()=>handleQuestionEdit()} 
+                onChange={() => handleEditValue}*/}
+              </div>
+            ) : null}
           </div>
         </div>
       </Container>

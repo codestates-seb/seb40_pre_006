@@ -317,3 +317,15 @@ export const questionIdState = atom({
   default: 1,
   effects_UNSTABLE: [persistAtom],
 });
+
+export const userNameState = atom({ //로그인 후 받아오는 userName
+  key: "userNameState",
+  default: "stack",
+  effects_UNSTABLE: [persistAtom],
+});
+
+export const compareUserNameState = atom({  //질문 클릭했을 때 해당 질문의 작성자(userName)
+  key: "compareUserNameState",
+  default: "",
+  effects_UNSTABLE: [persistAtom],
+});
