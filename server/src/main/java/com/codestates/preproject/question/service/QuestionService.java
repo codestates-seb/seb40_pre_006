@@ -46,29 +46,8 @@ public class QuestionService {
     public Question createQuestion(Question question) {
         User user = userRepository.findByUserId(question.getUser().getUserId());
         question.setUser(user);
-
-        Question question1 = questionRepository.save(question);
-        List<QuestionTag> questionTagList = new ArrayList<>();
-        for (int i = 0; i < question.getQuestionTagList().size(); i++){
-            Tag tag = new Tag();
-            tag.setTagName(question.getQuestionTagList().get(i).getTag().getTagName());
-            if (!tagRepository.findByTagName(tag.getTagName()).isPresent()) {
-                tagRepository.save(tag);
-                question.getQuestionTagList().get(i).setTag(tag);
-            } else {
-                List<Tag> list = tagRepository.findAll().stream()
-                        .filter(a -> a.getTagName().equals(tag.getTagName()))
-                        .collect(Collectors.toList());
-                Tag tag1 = list.get(0);
-                question.getQuestionTagList().get(i).setTag(tag1);
-            }
-
-            question.getQuestionTagList().get(i).setQuestion(question1);
-            QuestionTag questionTag = questionTagRepository.save(question.getQuestionTagList().get(i));
-            questionTagList.add(questionTag);
-        }
-        question1.setQuestionTagList(questionTagList);
-        updateQuestionCount(question1);
+        createTag(question);
+        upQuestionCount(question);
         return questionRepository.save(question);
     }
 
@@ -109,12 +88,6 @@ public class QuestionService {
         return question;
     }
 
-    private void VerifiedNoQuestion(Page<Question> findAllQuestion){
-        if(findAllQuestion.getTotalElements() == 0){
-            throw new BusinessLogicException(ExceptionCode.QUESTION_NOT_FOUND);
-        }
-    }
-
     public Question VerifyQuestionId(Long questionId) {
         Optional<Question> optionalQuestion = questionRepository.findById(questionId);
         Question findQuestion = optionalQuestion.orElseThrow(()->
@@ -122,9 +95,16 @@ public class QuestionService {
         return findQuestion;
     }
 
-    private void updateQuestionCount(Question question) {
+    private void upQuestionCount(Question question) {
         User user = userService.findUser(question.getUser().getUserId());
         user.setQuestionCount(user.getQuestionCount() + 1);
+
+        userService.updateUser(user);
+    }
+
+    private void downQuestionCount(Question question) {
+        User user = userService.findUser(question.getUser().getUserId());
+        user.setQuestionCount(user.getQuestionCount() - 1);
 
         userService.updateUser(user);
     }
@@ -149,5 +129,63 @@ public class QuestionService {
         int end = Math.min((start + pageRequest.getPageSize()), list.size());
         Page<Question> questionPage = new PageImpl<>(list.subList(start, end), pageRequest, list.size());
         return questionPage;
+    }
+
+    public void deleteQuestion(Long questionId) {
+        Question question = findVerifyQuestion(questionId);
+        deleteTag(question);
+        downQuestionCount(question);
+        questionRepository.delete(question);
+
+    }
+
+    public void createTag(Question question) {
+        Question question1 = questionRepository.save(question);
+        List<QuestionTag> questionTagList = new ArrayList<>();
+        for (int i = 0; i < question.getQuestionTagList().size(); i++){
+            Tag tag = new Tag();
+            tag.setTagName(question.getQuestionTagList().get(i).getTag().getTagName());
+            tag.setTagCount(tag.getTagCount() + 1);
+            if (!tagRepository.findByTagName(tag.getTagName()).isPresent()) {
+                tagRepository.save(tag);
+                question.getQuestionTagList().get(i).setTag(tag);
+            } else {
+                List<Tag> list = tagRepository.findAll().stream()
+                        .filter(a -> a.getTagName().equals(tag.getTagName()))
+                        .collect(Collectors.toList());
+                Tag tag1 = list.get(0);
+                question.getQuestionTagList().get(i).setTag(tag1);
+                tag1.setTagCount(tag1.getTagCount() + 1);
+            }
+
+            question.getQuestionTagList().get(i).setQuestion(question1);
+            QuestionTag questionTag = questionTagRepository.save(question.getQuestionTagList().get(i));
+            questionTagList.add(questionTag);
+        }
+        question1.setQuestionTagList(questionTagList);
+    }
+
+    public void deleteTag(Question question) {
+        for (int i = 0; i < question.getQuestionTagList().size(); i++) {
+            Tag tag = new Tag();
+            tag.setTagName(question.getQuestionTagList().get(i).getTag().getTagName());
+            tag.setTagCount(tag.getTagCount() - 1);
+            if (!tagRepository.findByTagName(tag.getTagName()).isPresent()) {
+                tagService.updateTag(tag);
+                question.getQuestionTagList().get(i).setTag(tag);
+            } else {
+                List<Tag> list = tagRepository.findAll().stream()
+                        .filter(a -> a.getTagName().equals(tag.getTagName()))
+                        .collect(Collectors.toList());
+                Tag tag1 = list.get(0);
+                question.getQuestionTagList().get(i).setTag(tag1);
+                tag1.setTagCount(tag1.getTagCount() - 1);
+            }
+            Question question1 = questionRepository.save(question);
+            List<QuestionTag> questionTagList = new ArrayList<>();
+            question.getQuestionTagList().get(i).setQuestion(question1);
+            QuestionTag questionTag = questionTagRepository.save(question.getQuestionTagList().get(i));
+            questionTagList.add(questionTag);
+        }
     }
 }

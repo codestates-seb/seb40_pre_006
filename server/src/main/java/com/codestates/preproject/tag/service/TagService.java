@@ -20,4 +20,8 @@ public class TagService {
              Sort.by("tagName")));
     }
 
+    public Tag updateTag(Tag tag) {
+        return tagRepository.save(tag);
+    }
+
 }
