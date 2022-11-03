@@ -1,12 +1,14 @@
 package com.codestates.preproject.question.dto;
 
 import lombok.Getter;
+import lombok.Setter;
 
-@Getter
+import java.util.List;
+
+@Getter @Setter
 public class QuestionPatchDto {
     private Long questionId;
-
-    public void setQuestionId(Long questionId) {
-        this.questionId = questionId;
-    }
+    private String title;
+    private String QuestionBody;
+    private List<QuestionTagDto> questionTagList;
 }

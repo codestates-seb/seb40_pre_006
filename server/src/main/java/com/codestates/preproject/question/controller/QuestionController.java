@@ -5,6 +5,7 @@ import com.codestates.preproject.dto.SingleResponseDto;
 import com.codestates.preproject.question.dto.QuestionPatchDto;
 import com.codestates.preproject.question.dto.QuestionPostDto;
 import com.codestates.preproject.question.dto.QuestionResponseDto;
+import com.codestates.preproject.question.dto.QuestionVoteDto;
 import com.codestates.preproject.question.entity.Question;
 import com.codestates.preproject.question.mapper.QuestionMapper;
 import com.codestates.preproject.question.service.QuestionService;
@@ -52,6 +53,34 @@ public class QuestionController {
                 , HttpStatus.CREATED);
     }
 
+    // 질문 수정
+    @PatchMapping("/{question-id}")
+    public ResponseEntity patchQuestion(@PathVariable("question-id") @Positive long questionId,
+                                        @Valid @RequestBody QuestionPatchDto requestBody) {
+        requestBody.setQuestionId(questionId);
+
+        Question question =
+                questionService.updateQuestion(mapper.questionPatchDtoToQuestion(requestBody));
+
+        return new ResponseEntity<>(
+                new SingleResponseDto<>(mapper.questionToQuestionResponseDto(question)),
+                HttpStatus.OK);
+    }
+
+    // 투표하기 Vote=true +1, 투표 취소하기 Vote=false -1
+    @PatchMapping("/{question-id}/vote")
+    public ResponseEntity patchVote(@PathVariable("question-id") @Positive Long questionId,
+                                    @RequestParam Boolean vote,
+                                    @Valid @RequestBody QuestionVoteDto questionVoteDto) {
+        questionVoteDto.setQuestionId(questionId);
+
+        Question question = questionService.voteQuestion(mapper.questionVoteToQuestion(questionVoteDto),
+                vote);
+        return new ResponseEntity<>(
+                    new SingleResponseDto<>(mapper.questionToQuestionResponse(userMapper, question))
+                    , HttpStatus.OK);
+    }
+
     // 특정 게시글 조회
     @GetMapping("/{question-id}")
     public ResponseEntity getQuestion(@PathVariable("question-id") @Positive Long questionId) {
@@ -62,19 +91,6 @@ public class QuestionController {
                 HttpStatus.OK);
     }
 
-    // 투표하기 Vote=true +1, 투표 취소하기 Vote=false -1
-    @PatchMapping("/{question-id}/vote")
-    public ResponseEntity patchVote(@PathVariable("question-id") @Positive Long questionId,
-                                    @RequestParam Boolean vote,
-                                    @Valid @RequestBody QuestionPatchDto questionPatchDto) {
-        questionPatchDto.setQuestionId(questionId);
-
-        Question question = questionService.voteQuestion(mapper.questionPatchToQuestion(questionPatchDto),
-                vote);
-        return new ResponseEntity<>(
-                    new SingleResponseDto<>(mapper.questionToQuestionResponse(userMapper, question))
-                    , HttpStatus.OK);
-    }
 
     // 전체 게시글 조회
     @GetMapping  // page = 1, size = 10으로 설정해 주세요!
