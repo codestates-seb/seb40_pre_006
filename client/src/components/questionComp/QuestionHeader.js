@@ -9,6 +9,7 @@ import { useRecoilState } from "recoil";
 import { useEffect } from "react";
 import axios from "axios";
 import { Route, Routes, Link } from "react-router-dom";
+import { pageState } from "../../atom/atom";
 
 import QuestionList from "./QuestionList";
 
@@ -118,9 +119,11 @@ const QuestionHeader = () => {
   const [questionCount, setQuestionCount] = useRecoilState(questionCountState);
   const [questions, setQuestions] = useRecoilState(getDataState);
   const [isAsk, setIsAsk] = useRecoilState(isAskState);
+  const [page, setPage] = useRecoilState(pageState);
 
   const handleOptionBtnClick = (opt) => {
     setOptionBtn(opt);
+    setPage(1);
   };
 
   return (

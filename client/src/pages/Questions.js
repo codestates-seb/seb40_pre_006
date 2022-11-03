@@ -60,7 +60,7 @@ const Questions = () => {
         .all([
           axios.get(
             // "https://6034-221-140-177-247.jp.ngrok.io/question?page=3&size=1"
-            `${process.env.REACT_APP_API_URL}/question?page=1&size=5`
+            `${process.env.REACT_APP_API_URL}/question?page=${page}&size=5`
           ),
           axios.get(`${process.env.REACT_APP_API_URL}/tag/right`),
         ])
@@ -71,41 +71,40 @@ const Questions = () => {
             setQuestionCount(res1.data.pageInfo.totalElements);
             setTags(res2.data.data);
             setSize(res1.data.pageInfo.size); // 사이즈는 변하지 않아서 처음에만 설정하면 될 것 같아요
-            // console.log('옵션1로 변해 모든 데이터(Page1)를 불러와 데이터로 설정') //
+            console.log(`옵션1로 변해 ${page}페이지 데이터를 불러와 데이터로 설정`) //
           })
         );
-        console.log('go1');
-
+      console.log("go1");
     } else if (opt === 2) {
       axios
         // .get(`${process.env.REA_APP_API_URL}/question/answered`)
-        .get(`${process.env.REACT_APP_API_URL}/question/unanswered?page=1&size=5`)
+        .get(
+          `${process.env.REACT_APP_API_URL}/question/unanswered?page=${page}&size=5`
+        )
         .then((res) => {
+          setQuestionCount(res.data.pageInfo.totalElements);
           setData(res.data.data);
-          // setQuestionCount(res.data.pageInfo.totalElements);
-          setQuestionCount(res.data.data.length);
-          console.log('옵션2로 변해 필터링된 데이터(Page1)를 불러와 데이터로 설정') // 
+          console.log(
+            `옵션2로 변해 ${page}필터링된 페이지 데이터를 불러와 데이터로 설정`
+          ); //
         });
-        console.log('go2');
-
+      console.log("go2");
     } else if (opt === 3) {
       axios
-        .get(`${process.env.REACT_APP_API_URL}/question/answered?page=1&size=5`)
+        .get(`${process.env.REACT_APP_API_URL}/question/answered?page=${page}&size=5`)
         .then((res) => {
+          setQuestionCount(res.data.pageInfo.totalElements);
           setData(res.data.data);
-          // setQuestionCount(res.data.pageInfo.totalElements);
-          setQuestionCount(res.data.data.length);
 
-          console.log('옵션3로 변해 필터링된 데이터(Page1)를 불러와 데이터로 설정') // 
+          console.log(
+            `옵션3로 변해 ${page}필터링된 페이지 데이터를 불러와 데이터로 설정`
+          ); //
         });
-        console.log('go3');
-
+      console.log("go3");
     }
-    
-    setPage(1); //
-    console.log('페이지 1로 리셋') //
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [opt]);
+  }, [opt, page]);
 
   return (
     <>
