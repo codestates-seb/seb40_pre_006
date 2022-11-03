@@ -134,7 +134,7 @@ const Aside = () => {
                   <div className="icons"></div>
                   <div className="text">Tags</div>
                 </Menubox>
-              </StyledLink>
+              </StyledLink> 
             </li>
 
             <li className="node">

@@ -237,7 +237,7 @@ function Header() {
               backgroundcolor="#1693FA"
               color="#FFFFFF"
               className="sign-up"
-              width="87px"
+              width="87px" 
               border="0.5px solid #0074CC"
               hoverbackcolor="#0066cc"
               onClick={handleLogOut}
