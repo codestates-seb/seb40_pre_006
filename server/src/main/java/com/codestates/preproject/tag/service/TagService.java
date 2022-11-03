@@ -17,7 +17,7 @@ public class TagService {
 
     public Page<Tag> findTags(int page, int size) {
      return tagRepository.findAll(PageRequest.of(page, size,
-             Sort.by("tagName")));
+             Sort.by("tagCount").descending()));
     }
 
     public Tag updateTag(Tag tag) {
