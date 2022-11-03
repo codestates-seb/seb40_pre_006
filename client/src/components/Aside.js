@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Routes, Route, Link, useLocation } from "react-router-dom";
 // import { useState } from "react";
 import { FaGlobeAmericas } from "react-icons/fa";
-import { asideFocusState, headerToggleState, isAskState } from "../atom/atom";
+import { asideFocusState, headerToggleState, isAskState, pageState, questionOptionFocusState } from "../atom/atom";
 import { useRecoilState } from "recoil";
 import { useEffect } from "react";
 
@@ -97,6 +97,8 @@ const Aside = () => {
   const [focus, setFocus] = useRecoilState(asideFocusState);
   const [toggle, setToggle] = useRecoilState(headerToggleState);
   const [isAsk, setIsAsk] = useRecoilState(isAskState);
+  const [page, setPage] = useRecoilState(pageState);
+  const [opt, setOpt] = useRecoilState(questionOptionFocusState);
 
   let params = useLocation();
 
@@ -105,9 +107,10 @@ const Aside = () => {
   // useEffect(()=> {
   // },[])
 
-  // const handleClick = ( ) => {
-  //     setFocus(params.pathname);
-  // }
+  const handleClick = ( ) => {
+    setPage(1);
+    setOpt(1);
+  }
 
   return (
     <>
@@ -116,7 +119,7 @@ const Aside = () => {
           <ol className="menu-list">
             <li className="root">PUBLIC</li>
             <li className="node">
-              <StyledLink to="/">
+              <StyledLink to="/" onClick={handleClick}>
                 <Menubox props={focus === "/" ? focus : null}>
                   <div className="icons">
                     <FaGlobeAmericas />
@@ -131,7 +134,7 @@ const Aside = () => {
                   <div className="icons"></div>
                   <div className="text">Tags</div>
                 </Menubox>
-              </StyledLink>
+              </StyledLink> 
             </li>
 
             <li className="node">

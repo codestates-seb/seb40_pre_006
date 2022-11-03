@@ -6,6 +6,8 @@ import {
   headerClickState,
   userNameState,
   LoginState,
+  pageState,
+  questionOptionFocusState,
 } from "../atom/atom";
 import { useRecoilState } from "recoil";
 
@@ -172,6 +174,9 @@ function Header() {
   const [userName] = useRecoilState(userNameState);
   const [isLogin, setIsLogin] = useRecoilState(LoginState);
 
+  const [page, setPage] = useRecoilState(pageState);
+  const [opt, setOpt] = useRecoilState(questionOptionFocusState);
+
   const handleClickMenu = () => {
     setMenuClick(!menuClick);
     setSearchClick(false);
@@ -185,6 +190,8 @@ function Header() {
   const handleLogoClick = () => {
     document.location.href = "/";
     // window.location.reload();
+    setPage(1);
+    setOpt(1);
   };
 
   const handleLogOut = () => {
@@ -230,7 +237,7 @@ function Header() {
               backgroundcolor="#1693FA"
               color="#FFFFFF"
               className="sign-up"
-              width="87px"
+              width="87px" 
               border="0.5px solid #0074CC"
               hoverbackcolor="#0066cc"
               onClick={handleLogOut}
