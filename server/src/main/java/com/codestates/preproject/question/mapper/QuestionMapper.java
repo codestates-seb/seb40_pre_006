@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 @Mapper(componentModel = "spring")
 public interface QuestionMapper {
     List<QuestionResponseDto> questionsToQuestionResponses(List<Question> questions);
+    List<QuestionResponseDto> questionsToQuestionResponseDtos(List<Question> questions);
 
     default Question questionPostToQuestion(UserService userService, QuestionPostDto questionPostDto) {
         if ( questionPostDto == null ) {
