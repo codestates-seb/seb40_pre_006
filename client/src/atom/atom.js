@@ -106,7 +106,7 @@ export const DetailQuestionInfoState = atom({
 
 export const LoginState = atom({
   key: "LoginState",
-  default: true,
+  default: false,
 });
 {
   /**
