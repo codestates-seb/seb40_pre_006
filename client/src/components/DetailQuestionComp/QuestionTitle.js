@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
-import { DetailQuestionInfoState } from "../../atom/atom";
+import { DetailQuestionInfoState, LoginState } from "../../atom/atom";
 
 const Container = styled.div`
   width: 100%;
@@ -63,6 +63,8 @@ const QuestionTitle = () => {
   const [questionInfo, setQuestionInfo] = useRecoilState(
     DetailQuestionInfoState
   );
+  const [login, isLogin] = useRecoilState(LoginState);
+
 
   // console.log(questionInfo);
 
@@ -88,14 +90,27 @@ const QuestionTitle = () => {
 
   }
 
+  const handleAskBtnClick = () => {
+    let isGo = false;
+
+    if (!login) {
+      isGo = window.confirm(
+        "로그인이 필요합니다! \n로그인 창으로 이동하시겠습니까?"
+      );
+      isGo ? (window.location = "/login") : console.log("stay");
+    }else {
+      window.location = "/ask";
+    }
+  };
+
   return (
     <>
       <Container>
         <div className="title-container">
           <div className="title">{questionInfo.title}</div>
-          <a href="/ask">
-            <button>Ask Question</button>
-          </a>
+          {/* <a href="/ask"> */}
+            <button onClick={handleAskBtnClick}>Ask Question</button>
+          {/* </a> */}
         </div>
         <div className="detail-info">
           <div className="date">{handleDate(questionInfo.createdAt)}</div>

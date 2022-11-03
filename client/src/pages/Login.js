@@ -161,6 +161,15 @@ const Login = () => {
     setPw(e.target.value);
   }
 
+  const handleLoginClick = () => {
+    const loginInfo = {
+      email : email,
+      password : pw
+    }
+
+    console.log(loginInfo);
+  }
+
   return (
     <>
       <Container>
@@ -177,7 +186,7 @@ const Login = () => {
             <div className="label">Password</div>
             <input type="password" name="password" autoComplete="off" onChange={handlePwChange} value={pw}></input>
             <div className="btn-container">
-              {pass && pw ? <button type="submit" className="login-btn" >Log in</button> : <button type="submit" className="login-btn-inactive" >Log in</button>}
+              {pass && pw ? <button type="submit" className="login-btn" onClick={handleLoginClick}>Log in</button> : <button type="submit" className="login-btn-inactive" >Log in</button>}
               <Link to="/signUp">
                 <button className="signup-btn">Sign up</button>
               </Link>

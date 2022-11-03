@@ -75,7 +75,7 @@ function TagSideBar() {
   return (
     <TagWrapper>
       <Wrapper>
-        <TitleContainer>Related Tags</TitleContainer>
+        <TitleContainer>Related Tags (Top5)</TitleContainer>
         {tags.map((tag) => (
           <TagContainer key={tag.tagId}>{tag.tagName}</TagContainer>
         ))}

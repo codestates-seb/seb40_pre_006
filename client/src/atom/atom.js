@@ -101,12 +101,13 @@ export const questionContentValueState = atom({
 export const DetailQuestionInfoState = atom({
   key: "DetailQuestionInfoState",
   default: "",
-  // effects_UNSTABLE: [persistAtom],
+  effects_UNSTABLE: [persistAtom],
 });
 
 export const LoginState = atom({
   key: "LoginState",
-  default: false,
+  default: true,
+
 });
 {
   /**
