@@ -29,7 +29,11 @@ configurations {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+<<<<<<< Updated upstream
 	implementation 'org.springframework.boot:spring-boot-starter-security'
+=======
+	implementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '2.4.1'
+>>>>>>> Stashed changes
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'
