@@ -4,6 +4,7 @@ import {
   questionCountState,
   getDataState,
   isAskState,
+  LoginState,
 } from "../../atom/atom";
 import { useRecoilState } from "recoil";
 import { useEffect } from "react";
@@ -119,11 +120,26 @@ const QuestionHeader = () => {
   const [questionCount, setQuestionCount] = useRecoilState(questionCountState);
   const [questions, setQuestions] = useRecoilState(getDataState);
   const [isAsk, setIsAsk] = useRecoilState(isAskState);
+  const [login, isLogin] = useRecoilState(LoginState);
   const [page, setPage] = useRecoilState(pageState);
 
   const handleOptionBtnClick = (opt) => {
     setOptionBtn(opt);
     setPage(1);
+
+  };
+
+  const handleAskBtnClick = () => {
+    let isGo = false;
+
+    if (!login) {
+      isGo = window.confirm(
+        "로그인이 필요합니다! \n로그인 창으로 이동하시겠습니까?"
+      );
+      isGo ? (window.location = "/login") : console.log("stay");
+    }else {
+      window.location = "/ask";
+    }
   };
 
   return (
@@ -131,9 +147,9 @@ const QuestionHeader = () => {
       <Container>
         <div className="up-box">
           <div className="title">All Questions</div>
-          <a href="/ask">
-            <button>Ask Question</button>
-          </a>
+          {/* <a href="/ask"> */}
+            <button onClick={handleAskBtnClick}>Ask Question</button>
+          {/* </a> */}
         </div>
         <div className="down-box">
           <div className="question-count">{questionCount} questions</div>

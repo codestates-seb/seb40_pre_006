@@ -21,6 +21,7 @@ const Container = styled.div`
     height: 500px;
     position: absolute;
     left: 0;
+    z-index : 3;
   }
 
   .side-menu {

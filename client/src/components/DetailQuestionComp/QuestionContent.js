@@ -10,6 +10,7 @@ import axios from "axios";
 import { useState } from "react";
 
 import { compareUserNameState } from "../../atom/atom";
+import { editableInputTypes } from "@testing-library/user-event/dist/utils";
 
 const Container = styled.div`
   width: 100%;
@@ -110,6 +111,25 @@ const Container = styled.div`
 
         /* overflow : auto; */
         /* border: 1px solid red; */
+      }
+
+      textarea {
+        width: 90%;
+        resize: none;
+        /* height : 500px; */
+        padding: 5px;
+        padding-top: 20px;
+
+        border: 1px solid #babfc4;
+
+        color: #3a3a3a;
+
+        font-size: 15px;
+
+        &:focus {
+          outline: none;
+          border: 1px solid #6bbbf7;
+        }
       }
 
       .delete {
@@ -242,7 +262,8 @@ const QuestionContent = () => {
   const [compareUserName, setCompareUserName] =
     useRecoilState(compareUserNameState);
 
-  const [editContent, setEditContent] = useState("");
+  const [editMode, setEditMode] = useState(false);
+  const [editContent, setEditContent] = useState(questionInfo.questionBody);
 
   // console.log(questionInfo);
 
@@ -255,24 +276,27 @@ const QuestionContent = () => {
 
     let minusBody = {
       // voteCount : questionInfo.voteCount - 1
-      questionId : qId
-    }
+      questionId: qId,
+    };
 
     let plusBody = {
       // voteCount : questionInfo.voteCount + 1
-      questionId : qId
-    }
+      questionId: qId,
+    };
 
     if (!isLogin) {
       isGo = window.confirm(
         "로그인이 필요합니다! \n로그인 창으로 이동하시겠습니까?"
       );
-      isGo ? (window.location = "/ask") : console.log("stay");
+      isGo ? (window.location = "/login") : console.log("stay");
     } else {
       if (vote) {
         setVote(false);
         await axios
-          .patch(`${process.env.REACT_APP_API_URL}/question/${qId}/vote?vote=false`, minusBody)
+          .patch(
+            `${process.env.REACT_APP_API_URL}/question/${qId}/vote?vote=false`,
+            minusBody
+          )
           .then((res) => {
             setQuestionInfo(res.data.data);
             // console.log(res);
@@ -280,7 +304,10 @@ const QuestionContent = () => {
       } else {
         setVote(true);
         await axios
-          .patch(`${process.env.REACT_APP_API_URL}/question/${qId}/vote?vote=true`, plusBody)
+          .patch(
+            `${process.env.REACT_APP_API_URL}/question/${qId}/vote?vote=true`,
+            plusBody
+          )
           .then((res) => {
             setQuestionInfo(res.data.data);
             // console.log(res);
@@ -288,6 +315,26 @@ const QuestionContent = () => {
       }
     }
   };
+
+  const handleEditClick = () => {
+    // console.log(editContent);
+    setEditMode(true);
+  };
+
+  const handleEditChange = (e) => {
+    setEditContent(e.target.value);
+  };
+
+  const handleCompleteClick = () => {
+    // setEditMode(false);
+
+    let isGo = window.confirm("수정하시겠습니까?");
+
+    if (isGo) {
+      window.alert("수정되었습니다");
+      setEditMode(false);
+    }
+  }
 
   return (
     <>
@@ -306,7 +353,12 @@ const QuestionContent = () => {
         </div>
         <div className="main">
           <div className="content-container">
-            <div className="content">{questionInfo.questionBody}</div>
+            {editMode ? (
+              <textarea value={editContent} onChange={handleEditChange} />
+            ) : (
+              <div className="content">{questionInfo.questionBody}</div>
+            )}
+
             {userName === compareUserName ? (
               <div className="delete">
                 <button>delete</button>{" "}
@@ -334,7 +386,16 @@ const QuestionContent = () => {
             </div>
             {userName === compareUserName ? (
               <div className="edit-container">
-                <div className="edit-btn">edit</div>{" "}
+                {editMode ? (
+                  <div className="edit-btn" onClick={handleCompleteClick}>
+                    complete
+                  </div>
+                ) : (
+                  <div className="edit-btn" onClick={handleEditClick}>
+                    edit
+                  </div>
+                )}
+
                 {/* onClick={()=>handleQuestionEdit()} 
                 onChange={() => handleEditValue}*/}
               </div>
