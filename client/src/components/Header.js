@@ -195,8 +195,6 @@ function Header() {
     }
   };
 
-  console.log(isLogin);
-
   return (
     <Wrapper>
       <MenuIcon onClick={handleClickMenu} />
@@ -215,7 +213,7 @@ function Header() {
           }}
         />
         <ButtonWrapper>
-          <Link to={isLogin ? null : "/login"}>
+          <a href={isLogin ? null : "/login"}>
             <Button
               backgroundcolor="#E1ECF4"
               color="#2C5877"
@@ -226,8 +224,8 @@ function Header() {
             >
               {isLogin ? userName : "Log in"}
             </Button>
-          </Link>
-          <Link to={isLogin ? "/login" : "/signUp"}>
+          </a>
+          <a href={isLogin ? "/login" : "/signUp"}>
             <Button
               backgroundcolor="#1693FA"
               color="#FFFFFF"
@@ -239,7 +237,7 @@ function Header() {
             >
               {isLogin ? "Log Out" : "Sign up"}
             </Button>
-          </Link>
+          </a>
         </ButtonWrapper>
       </RightContainer>
     </Wrapper>
