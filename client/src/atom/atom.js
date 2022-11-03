@@ -1,4 +1,4 @@
-import { atom, selector } from "recoil";
+import { atom } from "recoil";
 import { recoilPersist } from "recoil-persist";
 
 const { persistAtom } = recoilPersist();
@@ -60,44 +60,6 @@ export const questionContentValueState = atom({
   default: "",
 });
 
-// export const questionTagValueState = atom({
-//   key: "questionTagValueState",
-//   default: "",
-// });
-{
-  /**
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  */
-}
-// 성훈님
 export const DetailQuestionInfoState = atom({
   key: "DetailQuestionInfoState",
   default: "",
@@ -106,99 +68,8 @@ export const DetailQuestionInfoState = atom({
 
 export const LoginState = atom({
   key: "LoginState",
-  default: true,
-
+  default: false,
 });
-{
-  /**
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-*/
-}
-// 채은님
 
 export const questionTagValueState = atom({
   key: "questionTagValueState",
@@ -264,30 +135,6 @@ export const signUpNameValueState = atom({
   key: "signUpNameValueState",
   default: "",
 });
-
-{
-  /**
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-**/
-}
-
-// 세비님
 
 export const pageSizeState = atom({
   key: "pageSizeState",

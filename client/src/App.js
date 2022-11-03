@@ -10,7 +10,7 @@ import {
 import { Routes, Route, Link } from "react-router-dom";
 import styled from "styled-components";
 import { isAskState } from "./atom/atom";
-
+import { useState } from "react";
 import Footer from "./components/Footer";
 import Aside from "./components/Aside";
 import Questions from "./pages/Questions";
@@ -27,23 +27,37 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
-
-  /* background-color : #ff7b7b; */
 `;
 
 function App() {
   const [isAsk, setIsAsk] = useRecoilState(isAskState);
+  const [view, setView] = useState(true);
+
+  window.onload = () => {
+    checkScreenSize();
+  };
+
+  window.onresize = () => {
+    checkScreenSize();
+  };
+
+  const checkScreenSize = () => {
+    let screenWidth = window.innerWidth;
+
+    if (screenWidth < 640) {
+      setView(true);
+    } else {
+      setView(false);
+    }
+  };
+
+  // console.log(window.innerWidth);
 
   return (
     <>
       <Header />
-      {isAsk === "/ask" || isAsk === "/signUp" || isAsk === "/login" ? (
-        <Routes>
-          <Route path="/ask" element={<AskQuestion />} />
-          <Route path="/signUp" element={<SignUp />} />
-          <Route path="/login" element={<Login />} />
-        </Routes>
-      ) : (
+      {!view &&
+      (isAsk === "/ask" || isAsk === "/signUp" || isAsk === "/login") ? null : (
         <Container>
           <Aside />
           {/* <DetailQuestion /> */}
@@ -55,6 +69,12 @@ function App() {
           </Routes>
         </Container>
       )}
+
+      <Routes>
+        <Route path="/ask" element={<AskQuestion />} />
+        <Route path="/signUp" element={<SignUp />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
 
       {isAsk === "/login" || isAsk === "/signUp" ? null : <Footer />}
     </>

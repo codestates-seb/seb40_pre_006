@@ -5,7 +5,7 @@ import { FaSearch } from "react-icons/fa";
 
 const Container = styled.div`
   width: 70vw;
-  height: 1500px;
+  height: 700px;
   padding: 24px;
 
   /* background-color : #7e7e7e; */
@@ -109,7 +109,6 @@ const Users = () => {
       .get(`${process.env.REACT_APP_API_URL}/user?page=1&size=10`)
       .then((res) => {
         setUsers(res.data.data);
-        // console.log(res.data.data)
       });
   });
 
@@ -122,7 +121,7 @@ const Users = () => {
             <FaSearch className="icon" />
             <input
               placeholder="Filter by user"
-              autocomplete="off"
+              autoComplete="off"
               type="text"
             ></input>
           </div>

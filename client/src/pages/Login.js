@@ -146,7 +146,6 @@ const Login = () => {
   setIsAsk(params.pathname);
 
   const handleEmailChange = (e) => {
-    // console.log(e.target.value);
     setEmail(e.target.value);
     const emailRex = /^([\w\.\-_]+)?\w+@[\w-_]+(\.\w+){1,}$/;
 

@@ -136,8 +136,6 @@ function Question({ questionId, question }) {
   const handleTitleClick = () => { // id 설정
     setId(Q.questionId);
     setCompareUserName(Q.name);
-    // console.log(Q.name);
-    // console.log('active')
   };
 
   const handleDate = (createdAt) => {

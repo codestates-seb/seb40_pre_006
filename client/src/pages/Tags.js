@@ -5,7 +5,7 @@ import { FaSearch } from "react-icons/fa";
 
 const Container = styled.div`
   width: 70vw;
-  height: 1500px;
+  height: 700px;
   padding: 24px;
 
   /* background-color : #7e7e7e; */
@@ -113,7 +113,6 @@ const Tags = () => {
       .get(`${process.env.REACT_APP_API_URL}/tag/right`)
       .then((res) => {
         setTags(res.data.data);
-        // console.log(res.data.data)
       });
   });
 
@@ -126,7 +125,7 @@ const Tags = () => {
             <FaSearch className="icon" />
             <input
               placeholder="Filter by tag"
-              autocomplete="off"
+              autoComplete="off"
               type="text"
             ></input>
           </div>

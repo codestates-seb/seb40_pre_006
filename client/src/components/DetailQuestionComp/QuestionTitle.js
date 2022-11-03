@@ -66,8 +66,6 @@ const QuestionTitle = () => {
   const [login, isLogin] = useRecoilState(LoginState);
 
 
-  // console.log(questionInfo);
-
   const handleDate = (createdAt) => {
     if(createdAt !== undefined){
       let date = new Date(createdAt);
@@ -86,7 +84,6 @@ const QuestionTitle = () => {
   
       return `asked ${month} ${day}, ${year} at ${time}`
     }
-    // console.log(createdAt)
 
   }
 

@@ -19,20 +19,25 @@ const Container = styled.div`
     display: ${(props) => (props.props ? "block" : "none")};
     width: 220px;
     height: 500px;
-    position: absolute;
+    position: fixed;
     left: 0;
-    z-index : 3;
+    z-index : 2;
   }
 
   .side-menu {
     width: 100%;
-    height: 100%;
+    height: 500px;
 
     position: sticky;
     top: 53px;
 
-    background-color: white;
-    border-bottom: 1px solid #e0e0e0;
+    /* background-color : #ff6f6f; */
+
+    background-color: #ffffff;
+
+    @media screen and (max-width: 640px){
+      border-bottom: 1px solid #e0e0e0;
+    }
 
     .menu-list {
       list-style: none;
