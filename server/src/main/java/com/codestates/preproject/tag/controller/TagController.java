@@ -8,11 +8,9 @@ import com.codestates.preproject.tag.service.TagService;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.Positive;
 import java.util.List;
 
 @CrossOrigin
@@ -38,4 +36,15 @@ public class TagController {
                 HttpStatus.OK);
     }
 
+    @GetMapping
+    public ResponseEntity getTags(@Positive @RequestParam int page,
+                                  @Positive @RequestParam int size){
+
+        Page<Tag> pageTags = tagService.findTags(page - 1, size);
+        List<Tag> tags = pageTags.getContent();
+
+        return new ResponseEntity<>(
+                new MultiResponseDto<>(mapper.tagToTagResponseDto(tags), pageTags),
+                HttpStatus.OK);
+    }
 }
