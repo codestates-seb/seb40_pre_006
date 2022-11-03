@@ -59,16 +59,28 @@ public interface QuestionMapper {
         }).collect(Collectors.toList());
     }
 
-    default Question questionPatchToQuestion(QuestionPatchDto questionPatchDto) {
-        if ( questionPatchDto == null ) {
+    default Question questionPatchDtoToQuestion(QuestionPatchDto requestBody) {
+        Question question = new Question();
+
+        question.setQuestionId(requestBody.getQuestionId());
+//        question.setVoteCount(requestBody.getVoteCount());
+        question.setTitle(requestBody.getTitle());
+        question.setQuestionBody(requestBody.getQuestionBody());
+
+        return question;
+    }
+    
+    default Question questionVoteToQuestion(QuestionVoteDto questionVoteDto) {
+        if ( questionVoteDto == null ) {
             return null;
         }
 
         Question question = new Question();
-        question.setQuestionId( questionPatchDto.getQuestionId() );
+        question.setQuestionId( questionVoteDto.getQuestionId() );
 
         return question;
     }
+
 
     default QuestionResponseDto questionToQuestionResponse(UserMapper userMapper, Question question) {
         if ( question == null ) {

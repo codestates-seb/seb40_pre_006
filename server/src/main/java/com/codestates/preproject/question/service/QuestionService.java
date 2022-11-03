@@ -71,6 +71,17 @@ public class QuestionService {
         updateQuestionCount(question1);
         return questionRepository.save(question);
     }
+
+    // 게시글 내용 수정
+    public Question updateQuestion(Question question) {
+        Question findQuestion = questionRepository.findByQuestionId(question.getQuestionId());
+
+        Optional.ofNullable(question.getQuestionBody())
+                .ifPresent(questionBody -> findQuestion.setQuestionBody(questionBody));
+
+        return questionRepository.save(findQuestion);
+    }
+
     public Question voteQuestion(Question question, Boolean vote) {
         Question findQuestion = questionRepository.findByQuestionId(question.getQuestionId());
         if (vote.equals(true)) {
