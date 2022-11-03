@@ -19,7 +19,7 @@ public class Answer {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long answerId;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 50000)
     private String answerBody;
 
     private LocalDateTime createdAt;
