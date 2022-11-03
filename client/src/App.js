@@ -32,7 +32,9 @@ const Container = styled.div`
 
 function App() {
   const [isAsk, setIsAsk] = useRecoilState(isAskState);
+
   const [view, setView] = useState(false);
+
 
   window.onload = () => {
     checkScreenSize();
@@ -51,6 +53,7 @@ function App() {
       setView(false);
     }
   };
+
 
   return (
     <>
