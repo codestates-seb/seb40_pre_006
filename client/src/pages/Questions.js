@@ -59,7 +59,6 @@ const Questions = () => {
       axios
         .all([
           axios.get(
-            // "https://6034-221-140-177-247.jp.ngrok.io/question?page=3&size=1"
             `${process.env.REACT_APP_API_URL}/question?page=${page}&size=5`
           ),
           axios.get(`${process.env.REACT_APP_API_URL}/tag/right`),
@@ -67,14 +66,12 @@ const Questions = () => {
         .then(
           axios.spread((res1, res2) => {
             setData(res1.data.data);
-            // console.log(res1.data.data);
+  
             setQuestionCount(res1.data.pageInfo.totalElements);
             setTags(res2.data.data);
             setSize(res1.data.pageInfo.size); // 사이즈는 변하지 않아서 처음에만 설정하면 될 것 같아요
-            console.log(`옵션1로 변해 ${page}페이지 데이터를 불러와 데이터로 설정`) //
           })
         );
-      console.log("go1");
     } else if (opt === 2) {
       axios
         // .get(`${process.env.REA_APP_API_URL}/question/answered`)
@@ -84,11 +81,7 @@ const Questions = () => {
         .then((res) => {
           setQuestionCount(res.data.pageInfo.totalElements);
           setData(res.data.data);
-          console.log(
-            `옵션2로 변해 ${page}필터링된 페이지 데이터를 불러와 데이터로 설정`
-          ); //
         });
-      console.log("go2");
     } else if (opt === 3) {
       axios
         .get(`${process.env.REACT_APP_API_URL}/question/answered?page=${page}&size=5`)
@@ -96,11 +89,8 @@ const Questions = () => {
           setQuestionCount(res.data.pageInfo.totalElements);
           setData(res.data.data);
 
-          console.log(
-            `옵션3로 변해 ${page}필터링된 페이지 데이터를 불러와 데이터로 설정`
-          ); //
         });
-      console.log("go3");
+
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps

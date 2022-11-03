@@ -270,11 +270,6 @@ const QuestionContent = () => {
   const [page, setPage] = useRecoilState(pageState);
   const [opt, setOpt] = useRecoilState(questionOptionFocusState);
 
-  // console.log(questionInfo);
-
-  // const getId = (id) => {
-  //   return id++;
-  // }
 
   const handleVoteClick = async () => {
     let isGo = false;
@@ -304,7 +299,6 @@ const QuestionContent = () => {
           )
           .then((res) => {
             setQuestionInfo(res.data.data);
-            // console.log(res);
           });
       } else {
         setVote(true);
@@ -315,14 +309,12 @@ const QuestionContent = () => {
           )
           .then((res) => {
             setQuestionInfo(res.data.data);
-            // console.log(res);
           });
       }
     }
   };
 
   const handleEditClick = () => {
-    // console.log(editContent);
     setEditMode(true);
   };
 
@@ -357,7 +349,6 @@ const QuestionContent = () => {
       setPage(1);
       setOpt(1);
 
-      // console.log(deleteBody);
     } else {
       console.log("stay");
     }

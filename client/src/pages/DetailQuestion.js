@@ -32,19 +32,6 @@ const DetailQuestion = () => {
   const [answerData, setAnswerData] = useRecoilState(getAnswerState);
   const [id, setId] = useRecoilState(questionIdState);
 
-  // useEffect(() => {
-  //   axios.get(`${process.env.REACT_APP_API_URL}/question/1`)
-  //   .then((res) => {
-  //     // console.log(res.data);
-  //     setQuestionInfo(res.data);
-  //   })
-  // },[])
-
-  // useEffect(() => {
-  //   axios.get(`${process.env.REACT_APP_API_URL}/answer/1`).then((res) => {
-  //     setAnswerData(res.data.data);
-  //   });
-  // }, [id]);
 
   useEffect(() => {
     axios

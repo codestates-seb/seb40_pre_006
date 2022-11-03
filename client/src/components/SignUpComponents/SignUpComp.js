@@ -205,11 +205,8 @@ const SignUpForm = () => {
         alert("회원가입이 완료되었습니다");
         window.location.href = "http://localhost:3000/login";
       })
-
-      // .then(alert("회원가입이 완료되었습니다"))
-      // .then((window.location.href = "http://localhost:3000/login"))
       .catch((err) => setErrorResponse(err.response["data"]["message"]));
-    // .then(console.log(errorResponse));
+
   };
 
   if (errorResponse.length > 0) {
