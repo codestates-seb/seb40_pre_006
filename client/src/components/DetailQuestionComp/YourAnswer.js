@@ -1,7 +1,10 @@
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
-import { answerContentValueState } from "../../atom/atom";
-import { questionIdState } from "../../atom/atom";
+import {
+  answerContentValueState,
+  questionIdState,
+  LoginState,
+} from "../../atom/atom";
 import axios from "axios";
 
 const Container = styled.div`
@@ -75,23 +78,29 @@ const YourAnswer = () => {
   );
 
   const [qId, SetQId] = useRecoilState(questionIdState);
+  const [isLogin, setIsLogin] = useRecoilState(LoginState);
 
   const handleAsnwerContentValue = (e) => {
     setAnswerContent(e.target.value);
   };
 
   async function handleAnswerSubmit() {
-    const answer = {
-      questionId: qId,
-      answerBody: answerContent,
-      userId: 1,
-    };
-    // await axios.post(`${process.env.REACT_APP_API_URL}/answer`, answer);
-    axios
-      .post(`${process.env.REACT_APP_API_URL}/answer`, answer)
-      .then((response) => this.setState({ answerId: response.data.id }));
+    if (!isLogin) {
+      alert("로그인이 필요합니다! \n로그인 창으로 이동하시겠습니까?");
+      window.location = "/login";
+    } else {
+      const answer = {
+        questionId: qId,
+        answerBody: answerContent,
+        userId: 1,
+      };
+      // await axios.post(`${process.env.REACT_APP_API_URL}/answer`, answer);
+      axios
+        .post(`${process.env.REACT_APP_API_URL}/answer`, answer)
+        .then((response) => this.setState({ answerId: response.data.id }));
 
-    window.location.reload();
+      window.location.reload();
+    }
   }
 
   return (
