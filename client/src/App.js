@@ -22,6 +22,7 @@ import DetailQuestion from "./pages/DetailQuestion";
 import SignUpForm from "./components/SignUpComponents/SignUpComp";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
+import { FaLaptopHouse } from "react-icons/fa";
 
 const Container = styled.div`
   display: flex;
@@ -31,7 +32,7 @@ const Container = styled.div`
 
 function App() {
   const [isAsk, setIsAsk] = useRecoilState(isAskState);
-  const [view, setView] = useState(true);
+  const [view, setView] = useState(false);
 
   window.onload = () => {
     checkScreenSize();
@@ -50,8 +51,6 @@ function App() {
       setView(false);
     }
   };
-
-  // console.log(window.innerWidth);
 
   return (
     <>
