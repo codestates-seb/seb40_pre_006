@@ -50,15 +50,6 @@ public interface QuestionMapper {
         return question;
     }
 
-    default List<QuestionTag> questionTagsDtosToQuestionTags(List<QuestionTagDto> questionTagDtos, Question question) {
-        return questionTagDtos.stream().map(questionTagDto -> {
-            QuestionTag questionTag = new QuestionTag();
-            questionTag.addQuestion(question);
-            questionTag.getTag().setTagName(questionTagDto.getTagName());
-            return questionTag;
-        }).collect(Collectors.toList());
-    }
-
     default Question questionPatchDtoToQuestion(QuestionPatchDto requestBody) {
         Question question = new Question();
 
@@ -118,18 +109,6 @@ public interface QuestionMapper {
                         .tagName(questionTag.getTag().getTagName())
                         .build())
                 .collect(Collectors.toList());
-    }
-
-    default QuestionTagResponseDto questionTagToQuestionTagResponseDto(QuestionTag questionTag) {
-        if ( questionTag == null ) {
-            return null;
-        }
-
-        QuestionTagResponseDto.QuestionTagResponseDtoBuilder questionTagResponseDto =
-                QuestionTagResponseDto
-                        .builder();
-
-        return questionTagResponseDto.build();
     }
 
     default UserDto.Response userToResponse(User user) {

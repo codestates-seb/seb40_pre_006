@@ -131,4 +131,11 @@ public class QuestionController {
                 new MultiResponseDto<>(mapper.questionsToQuestionResponseDtos(questions),
                         pageQuestions), HttpStatus.OK);
     }
+
+    // 게시글 삭제
+    @DeleteMapping("/{question-id}")
+    public ResponseEntity deleteQuestion(@PathVariable("question-id") @Positive Long questionId) {
+        questionService.deleteQuestion(questionId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }
