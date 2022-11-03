@@ -11,6 +11,8 @@ import { useState } from "react";
 
 import { compareUserNameState } from "../../atom/atom";
 import { editableInputTypes } from "@testing-library/user-event/dist/utils";
+import { pageState } from "../../atom/atom";
+import { questionOptionFocusState } from "../../atom/atom";
 
 const Container = styled.div`
   width: 100%;
@@ -265,6 +267,9 @@ const QuestionContent = () => {
   const [editMode, setEditMode] = useState(false);
   const [editContent, setEditContent] = useState(questionInfo.questionBody);
 
+  const [page, setPage] = useRecoilState(pageState);
+  const [opt, setOpt] = useRecoilState(questionOptionFocusState);
+
   // console.log(questionInfo);
 
   // const getId = (id) => {
@@ -336,6 +341,28 @@ const QuestionContent = () => {
     }
   }
 
+  const handleQuestionDelete = () => {
+    let isGo = window.confirm("삭제하시겠습니까?");
+
+    if (isGo) {
+      window.alert("삭제되었습니다");
+      // delete API 요청
+      // const deleteBody = {
+      //   questionId: qId,
+      // };
+      // axios
+      //   .delete(`${process.env.REACT_APP_API_URL}/question`, deleteBody);
+      
+      window.location = "/";
+      setPage(1);
+      setOpt(1);
+
+      // console.log(deleteBody);
+    } else {
+      console.log("stay");
+    }
+  };
+
   return (
     <>
       <Container>
@@ -361,8 +388,8 @@ const QuestionContent = () => {
 
             {userName === compareUserName ? (
               <div className="delete">
-                <button>delete</button>{" "}
-                {/* onClick={()=>handleQuestionDelete()} */}
+                <button onClick={handleQuestionDelete}>delete</button>
+                
               </div>
             ) : null}
           </div>
