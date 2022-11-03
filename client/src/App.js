@@ -37,7 +37,13 @@ function App() {
   return (
     <>
       <Header />
-      {isAsk === "/ask" || isAsk === "/signUp" || isAsk === "/login" ? null : (
+      {isAsk === "/ask" || isAsk === "/signUp" || isAsk === "/login" ? (
+        <Routes>
+          <Route path="/ask" element={<AskQuestion />} />
+          <Route path="/signUp" element={<SignUp />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      ) : (
         <Container>
           <Aside />
           {/* <DetailQuestion /> */}
@@ -49,11 +55,6 @@ function App() {
           </Routes>
         </Container>
       )}
-      <Routes>
-        <Route path="/ask" element={<AskQuestion />} />
-        <Route path="/signUp" element={<SignUp />} />
-        <Route path="/login" element={<Login />} />
-      </Routes>
 
       {isAsk === "/login" || isAsk === "/signUp" ? null : <Footer />}
     </>
