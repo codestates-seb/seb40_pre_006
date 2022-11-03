@@ -104,11 +104,13 @@ export const DetailQuestionInfoState = atom({
   // effects_UNSTABLE: [persistAtom],
 });
 
+export const LoginState = atom({
+  key: "LoginState",
+  default: true,
+});
+{
+  /**
 
-  export const LoginState = atom({
-    key : "LoginState",
-    default : true,
-  })
 
 
 
@@ -176,6 +178,25 @@ export const DetailQuestionInfoState = atom({
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*/
+}
 // 채은님
 
 export const questionTagValueState = atom({
@@ -228,7 +249,6 @@ export const signUpPasswordMessageState = atom({
   default: "",
 });
 
-
 export const signUpNameMessageState = atom({
   key: "signUpNameMessageState",
   default: "",
@@ -239,27 +259,10 @@ export const signUpResponseState = atom({
   default: "",
 });
 
-
 export const signUpNameValueState = atom({
   key: "signUpNameValueState",
   default: "",
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 {
   /**
@@ -280,17 +283,8 @@ export const signUpNameValueState = atom({
 
 
 
-**/}
-
-
-
-
-
-
-
-
-
-
+**/
+}
 
 // 세비님
 
@@ -318,13 +312,15 @@ export const questionIdState = atom({
   effects_UNSTABLE: [persistAtom],
 });
 
-export const userNameState = atom({ //로그인 후 받아오는 userName
+export const userNameState = atom({
+  //로그인 후 받아오는 userName
   key: "userNameState",
   default: "stack",
   effects_UNSTABLE: [persistAtom],
 });
 
-export const compareUserNameState = atom({  //질문 클릭했을 때 해당 질문의 작성자(userName)
+export const compareUserNameState = atom({
+  //질문 클릭했을 때 해당 질문의 작성자(userName)
   key: "compareUserNameState",
   default: "",
   effects_UNSTABLE: [persistAtom],
