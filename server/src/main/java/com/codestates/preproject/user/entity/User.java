@@ -64,4 +64,7 @@ public class User {
             answer.setUser(this);
         }
     }
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<String> roles = new ArrayList<>();
 }
