@@ -55,6 +55,29 @@ const Container = styled.div`
 
     .date {
       font-size: 13px;
+      color : #535353;
+
+      .date-label {
+        font-size : 13px;
+        color : #8b8b8b;
+        font-weight : 400;
+
+        margin-right : 5px;
+      }
+    }
+    .view {
+      margin-left : 30px;
+      font-size: 13px;
+      color : #535353;
+
+      .view-label {
+        font-size : 13px;
+        color : #8b8b8b;
+        font-weight : 400;
+
+        margin-right : 5px;
+      }
+
     }
   }
 `;
@@ -72,7 +95,7 @@ const QuestionTitle = () => {
 
       const utc = date.getTime() + (date.getTimezoneOffset() * 60 * 1000);
       const KR_TIME_DIFF = 9 * 60 * 60 * 1000;  //한국 시간(KST)은 UTC시간보다 9시간 더 빠르므로 9시간을 밀리초 단위로 변환.
-      const kr_curr = utc + (KR_TIME_DIFF * 2);
+      const kr_curr = utc + (KR_TIME_DIFF);
 
       date = new Date(kr_curr).toString();
       
@@ -82,7 +105,7 @@ const QuestionTitle = () => {
       let year = splitDate[3];
       let time = splitDate[4].slice(0,5);
   
-      return `asked ${month} ${day}, ${year} at ${time}`
+      return `${month} ${day}, ${year} at ${time}`
     }
 
   }
@@ -110,7 +133,8 @@ const QuestionTitle = () => {
           {/* </a> */}
         </div>
         <div className="detail-info">
-          <div className="date">{handleDate(questionInfo.createdAt)}</div>
+          <div className="date"><span className="date-label">Asked</span>{handleDate(questionInfo.createdAt)}</div>
+          <div className="view"><span className="view-label">Viewed</span>{questionInfo.viewCount}</div>
         </div>
       </Container>
     </>
