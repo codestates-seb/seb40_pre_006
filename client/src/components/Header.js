@@ -68,7 +68,7 @@ const Searchbar = styled.div`
   /* width: 65.8rem; */
   width: 71rem;
   height: 36px;
-  margin-left: 1.25rem;
+  margin-left: 0rem;
   margin-right: 10px;
   border-radius: 3px;
   border: 0.5px solid #dadde0;

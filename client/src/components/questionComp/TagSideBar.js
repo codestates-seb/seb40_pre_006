@@ -44,7 +44,10 @@ const TagContainer = styled.div`
   padding-left: 10px;
   padding-right: 10px;
   display: flex;
+  justify-content: center;
   align-items: center;
+  /* flex-direction: row; */
+  white-space: nowrap;
   background-color: #e1ecf4;
   color: #4c85b9;
   font-size: 0.9rem;
@@ -61,13 +64,11 @@ function TagSideBar() {
   const [allTags, setAllTags] = useRecoilState(tagState);
 
   let tags = allTags.filter((el) => el.tagCount > 0);
-  console.log(allTags);
-  console.log(tags);
 
   return (
     <TagWrapper>
       <Wrapper>
-        <TitleContainer>Related Tags (Top5)</TitleContainer>
+        <TitleContainer>Top5 Tags</TitleContainer>
         {tags.map((tag) => (
           <TagContainer key={tag.tagId}>
             {tag.tagName}
