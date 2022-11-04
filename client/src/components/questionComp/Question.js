@@ -68,6 +68,10 @@ const QuestionContent = styled.div`
     height: 100%;
   }
 
+  a {
+    height : fit-content;
+  }
+
   .title {
     /* overflow: hidden; */
     font-weight: 600;
@@ -81,6 +85,7 @@ const QuestionContent = styled.div`
 
   .body {
     overflow: hidden;
+    /* height : 50px; */
     color: hsl(210, 8%, 25%);
     margin-bottom: 10px;
 
@@ -97,7 +102,7 @@ const Etc = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 100%;
+  height: fit-content;
   flex-wrap: wrap;
 
   .tags > span {
@@ -181,7 +186,8 @@ function Question({ questionId, question }) {
           </h3>
 
         </Link>
-        <div className="body">{Q.questionBody}</div>
+        {/* <div className="body">{Q.questionBody}</div> */}
+        <div className="body">{Q.questionBody.length > 200 ? Q.questionBody.slice(0, 200) + '...' : Q.questionBody}</div>
         <Etc>
           <Tags className="tags">
             {Q.questionTagList.map((tag, idx) => (
