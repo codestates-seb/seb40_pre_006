@@ -6,7 +6,7 @@ import Pagination from "react-js-pagination";
 
 const Container = styled.div`
   width: 70vw;
-  height: 700px;
+  min-height: 700px;
   padding: 24px;
 
   /* background-color : #7e7e7e; */

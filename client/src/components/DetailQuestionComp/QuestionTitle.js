@@ -24,11 +24,12 @@ const Container = styled.div`
 
     .title {
       font-size: 28px;
+      padding-right : 20px;
     }
 
     button {
       height: 40px;
-      width: 100px;
+      min-width: 100px;
 
       border: 0.5px solid #0074cc;
       border-radius: 3px;

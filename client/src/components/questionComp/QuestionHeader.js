@@ -73,6 +73,11 @@ const Container = styled.div`
     .question-count {
       font-size: 17px;
       margin-left: 15px;
+      width : 120px;
+
+      /* @media screen and (max-width : 750px) {
+        font-size : 10px;
+      } */
     }
 
     .option-container {

@@ -78,6 +78,12 @@ const QuestionContent = styled.div`
     color: #0074cc;
     font-size: 20px;
 
+    display: -webkit-box;
+    -webkit-line-clamp:1;
+    -webkit-box-orient:vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
     :hover {
       color: #0a95ff;
     }
