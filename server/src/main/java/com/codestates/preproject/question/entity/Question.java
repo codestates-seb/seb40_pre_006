@@ -24,7 +24,7 @@ public class Question {
     @Column(nullable = false)
     private String title;
 
-    @Column(nullable = false, length = 50000)
+    @Column(nullable = false, length = 10000)
     private String questionBody;
 
     private int voteCount;
