@@ -225,7 +225,7 @@ function Header() {
               backgroundcolor="#E1ECF4"
               color="#2C5877"
               marginright="7px"
-              width="76px"
+              width="82px"
               border="0.5px solid #7aa7c7"
               hoverbackcolor="#B3D3EA"
             >
