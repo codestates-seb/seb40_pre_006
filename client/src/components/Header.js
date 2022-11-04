@@ -68,7 +68,7 @@ const Searchbar = styled.div`
   /* width: 65.8rem; */
   width: 71rem;
   height: 36px;
-  margin-left: 1.25rem;
+  margin-left: 0rem;
   margin-right: 10px;
   border-radius: 3px;
   border: 0.5px solid #dadde0;
@@ -225,7 +225,7 @@ function Header() {
               backgroundcolor="#E1ECF4"
               color="#2C5877"
               marginright="7px"
-              width="82px"
+              width="76px"
               border="0.5px solid #7aa7c7"
               hoverbackcolor="#B3D3EA"
             >

@@ -190,7 +190,6 @@ const SignUpForm = () => {
     setPasswordMessage("비밀번호 형식 맞음");
   }
 
-  console.log(capitalEnglish);
   if (!isValidName.test(name)) {
     setNameMessage(`${name} is not a valid name`);
   } else if (name.length > 10) {
