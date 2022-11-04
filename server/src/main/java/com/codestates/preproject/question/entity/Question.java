@@ -31,6 +31,8 @@ public class Question {
 
     private int answerCount;
 
+    private int viewCount;
+
     private LocalDateTime createdAt;
 
     public Question(Long questionId, String title, String questionBody, int voteCount, int answerCount,

@@ -85,7 +85,7 @@ public class QuestionController {
     @GetMapping("/{question-id}")
     public ResponseEntity getQuestion(@PathVariable("question-id") @Positive Long questionId) {
 
-        Question question = questionService.findQuestion(questionId);
+        Question question = questionService.findGetQuestion(questionId);
         return new ResponseEntity<>(
                 new SingleResponseDto<>(mapper.questionToQuestionResponse(userMapper, question)),
                 HttpStatus.OK);
