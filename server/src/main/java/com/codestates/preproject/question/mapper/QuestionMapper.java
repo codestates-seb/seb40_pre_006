@@ -88,6 +88,7 @@ public interface QuestionMapper {
         questionResponseDto.setQuestionTagList(questionTagListToQuestionTagResponseDtoList(question.getQuestionTagList()));
         questionResponseDto.setVoteCount( question.getVoteCount() );
         questionResponseDto.setAnswerCount( question.getAnswerCount() );
+        questionResponseDto.setViewCount(question.getViewCount());
         questionResponseDto.setCreatedAt(question.getCreatedAt());
 
         User user = question.getUser();
@@ -141,6 +142,7 @@ public interface QuestionMapper {
         questionResponseDto.setQuestionTagList( questionTagListToQuestionTagResponseDtoList( question.getQuestionTagList() ) );
         questionResponseDto.setVoteCount( question.getVoteCount() );
         questionResponseDto.setAnswerCount( question.getAnswerCount() );
+        questionResponseDto.setViewCount(question.getViewCount());
         questionResponseDto.setCreatedAt( question.getCreatedAt() );
 
         return questionResponseDto;

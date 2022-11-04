@@ -19,6 +19,7 @@ public class QuestionResponseDto {
     private String name;
     private int voteCount;
     private int answerCount;
+    private int viewCount;
     private LocalDateTime createdAt;
 
     public void setUser(UserDto.Response userToUserResponseDto) {

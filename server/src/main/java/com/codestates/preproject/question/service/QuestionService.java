@@ -76,6 +76,13 @@ public class QuestionService {
         return findVerifyQuestion(questionId);
     }
 
+    public Question findGetQuestion(Long questionId) {
+        Question question = findVerifyQuestion(questionId);
+        question.setViewCount(question.getViewCount() + 1);
+        questionRepository.save(question);
+        return question;
+    }
+
     public Page<Question> findQuestions(int page, int size) {
         return questionRepository.findAll(PageRequest.of(page, size, Sort.by("questionId").descending()));
     }
@@ -144,7 +151,7 @@ public class QuestionService {
         List<QuestionTag> questionTagList = new ArrayList<>();
         for (int i = 0; i < question.getQuestionTagList().size(); i++){
             Tag tag = new Tag();
-            tag.setTagName(question.getQuestionTagList().get(i).getTag().getTagName());
+            tag.setTagName(question.getQuestionTagList().get(i).getTag().getTagName().toUpperCase());
             tag.setTagCount(tag.getTagCount() + 1);
             if (!tagRepository.findByTagName(tag.getTagName()).isPresent()) {
                 tagRepository.save(tag);
