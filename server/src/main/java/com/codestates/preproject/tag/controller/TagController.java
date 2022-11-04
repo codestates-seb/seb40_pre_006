@@ -29,7 +29,7 @@ public class TagController {
     @GetMapping("/{right}")
     public ResponseEntity getTagsRight(){
 
-        Page<Tag> pageTags = tagService.findTags(1-1, 5);
+        Page<Tag> pageTags = tagService.findTagsRight(0, 5);
         List<Tag> tags = pageTags.getContent();
         return new ResponseEntity<>(
                 new SingleResponseDto<>(mapper.tagToTagResponseDto(tags)),
