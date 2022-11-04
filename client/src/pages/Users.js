@@ -106,7 +106,7 @@ const Users = () => {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/user?page=1&size=10`)
+      .get(`${process.env.REACT_APP_API_URL}/user?page=1&size=100`)
       .then((res) => {
         setUsers(res.data.data);
       });

@@ -84,8 +84,12 @@ const QuestionContent = styled.div`
   }
 
   .body {
-    overflow: hidden;
+    /* overflow: hidden; */
     /* height : 50px; */
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     color: hsl(210, 8%, 25%);
     margin-bottom: 10px;
 
@@ -190,7 +194,8 @@ function Question({ questionId, question }) {
 
         </Link>
         {/* <div className="body">{Q.questionBody}</div> */}
-        <div className="body">{Q.questionBody.length > 200 ? Q.questionBody.slice(0, 200) + '...' : Q.questionBody}</div>
+        {/* <div className="body">{Q.questionBody.length > 200 ? Q.questionBody.slice(0, 200) + '...' : Q.questionBody}</div> */}
+        <div className="body">{Q.questionBody}</div>
         <Etc>
           <Tags className="tags">
             {Q.questionTagList.map((tag, idx) => (
