@@ -144,7 +144,7 @@ public class QuestionService {
         List<QuestionTag> questionTagList = new ArrayList<>();
         for (int i = 0; i < question.getQuestionTagList().size(); i++){
             Tag tag = new Tag();
-            tag.setTagName(question.getQuestionTagList().get(i).getTag().getTagName());
+            tag.setTagName(question.getQuestionTagList().get(i).getTag().getTagName().toUpperCase());
             tag.setTagCount(tag.getTagCount() + 1);
             if (!tagRepository.findByTagName(tag.getTagName()).isPresent()) {
                 tagRepository.save(tag);
