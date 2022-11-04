@@ -48,6 +48,34 @@ StackOverFlow 사이트를 밴치마킹 구현하는 협업 프로젝트 입니�
 
 </br>
 
+## 🪄 Client (Front-end) 실행방법
+
+### git clone 후
+
+1. Git 브랜치 업데이트
+```
+ git remote update
+```
+
+2. fe-dev 브랜치로 이동
+```
+ git checkout -t origin/fe-dev
+```
+
+3. package.json 설치
+```
+ npm install
+```
+
+4. app 실행
+```
+ npm run start
+```
+
+
+
+</br>
+
 ## 🖌️Code Convention
 ### 🪄Frontend
 - Camel Casting
