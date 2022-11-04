@@ -71,7 +71,9 @@ const Questions = () => {
             setTags(res2.data.data);
             setSize(res1.data.pageInfo.size); // 사이즈는 변하지 않아서 처음에만 설정하면 될 것 같아요
           })
-        );
+        ).catch((error)=> {
+          console.log(error);
+        });
     } else if (opt === 2) {
       axios
         // .get(`${process.env.REA_APP_API_URL}/question/answered`)
@@ -81,7 +83,9 @@ const Questions = () => {
         .then((res) => {
           setQuestionCount(res.data.pageInfo.totalElements);
           setData(res.data.data);
-        });
+        }).catch((error) => {
+          console.log(error);
+        })
     } else if (opt === 3) {
       axios
         .get(`${process.env.REACT_APP_API_URL}/question/answered?page=${page}&size=5`)
@@ -89,6 +93,8 @@ const Questions = () => {
           setQuestionCount(res.data.pageInfo.totalElements);
           setData(res.data.data);
 
+        }).catch((error)=> {
+          console.log(error);
         });
 
     }

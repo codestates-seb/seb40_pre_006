@@ -270,7 +270,6 @@ const QuestionContent = () => {
   const [page, setPage] = useRecoilState(pageState);
   const [opt, setOpt] = useRecoilState(questionOptionFocusState);
 
-
   const handleVoteClick = async () => {
     let isGo = false;
 
@@ -283,6 +282,8 @@ const QuestionContent = () => {
       // voteCount : questionInfo.voteCount + 1
       questionId: qId,
     };
+
+    // edit 객체
 
     if (!isLogin) {
       isGo = window.confirm(
@@ -328,10 +329,22 @@ const QuestionContent = () => {
     let isGo = window.confirm("수정하시겠습니까?");
 
     if (isGo) {
-      window.alert("수정되었습니다");
-      setEditMode(false);
+      // TODO
+      axios
+        .patch(`${process.env.REACT_APP_API_URL}/question/${qId}`, {
+          questionBody: editContent,
+        })
+        .then((res) => {
+          setQuestionInfo(res.data.data);
+          window.alert("수정되었습니다");
+          setEditMode(false);
+        })
+        .catch((error) => {
+          console.log(error);
+          window.alert("수정에 실패하였습니다.");
+        });
     }
-  }
+  };
 
   const handleQuestionDelete = () => {
     let isGo = window.confirm("삭제하시겠습니까?");
@@ -339,16 +352,12 @@ const QuestionContent = () => {
     if (isGo) {
       window.alert("삭제되었습니다");
       // delete API 요청
-      // const deleteBody = {
-      //   questionId: qId,
-      // };
-      // axios
-      //   .delete(`${process.env.REACT_APP_API_URL}/question`, deleteBody);
-      
+
+      axios.delete(`${process.env.REACT_APP_API_URL}/question/${qId}`);
+
       window.location = "/";
       setPage(1);
       setOpt(1);
-
     } else {
       console.log("stay");
     }
@@ -380,7 +389,6 @@ const QuestionContent = () => {
             {userName === compareUserName ? (
               <div className="delete">
                 <button onClick={handleQuestionDelete}>delete</button>
-                
               </div>
             ) : null}
           </div>

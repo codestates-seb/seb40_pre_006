@@ -4,6 +4,7 @@ import {
   answerContentValueState,
   questionIdState,
   LoginState,
+  userIdState
 } from "../../atom/atom";
 import axios from "axios";
 
@@ -79,6 +80,7 @@ const YourAnswer = () => {
 
   const [qId, SetQId] = useRecoilState(questionIdState);
   const [isLogin, setIsLogin] = useRecoilState(LoginState);
+  const [userId, setUserId] = useRecoilState(userIdState);
 
   const handleAsnwerContentValue = (e) => {
     setAnswerContent(e.target.value);
@@ -92,7 +94,7 @@ const YourAnswer = () => {
       const answer = {
         questionId: qId,
         answerBody: answerContent,
-        userId: 1,
+        userId: userId,
       };
       // await axios.post(`${process.env.REACT_APP_API_URL}/answer`, answer);
       axios

@@ -8,6 +8,7 @@ import {
   questionBtn1ClickState,
   questionBtn2ClickState,
   questionBtn3ClickState,
+  userIdState
 } from "../atom/atom";
 import axios from "axios";
 
@@ -277,6 +278,8 @@ const AskQuestion = () => {
   const [isBtn2Click, setIsBtn2Click] = useRecoilState(questionBtn2ClickState);
   const [isBtn3Click, setIsBtn3Click] = useRecoilState(questionBtn3ClickState);
 
+  const [userId, setUserId] = useRecoilState(userIdState);
+
   const inputBodyRef = useRef(null);
   const inputTagRef = useRef(null);
 
@@ -351,7 +354,7 @@ const AskQuestion = () => {
       title: titleValue,
       questionBody: contentValue,
       questionTagList: tagValue,
-      userId: 1,
+      userId: userId,
     };
     // await axios.post(`${process.env.REACT_APP_API_URL}/question`, question);
     axios

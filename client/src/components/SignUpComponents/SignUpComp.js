@@ -203,7 +203,7 @@ const SignUpForm = () => {
       .then(() => {
         console.log("회원가입 성공");
         alert("회원가입이 완료되었습니다");
-        window.location.href = "http://localhost:3000/login";
+        window.location.href = "/login";
       })
       .catch((err) => setErrorResponse(err.response["data"]["message"]));
 

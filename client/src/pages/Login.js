@@ -1,9 +1,10 @@
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
-import { isAskState } from "../atom/atom";
+import { isAskState, userNameState, LoginState, userIdState } from "../atom/atom";
 import { useLocation, Link } from "react-router-dom";
 import { useState } from "react";
 import Oauth from "../components/LoginComponents/Oauth";
+import axios from "axios";
 
 const Container = styled.div`
   width: 100vw;
@@ -138,6 +139,11 @@ const Container = styled.div`
 
 const Login = () => {
   const [isAsk, setIsAsk] = useRecoilState(isAskState);
+  const [userName, setUserName] = useRecoilState(userNameState);
+  const [login, setLogin] = useRecoilState(LoginState);
+  const [userId, setUserId] = useRecoilState(userIdState);
+
+
   const [email, setEmail] = useState("");
   const [pw, setPw] = useState("");
   const [pass, setPass] = useState("");
@@ -166,7 +172,23 @@ const Login = () => {
       password : pw
     }
 
-    console.log(loginInfo);
+    // TODO api요청
+
+    axios.post(`${process.env.REACT_APP_API_URL}/auth/login`,loginInfo)
+    .then((res) => {
+      setLogin(true);
+      setUserName(res.data.name); // 확인 필요!
+      setUserId(res.data.userId); // 확인 필요!
+      window.location.href = "/";
+
+    })
+    .catch((error) => {
+      console.log(error);
+      window.alert("로그인 정보가 올바르지 않습니다.");
+    })
+
+
+    // console.log(loginInfo);
   }
 
   return (
