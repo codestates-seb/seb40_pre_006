@@ -76,6 +76,13 @@ public class QuestionService {
         return findVerifyQuestion(questionId);
     }
 
+    public Question findGetQuestion(Long questionId) {
+        Question question = findVerifyQuestion(questionId);
+        question.setViewCount(question.getViewCount() + 1);
+        questionRepository.save(question);
+        return question;
+    }
+
     public Page<Question> findQuestions(int page, int size) {
         return questionRepository.findAll(PageRequest.of(page, size, Sort.by("questionId").descending()));
     }
