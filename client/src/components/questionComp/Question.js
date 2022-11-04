@@ -84,10 +84,10 @@ const QuestionContent = styled.div`
   }
 
   .body {
-    /* overflow: hidden; */
-    /* height : 50px; */
-    display: inline-block;
-    white-space: nowrap;
+
+    display: -webkit-box;
+    -webkit-line-clamp:3;
+    -webkit-box-orient:vertical;
     overflow: hidden;
     text-overflow: ellipsis;
     color: hsl(210, 8%, 25%);
@@ -193,8 +193,6 @@ function Question({ questionId, question }) {
           </h3>
 
         </Link>
-        {/* <div className="body">{Q.questionBody}</div> */}
-        {/* <div className="body">{Q.questionBody.length > 200 ? Q.questionBody.slice(0, 200) + '...' : Q.questionBody}</div> */}
         <div className="body">{Q.questionBody}</div>
         <Etc>
           <Tags className="tags">
