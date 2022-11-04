@@ -38,7 +38,7 @@ const TitleContainer = styled.div`
 const TagContainer = styled.div`
   width: min-content;
   height: 25px;
-  display: inline-block;
+  /* display: inline-block; */
   border-radius: 3px;
   margin-bottom: 8px;
   padding-left: 10px;
@@ -47,37 +47,32 @@ const TagContainer = styled.div`
   align-items: center;
   background-color: #e1ecf4;
   color: #4c85b9;
+  font-size: 0.9rem;
+
+  .tagCount-container {
+    margin-top: 1.25px;
+    margin-left: 7px;
+    color: #5a5a5a;
+    font-size: 0.7rem;
+  }
 `;
 
 function TagSideBar() {
-  const [tags, setTags] = useRecoilState(tagState);
+  const [allTags, setAllTags] = useRecoilState(tagState);
 
-  // const questionTagList = data.map((row) => row.questionTagList);
-  // const tagList = questionTagList.flat([1]);
-  // const tagArr = [];
-
-  // for (let key in tagList) {
-  //   tagArr.push(tagList[key].tagName);
-  // }
-
-  // const setTag = new Set(tagArr);
-  // const uniqueTag = [...setTag];
-  // const sortedTag = uniqueTag.sort();
-  // let tags = [];
-
-  // for (let i = 0; i < sortedTag.length; i++) {
-  //   let obj = {};
-  //   obj.id = i;
-  //   obj.name = sortedTag[i];
-  //   tags.push(obj);
-  // }
+  let tags = allTags.filter((el) => el.tagCount > 0);
+  console.log(allTags);
+  console.log(tags);
 
   return (
     <TagWrapper>
       <Wrapper>
         <TitleContainer>Related Tags (Top5)</TitleContainer>
         {tags.map((tag) => (
-          <TagContainer key={tag.tagId}>{tag.tagName}</TagContainer>
+          <TagContainer key={tag.tagId}>
+            {tag.tagName}
+            <div className="tagCount-container"> x{tag.tagCount}</div>
+          </TagContainer>
         ))}
       </Wrapper>
     </TagWrapper>
