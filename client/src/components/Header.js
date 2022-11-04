@@ -225,7 +225,7 @@ function Header() {
               backgroundcolor="#E1ECF4"
               color="#2C5877"
               marginright="7px"
-              width="76px"
+              width="82px"
               border="0.5px solid #7aa7c7"
               hoverbackcolor="#B3D3EA"
             >
@@ -237,7 +237,7 @@ function Header() {
               backgroundcolor="#1693FA"
               color="#FFFFFF"
               className="sign-up"
-              width="87px" 
+              width="87px"
               border="0.5px solid #0074CC"
               hoverbackcolor="#0066cc"
               onClick={handleLogOut}
