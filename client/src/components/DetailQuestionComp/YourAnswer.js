@@ -4,7 +4,7 @@ import {
   answerContentValueState,
   questionIdState,
   LoginState,
-  userIdState
+  userIdState,
 } from "../../atom/atom";
 import axios from "axios";
 
@@ -114,7 +114,11 @@ const YourAnswer = () => {
       <div className="btn-container">
         <button
           className="post-btn"
-          disabled={answerContent.length > 0 ? null : "disabled"}
+          disabled={
+            answerContent.length > 0 && answerContent.length < 10000
+              ? null
+              : "disabled"
+          }
           onClick={handleAnswerSubmit}
         >
           Post Your Answer

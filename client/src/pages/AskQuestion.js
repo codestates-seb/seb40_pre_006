@@ -8,7 +8,7 @@ import {
   questionBtn1ClickState,
   questionBtn2ClickState,
   questionBtn3ClickState,
-  userIdState
+  userIdState,
 } from "../atom/atom";
 import axios from "axios";
 
@@ -404,7 +404,7 @@ const AskQuestion = () => {
               <SectionTitle>Body</SectionTitle>
               <SectionDescription>
                 Introduce the problem and expand on what you put in the title.
-                Minimum 20 characters.
+                Minimum 20 characters and maximum 10,000 characters.
               </SectionDescription>
               <Textarea
                 onChange={handleContentValue}
@@ -415,7 +415,11 @@ const AskQuestion = () => {
                 <NextBtn backgroundcolor="white">
                   <button
                     className="next-btn"
-                    disabled={contentValue.length < 20 ? "disabled" : null}
+                    disabled={
+                      contentValue.length < 20 || contentValue.length > 9999
+                        ? "disabled"
+                        : null
+                    }
                     onClick={handleBtn2Click}
                   >
                     Next
