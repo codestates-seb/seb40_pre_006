@@ -152,6 +152,8 @@ const SignUpForm = () => {
     setName(e.target.value);
   };
 
+  const isValidName = /(^[a-z]{1,10})/g;
+
   const isValidEmail = /^([\w\.\-_]+)?\w+@[\w-_]+(\.\w+){1,}$/;
 
   // /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g;
@@ -165,6 +167,7 @@ const SignUpForm = () => {
     /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
   let number = password.search(/[0-9]/g);
   let english = password.search(/[a-z]/gi);
+  let capitalEnglish = name.search(/[A-Z]/gi);
   let spece = password.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
 
   if (!isValidEmail.test(email)) {
@@ -187,6 +190,15 @@ const SignUpForm = () => {
     setPasswordMessage("비밀번호 형식 맞음");
   }
 
+  console.log(capitalEnglish);
+  if (!isValidName.test(name)) {
+    setNameMessage(`${name} is not a valid name`);
+  } else if (name.length > 10) {
+    setNameMessage("Name must contain 10 characters or less");
+  } else {
+    setNameMessage("");
+  }
+
   const handleSignUp = () => {
     const user = {
       email,
@@ -206,7 +218,6 @@ const SignUpForm = () => {
         window.location.href = "/login";
       })
       .catch((err) => setErrorResponse(err.response["data"]["message"]));
-
   };
 
   if (errorResponse.length > 0) {
@@ -230,6 +241,9 @@ const SignUpForm = () => {
             <div className="title">Display name</div>
             <Input onChange={handleName}></Input>
             <div className="message">{name && nameMessage}</div>
+            <div className="password-description">
+              Name could contain only lowercases and numbers
+            </div>
           </div>
           <div className="email-container">
             <div className="title">Email</div>
@@ -268,6 +282,7 @@ const SignUpForm = () => {
             <button
               className="signup-btn"
               disabled={
+                name.length > 10 ||
                 name.length < 1 ||
                 email.length < 1 ||
                 password.length < 1 ||
