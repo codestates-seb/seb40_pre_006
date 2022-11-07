@@ -211,7 +211,7 @@ function Footer() {
       site: "https://stackexchange.com/sites#professional",
     },
     { name: "Business", site: "https://stackexchange.com/sites#business" },
-    { name: "API", site: "https://api.stackexchange.com/" }, // 미래에 api 문서가 만들어진다면, 이곳에 들어가야 함.
+    { name: "API", site: "https://docs.google.com/spreadsheets/d/1EDk4GmbivGlzyXY-cBdbyAPBOj8n76J6WGnPxMYxJTM/edit?usp=sharing" }, // 미래에 api 문서가 만들어진다면, 이곳에 들어가야 함.
     { name: "Data", site: "https://data.stackexchange.com/" },
   ];
 

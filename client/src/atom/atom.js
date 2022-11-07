@@ -191,3 +191,10 @@ export const userIdState = atom({
   default: 0,
   effects_UNSTABLE: [persistAtom],
 })
+
+
+export const editContentState = atom({
+  key : "editContentState",
+  default: "",
+  effects_UNSTABLE: [persistAtom],
+})

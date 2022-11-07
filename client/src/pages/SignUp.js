@@ -15,7 +15,7 @@ const Container = styled.div`
 
   .text-container {
     width: 50%;
-    min-width: 420px;
+    min-width: 400px;
     /* border: 1px solid black; */
     @media screen and (max-width: 850px) {
       display: none;
@@ -24,10 +24,19 @@ const Container = styled.div`
 
   .signup-container {
     width: 50%;
-    margin-left: 50px;
-    min-width: 400px;
+    margin-left: 30px;
+    margin-right : 30px;
+    min-width: 350px;
+
+    display : flex;
+    justify-content : center;
+    flex-direction : column;
 
     /* border: 1px solid red; */
+
+    /* @media screen and (max-width: 400px) {
+      justify-content : center;
+    } */
   }
 `;
 

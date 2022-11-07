@@ -8,7 +8,7 @@ import { constSelector, useRecoilState } from "recoil";
 import { useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
-
+import { editContentState } from "../../atom/atom";
 import { compareUserNameState } from "../../atom/atom";
 import { editableInputTypes } from "@testing-library/user-event/dist/utils";
 import { pageState } from "../../atom/atom";
@@ -265,7 +265,8 @@ const QuestionContent = () => {
     useRecoilState(compareUserNameState);
 
   const [editMode, setEditMode] = useState(false);
-  const [editContent, setEditContent] = useState(questionInfo.questionBody);
+  // const [editContent, setEditContent] = useState(questionInfo.questionBody);
+  const [editContent, setEditContent] = useRecoilState(editContentState);
 
   const [page, setPage] = useRecoilState(pageState);
   const [opt, setOpt] = useRecoilState(questionOptionFocusState);
@@ -316,6 +317,7 @@ const QuestionContent = () => {
   };
 
   const handleEditClick = () => {
+    setEditContent(questionInfo.questionBody)
     setEditMode(true);
   };
 

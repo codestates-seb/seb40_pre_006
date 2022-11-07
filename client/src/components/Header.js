@@ -8,6 +8,7 @@ import {
   LoginState,
   pageState,
   questionOptionFocusState,
+  userIdState
 } from "../atom/atom";
 import { useRecoilState } from "recoil";
 
@@ -33,6 +34,9 @@ const Wrapper = styled.div`
   /* 수정사항 */
   z-index: 1;
 
+
+
+
   .logo {
     /* border : 1px solid red; */
     width: 180px;
@@ -52,23 +56,25 @@ const MenuIcon = styled(FaBars)`
   @media (min-width: 640px) {
     display: none;
   }
+
 `;
 
 const LogoImg = styled.img`
   margin-left: 1rem;
   width: 150px;
   height: 30px;
-  @media screen and (max-width: 640px) {
-    margin-left: 1rem;
+  @media screen and (max-width: 400px) {
+    width : 120px;
+    height : 25px;
   }
 `;
 
 const Searchbar = styled.div`
   background-color: white;
   /* width: 65.8rem; */
-  width: 71rem;
+  width: 71.8rem;
   height: 36px;
-  margin-left: 0rem;
+  margin-left: 0.5rem;
   margin-right: 10px;
   border-radius: 3px;
   border: 0.5px solid #dadde0;
@@ -143,6 +149,12 @@ const ButtonWrapper = styled.div`
     top: 10px;
     /* align-items : center;  */
   }
+
+  @media screen and (max-width : 400px) {
+    right : 0;
+    justify-content : center;
+    align-items : center;
+  }
 `;
 
 const Button = styled.button`
@@ -158,6 +170,11 @@ const Button = styled.button`
   &:hover {
     background-color: ${(props) => props.hoverbackcolor};
   }
+
+  @media screen and (max-width : 400px) {
+    width : 70px;
+    font-size : 0.8rem;
+  }
 `;
 
 const RightContainer = styled.div`
@@ -171,8 +188,9 @@ const RightContainer = styled.div`
 function Header() {
   const [menuClick, setMenuClick] = useRecoilState(headerToggleState);
   const [searchClick, setSearchClick] = useRecoilState(headerClickState);
-  const [userName] = useRecoilState(userNameState);
+  const [userName, setUserName] = useRecoilState(userNameState);
   const [isLogin, setIsLogin] = useRecoilState(LoginState);
+  const [userId, setUserId] = useRecoilState(userIdState);
 
   const [page, setPage] = useRecoilState(pageState);
   const [opt, setOpt] = useRecoilState(questionOptionFocusState);
@@ -197,6 +215,9 @@ function Header() {
   const handleLogOut = () => {
     if (isLogin === true) {
       setIsLogin(false);
+      setUserName("");
+      setUserId(0);
+
       alert("로그아웃 되었습니다.");
       // window.location.reload();
     }

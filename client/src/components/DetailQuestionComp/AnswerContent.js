@@ -163,7 +163,7 @@ const AnswerContent = ({ answer }) => {
 
       const utc = date.getTime() + (date.getTimezoneOffset() * 60 * 1000);
       const KR_TIME_DIFF = 9 * 60 * 60 * 1000;  //한국 시간(KST)은 UTC시간보다 9시간 더 빠르므로 9시간을 밀리초 단위로 변환.
-      const kr_curr = utc + (KR_TIME_DIFF * 2);
+      const kr_curr = utc + (KR_TIME_DIFF);
 
       date = new Date(kr_curr).toString();
       

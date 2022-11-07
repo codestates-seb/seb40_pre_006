@@ -14,7 +14,7 @@ import axios from "axios";
 
 const Container = styled.div`
   width: 100%;
-  height: 1230px;
+  min-height: 1230px;
   display: flex;
   justify-content: center;
   background-color: #f8f9f9;
@@ -23,7 +23,7 @@ const Container = styled.div`
 
   .wrapper {
     width: 80%;
-    height: 1230px;
+    min-height: 1230px;
     /* border: 1px solid black; */
     overflow: hidden;
   }
@@ -137,6 +137,10 @@ const SectionTitle = styled.div`
   font-weight: 500;
   /* background-color: red; */
   background-color: #ffffff;
+
+  @media screen and (max-width : 400px) {
+    margin-bottom : 15px;
+  }
 `;
 
 const SectionDescription = styled.div`
@@ -148,6 +152,10 @@ const SectionDescription = styled.div`
   color: #4e5457;
   /* background-color: pink; */
   background-color: #ffffff;
+
+  @media screen and (max-width : 400px) {
+    margin-bottom : 15px;
+  }
 `;
 
 const Input = styled.input`
