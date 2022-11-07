@@ -1,18 +1,156 @@
 {
-  "Questions": [
+  "data": [
+    {
+      "questionId": "1",
+      "title": "6조 FE 화이팅",
+      "questionBody": "내용 1",
+      "questionTagList": [
+        {
+          "tagName": "java"
+        },
+        {
+          "tagName": "c++"
+        }
+      ],
+      "name": "김코딩",
+      "voteCount": 1,
+      "answerCount": 2,
+      "createdAt": "2022년 10월 26일 16시"
+    },
+    {
+      "questionId": "2",
+      "title": "6조 BE 화이팅",
+      "questionBody": "내용 2",
+      "questionTagList": [
+        {
+          "tagName": "javascript"
+        },
+        {
+          "tagName": "react"
+        }
+      ],
+      "name": "박해커",
+      "voteCount": 3,
+      "answerCount": 4,
+      "createdAt": "2022년 10월 26일 18시"
+    },
+    {
+      "questionId": "3",
+      "title": "6조 화이팅",
+      "questionBody": "내용 3",
+      "questionTagList": [
+        {
+          "tagName": "array"
+        },
+        {
+          "tagName": "object"
+        }
+      ],
+      "name": "박해커",
+      "voteCount": 5,
+      "answerCount": 18,
+      "createdAt": "2022년 10월 26일 19시"
+    },
+    {
+      "questionId": "4",
+      "title": "6조 FE 화이팅",
+      "questionBody": "내용 1",
+      "questionTagList": [
+        {
+          "tagName": "java"
+        },
+        {
+          "tagName": "c++"
+        }
+      ],
+      "name": "김코딩",
+      "voteCount": 1,
+      "answerCount": 2,
+      "createdAt": "2022년 10월 26일 16시"
+    },
+    {
+      "questionId": "5",
+      "title": "6조 BE 화이팅",
+      "questionBody": "내용 2",
+      "questionTagList": [
+        {
+          "tagName": "javascript"
+        },
+        {
+          "tagName": "react"
+        }
+      ],
+      "name": "박해커",
+      "voteCount": 3,
+      "answerCount": 4,
+      "createdAt": "2022년 10월 26일 18시"
+    },
+    {
+      "questionId": "6",
+      "title": "6조 화이팅",
+      "questionBody": "내용 3",
+      "questionTagList": [
+        {
+          "tagName": "array"
+        },
+        {
+          "tagName": "object"
+        }
+      ],
+      "name": "박해커",
+      "voteCount": 5,
+      "answerCount": 18,
+      "createdAt": "2022년 10월 26일 19시"
+    }
+  ],
+  "pageInfo": {
+    "page": 1,
+    "size": 10,
+    "totalElements": 3,
+    "totalPages": 1
+  },
+  "question": [
     {
       "id": 1,
-      "author": "kimcoding",
-      "createdAt": "yyyy년 mm월 dd일 hh시",
-      "title": "hello world",
-      "body" : "이것은 바디입니다",
-      "tags" : ["javascript", "c"],
-      "vote" : 0,
-      "answer" : {
-          "id" : 0,
-          "author" : "park",
-          "body" : "이것은 답변입니다"
-      }
+      "title": "titleValue",
+      "questionBody": "contentValue",
+      "questionTagList": "tagValue"
+    },
+    {
+      "title": "안녕하세요 15글자입니다....",
+      "questionBody": "안ㄴ여하세요 20글자입ㄴ디ㅏ......",
+      "questionTagList": [
+        {
+          "tagName": "tag1"
+        },
+        {
+          "tagName": "tagh2"
+        }
+      ],
+      "userId": 1,
+      "id": 2
+    },
+    {
+      "title": "한번만더 테스트해보자.....",
+      "questionBody": "20글자20글자20글자20글자20글자20글자",
+      "questionTagList": [
+        {
+          "tagName": "tag1"
+        }
+      ],
+      "userId": 1,
+      "id": 3
+    },
+    {
+      "title": "123456879012345",
+      "questionBody": "123456789012345970123",
+      "questionTagList": [
+        {
+          "tagName": "1"
+        }
+      ],
+      "userId": 1,
+      "id": 4
     }
   ]
 }
