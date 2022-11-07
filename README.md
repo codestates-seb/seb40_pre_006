@@ -77,6 +77,20 @@ StackOverFlow 사이트를 밴치마킹 구현하는 협업 프로젝트 입니�
  npm run start
 ```
 
+## Back-end 실행방법
+### 사전 조건 : git clone 하여 백엔드 프로젝트가 있는 server 폴더 경로 들어가기
+### yml 파일별 프로파일 설명과 실행 방법
+#### application.yml
+- H2( local 임시 DB)를 사용하는 설정
+- 실행방법(IntelliJ를 사용하지 않는 방법) : 빌드 완료 후, CLI 환경의 프로젝트 내의 server폴더 위치에서, `java -jar build/libs/preproject-0.0.1-SNAPSHOT.jar` 명령어를 실행할 것
+#### application-aws-createdb.yml
+- AWS상의 RDS의 실제 DB를 사용하는 설정 (최초 수행 이후의 수행 시, 사용하는 용도 - DB에 테이블이 이미 있어야지만 성공적으로 수행됨 [`ddl-auto: none`] )
+- 실행방법(IntelliJ를 사용하지 않는 방법) : 빌드 완료 후, CLI 환경의 프로젝트 내의 server폴더 위치에서, `java -jar build/libs/preproject-0.0.1-SNAPSHOT.jar --spring.profiles.active=aws-createdb` 명령어를 실행할 것
+#### application-aws.yml
+- AWS상의 RDS의 실제 DB를 사용하는 설정 (최초 수행시, 사용 용도 - DB에 테이블을 직접 만들어서 동작하는 설정 [`ddl-auto: create`] )
+- 실행방법(IntelliJ를 사용하지 않는 방법) : 빌드 완료 후, CLI 환경의 프로젝트 내의 server폴더 위치에서, `java -jar build/libs/preproject-0.0.1-SNAPSHOT.jar --spring.profiles.active=aws` 명령어를 실행할 것
+### 빌드 방법 (window 환경 기준)
+- server 폴더 경로에서 터미널을 연 후, `./gradlew build` 명령어를 실행하면, *build/libs* 폴더 경로에 jar파일이 생성됨.
 
 
 </br>
