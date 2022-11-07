@@ -3,6 +3,11 @@
 
 </br>
 
+## 💡배포링크
+http://codestates-fe-006.s3-website.ap-northeast-2.amazonaws.com/
+
+</br>
+
 ## 🙌 Team members
 ### 🪄Frontend
 - 박성훈 (팀장)
@@ -44,6 +49,34 @@ StackOverFlow 사이트를 밴치마킹 구현하는 협업 프로젝트 입니�
 ![Slack](https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=slack&logoColor=white)
 <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
 <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
+
+
+</br>
+
+## 🪄 Client (Front-end) 실행방법
+
+### git clone 후
+
+1. Git 브랜치 업데이트
+```
+ git remote update
+```
+
+2. fe-dev 브랜치로 이동
+```
+ git checkout -t origin/fe-dev
+```
+
+3. package.json 설치
+```
+ npm install
+```
+
+4. app 실행
+```
+ npm run start
+```
+
 
 
 </br>
