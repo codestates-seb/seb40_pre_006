@@ -174,25 +174,12 @@ public class QuestionService {
 
     public void deleteTag(Question question) {
         for (int i = 0; i < question.getQuestionTagList().size(); i++) {
-            Tag tag = new Tag();
-            tag.setTagName(question.getQuestionTagList().get(i).getTag().getTagName());
-            tag.setTagCount(tag.getTagCount() - 1);
-            if (!tagRepository.findByTagName(tag.getTagName()).isPresent()) {
-                tagService.updateTag(tag);
-                question.getQuestionTagList().get(i).setTag(tag);
-            } else {
-                List<Tag> list = tagRepository.findAll().stream()
-                        .filter(a -> a.getTagName().equals(tag.getTagName()))
-                        .collect(Collectors.toList());
-                Tag tag1 = list.get(0);
-                question.getQuestionTagList().get(i).setTag(tag1);
+            Optional<Tag> tag = tagRepository.findByTagName(question.getQuestionTagList().get(i).getTag().getTagName());
+            if(tag.isPresent()) {
+                Tag tag1 = tag.get();
                 tag1.setTagCount(tag1.getTagCount() - 1);
+                tagRepository.save(tag1);
             }
-            Question question1 = questionRepository.save(question);
-            List<QuestionTag> questionTagList = new ArrayList<>();
-            question.getQuestionTagList().get(i).setQuestion(question1);
-            QuestionTag questionTag = questionTagRepository.save(question.getQuestionTagList().get(i));
-            questionTagList.add(questionTag);
         }
     }
 }
